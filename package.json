@@ -1,0 +1,20 @@
+{
+  "name": "webmaka",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "astro": "^5.16.5",
+    "typescript": "^5.9.3"
+  }
+}
