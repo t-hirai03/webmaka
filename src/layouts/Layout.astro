@@ -9,14 +9,14 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="min-h-dvh font-sans leading-relaxed">
+  <body class="min-h-dvh bg-bg-main text-text font-sans leading-relaxed">
     <slot />
   </body>
 </html>

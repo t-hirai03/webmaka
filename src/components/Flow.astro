@@ -1,0 +1,46 @@
+---
+import SectionTitle from './ui/SectionTitle.astro';
+
+const steps = [
+  {
+    number: 1,
+    title: 'お問い合わせ',
+    description: 'フォームからご連絡ください',
+  },
+  {
+    number: 2,
+    title: 'ヒアリング・お見積もり',
+    description: 'ご要望を伺い、お見積もりを提示します',
+  },
+  {
+    number: 3,
+    title: '制作・確認',
+    description: '制作を進めながら確認・修正を行います',
+  },
+  {
+    number: 4,
+    title: '納品・公開',
+    description: '完成後、納品・公開対応をします',
+  },
+];
+---
+
+<section id="flow" class="py-20 md:py-28 bg-bg-main">
+  <div class="max-w-5xl mx-auto px-4">
+    <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
+    <ol class="grid md:grid-cols-4 gap-8">
+      {steps.map((step, index) => (
+        <li class="relative flex flex-col items-center text-center">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white font-bold text-lg mb-4">
+            {step.number}
+          </div>
+          <h3 class="text-lg font-bold text-text mb-2">{step.title}</h3>
+          <p class="text-text-muted text-sm">{step.description}</p>
+          {index < steps.length - 1 && (
+            <div class="hidden md:block absolute top-6 left-[calc(50%+24px)] w-[calc(100%-48px)] h-0.5 bg-primary/30" aria-hidden="true"></div>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
