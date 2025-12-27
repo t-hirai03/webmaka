@@ -1,0 +1,47 @@
+---
+import Button from './ui/Button.astro';
+import SectionTitle from './ui/SectionTitle.astro';
+---
+
+<section id="contact" class="py-20 md:py-28 bg-primary">
+  <div class="max-w-5xl mx-auto px-4">
+    <SectionTitle title="Contact" subtitle="お問い合わせ" light />
+    <form class="max-w-md mx-auto space-y-6">
+      <div>
+        <label for="name" class="block text-white mb-2">お名前</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+      </div>
+      <div>
+        <label for="email" class="block text-white mb-2">メールアドレス</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+      </div>
+      <div>
+        <label for="message" class="block text-white mb-2">ご相談内容</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+        ></textarea>
+      </div>
+      <div class="text-center">
+        <Button type="submit" variant="secondary" size="lg">
+          送信する
+        </Button>
+      </div>
+    </form>
+  </div>
+</section>

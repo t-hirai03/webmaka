@@ -1,0 +1,37 @@
+---
+import Card from './ui/Card.astro';
+import SectionTitle from './ui/SectionTitle.astro';
+
+const services = [
+  {
+    icon: '🏢',
+    title: 'コーポレートサイト制作',
+    description: '企業の顔となるホームページを制作します',
+  },
+  {
+    icon: '📄',
+    title: 'ランディングページ制作',
+    description: '集客・CVに特化した1ページを制作します',
+  },
+  {
+    icon: '🔧',
+    title: 'Webサイト改善・保守',
+    description: '既存サイトの修正・更新・保守対応',
+  },
+];
+---
+
+<section id="service" class="py-20 md:py-28 bg-bg-section">
+  <div class="max-w-5xl mx-auto px-4">
+    <SectionTitle title="Service" subtitle="サービス内容" />
+    <div class="grid md:grid-cols-3 gap-6">
+      {services.map((service) => (
+        <Card
+          icon={service.icon}
+          title={service.title}
+          description={service.description}
+        />
+      ))}
+    </div>
+  </div>
+</section>

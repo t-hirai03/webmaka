@@ -1,0 +1,57 @@
+---
+const navItems = [
+  { href: '#service', label: 'Service' },
+  { href: '#flow', label: 'Flow' },
+  { href: '#price', label: 'Price' },
+  { href: '#works', label: 'Works' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header class="fixed top-0 w-full z-50 bg-bg-main/95 backdrop-blur-sm">
+  <nav class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between" aria-label="メインナビゲーション">
+    <a href="/" class="text-xl font-bold text-primary">
+      うぇぶまか
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="hidden md:flex gap-6">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="text-text hover:text-primary transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Hamburger Menu -->
+    <details class="md:hidden group">
+      <summary class="list-none cursor-pointer p-2 -mr-2" aria-label="メニューを開く">
+        <span class="block w-6 h-0.5 bg-text mb-1.5 transition-transform group-open:rotate-45 group-open:translate-y-2"></span>
+        <span class="block w-6 h-0.5 bg-text mb-1.5 transition-opacity group-open:opacity-0"></span>
+        <span class="block w-6 h-0.5 bg-text transition-transform group-open:-rotate-45 group-open:-translate-y-2"></span>
+      </summary>
+      <div class="absolute top-16 left-0 right-0 bg-bg-main border-t border-bg-section shadow-lg">
+        <ul class="py-4">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block px-6 py-3 text-text hover:text-primary hover:bg-bg-section transition-colors"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </details>
+  </nav>
+</header>
+
+<!-- Spacer to prevent content from going under fixed header -->
+<div class="h-16"></div>
