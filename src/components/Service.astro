@@ -1,6 +1,6 @@
 ---
 import SectionTitle from './ui/SectionTitle.astro';
-import { Palette, Code, Database } from 'lucide-astro';
+import { Palette, FileText, Code, Database } from 'lucide-astro';
 
 const services = [
   {
@@ -9,9 +9,19 @@ const services = [
     subtitle: 'デザインからコーディングまで一貫対応',
     description:
       'デザイナーと連携し、企画・デザイン・実装まで窓口ひとつで対応します。レスポンシブ対応、表示速度を重視した実装が強みです。',
-    details: ['コーポレートサイト', 'ランディングページ', 'サービスサイト'],
+    details: ['コーポレートサイト', 'サービスサイト', '採用サイト'],
     tech: ['Astro', 'Next.js', 'WordPress'],
     price: '15万円〜',
+  },
+  {
+    icon: FileText,
+    title: 'LP制作',
+    subtitle: '1ページ完結、デザイン込み',
+    description:
+      '商品・サービスの訴求に特化した1ページ構成のランディングページを制作します。デザインから実装まで一貫対応。',
+    details: ['商品・サービス紹介', 'キャンペーンLP', '採用LP'],
+    tech: ['Astro', 'HTML/CSS', 'JavaScript'],
+    price: '8万円〜',
   },
   {
     icon: Database,
@@ -82,7 +92,7 @@ const services = [
   }
 
   .service__container {
-    max-width: 72rem;
+    max-width: var(--container-max);
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -94,8 +104,15 @@ const services = [
 
   @media (min-width: 768px) {
     .service__grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .service__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
     }
   }
 
@@ -106,11 +123,6 @@ const services = [
     border-radius: 1rem;
     padding: 2rem 1.5rem;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
-    transition: box-shadow 0.2s ease;
-  }
-
-  .service-card:hover {
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   }
 
   .service-card__icon {

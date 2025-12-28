@@ -28,4 +28,7 @@ html {
   /* テキストカラー */
   --color-text: #374151;
   --color-text-muted: #6B7280;
+
+  /* コンテナ幅 */
+  --container-max: 1440px;
 }
