@@ -56,7 +56,7 @@ import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
   }
 
   .flow__container {
-    max-width: 72rem;
+    max-width: var(--container-max);
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -108,10 +108,13 @@ import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
     justify-content: center;
     width: 4rem;
     height: 4rem;
-    color: #fff;
     background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
     border-radius: 1rem;
     margin-block-end: 1.25rem;
+  }
+
+  .flow-card__icon :global(svg) {
+    stroke: #fff;
   }
 
   .flow-card__title {
