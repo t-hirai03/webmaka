@@ -1,44 +1,53 @@
 ---
 import SectionTitle from './ui/SectionTitle.astro';
 import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
+
+const flows = [
+  {
+    icon: Mail,
+    number: 1,
+    title: 'お問い合わせ',
+    description: 'フォームからご連絡ください',
+  },
+  {
+    icon: MessageCircle,
+    number: 2,
+    title: 'ヒアリング・お見積もり',
+    description: 'ご要望を伺い、お見積もりを提示します',
+  },
+  {
+    icon: PenTool,
+    number: 3,
+    title: '制作・確認',
+    description: '制作を進めながら確認・修正を行います',
+  },
+  {
+    icon: Rocket,
+    number: 4,
+    title: '納品・公開',
+    description: '完成後、納品・公開対応をします',
+  },
+];
 ---
 
 <section id="flow" class="flow">
   <div class="flow__container">
     <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
     <ol class="flow__list">
-      <li class="flow-card">
-        <span class="flow-card__number">1</span>
-        <div class="flow-card__icon">
-          <Mail size={28} strokeWidth={1.5} />
-        </div>
-        <h3 class="flow-card__title">お問い合わせ</h3>
-        <p class="flow-card__description">フォームからご連絡ください</p>
-      </li>
-      <li class="flow-card">
-        <span class="flow-card__number">2</span>
-        <div class="flow-card__icon">
-          <MessageCircle size={28} strokeWidth={1.5} />
-        </div>
-        <h3 class="flow-card__title">ヒアリング・お見積もり</h3>
-        <p class="flow-card__description">ご要望を伺い、お見積もりを提示します</p>
-      </li>
-      <li class="flow-card">
-        <span class="flow-card__number">3</span>
-        <div class="flow-card__icon">
-          <PenTool size={28} strokeWidth={1.5} />
-        </div>
-        <h3 class="flow-card__title">制作・確認</h3>
-        <p class="flow-card__description">制作を進めながら確認・修正を行います</p>
-      </li>
-      <li class="flow-card">
-        <span class="flow-card__number">4</span>
-        <div class="flow-card__icon">
-          <Rocket size={28} strokeWidth={1.5} />
-        </div>
-        <h3 class="flow-card__title">納品・公開</h3>
-        <p class="flow-card__description">完成後、納品・公開対応をします</p>
-      </li>
+      {
+        flows.map((flow) => (
+          <li class="flow-card">
+            <div class="flow-card__icon-wrap">
+              <div class="flow-card__icon">
+                <flow.icon size={24} strokeWidth={1.5} />
+              </div>
+              <span class="flow-card__number">{flow.number}</span>
+            </div>
+            <h3 class="flow-card__title">{flow.title}</h3>
+            <p class="flow-card__description">{flow.description}</p>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </section>
@@ -72,49 +81,50 @@ import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
   @media (min-width: 768px) {
     .flow__list {
       grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
+      gap: 1.5rem;
     }
   }
 
   .flow-card {
-    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     background-color: #fff;
     border-radius: 1rem;
     padding: 2rem 1.5rem;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
   }
 
-  .flow-card__number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #fff;
-    background-color: var(--color-accent);
-    border-radius: 50%;
-    margin-block-end: 1rem;
+  .flow-card__icon-wrap {
+    position: relative;
+    width: fit-content;
+    margin-block-end: 1.25rem;
   }
 
   .flow-card__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
-    border-radius: 1rem;
-    margin-block-end: 1.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 0.75rem;
   }
 
-  .flow-card__icon :global(svg) {
-    stroke: #fff;
+  .flow-card__number {
+    position: absolute;
+    inset-block-start: -0.5rem;
+    inset-inline-end: -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: var(--color-accent);
+    border-radius: 50%;
   }
 
   .flow-card__title {
