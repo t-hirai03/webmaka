@@ -1,6 +1,6 @@
 ---
 import SectionTitle from './ui/SectionTitle.astro';
-import { Palette, Code, Settings } from 'lucide-astro';
+import { Palette, Code, Database } from 'lucide-astro';
 
 const services = [
   {
@@ -24,14 +24,14 @@ const services = [
     price: '5万円〜',
   },
   {
-    icon: Settings,
-    title: '保守・改善',
-    subtitle: '既存サイトの修正・更新対応',
+    icon: Database,
+    title: 'CMS導入・移行',
+    subtitle: '静的サイトをCMS化して自分で更新できるように',
     description:
-      '「ここだけ直したい」「更新作業を任せたい」といったご要望に対応。WordPressの保守やセキュリティ対策もお任せください。',
-    details: ['コンテンツ更新', 'デザイン微調整', 'パフォーマンス改善'],
-    tech: ['WordPress', 'HTML/CSS', 'JavaScript'],
-    price: '月額1万円〜',
+      '「業者に頼まないと更新できない」を解消します。既存のHTMLサイトをWordPressやヘッドレスCMS（microCMS等）に移行し、お知らせやブログを自分で更新できる環境を構築します。',
+    details: ['既存HTMLサイトのCMS化', 'WordPress導入・構築', 'microCMS / Newt 等導入'],
+    tech: ['WordPress', 'microCMS', 'Newt'],
+    price: '10万円〜',
   },
 ];
 ---
