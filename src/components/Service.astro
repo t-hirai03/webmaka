@@ -12,6 +12,7 @@ const services = [
     details: ['コーポレートサイト', 'サービスサイト', '採用サイト'],
     tech: ['Astro', 'Next.js', 'WordPress'],
     price: '15万円〜',
+    priceNote: '5ページ目安',
   },
   {
     icon: FileText,
@@ -42,6 +43,7 @@ const services = [
     details: ['Figma/XDからの実装', 'レスポンシブ対応', 'アニメーション実装'],
     tech: ['HTML/CSS', 'JavaScript', 'Astro'],
     price: '3万円〜',
+    priceNote: '1ページ',
   },
 ];
 ---
@@ -70,7 +72,12 @@ const services = [
                   <span class="service-card__tech-tag">{t}</span>
                 ))}
               </div>
-              <p class="service-card__price">{service.price}</p>
+              <div class="service-card__price-wrap">
+                <p class="service-card__price">{service.price}</p>
+                {service.priceNote && (
+                  <span class="service-card__price-note">{service.priceNote}</span>
+                )}
+              </div>
             </div>
           </article>
         ))
@@ -197,10 +204,22 @@ const services = [
     border-radius: 0.25rem;
   }
 
+  .service-card__price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
   .service-card__price {
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--color-primary);
     margin: 0;
+  }
+
+  .service-card__price-note {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
   }
 </style>
