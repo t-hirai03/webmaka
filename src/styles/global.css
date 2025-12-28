@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+:root {
+  /* サイドバー幅 */
+  --sidebar-width: 80px;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -32,3 +37,15 @@ html {
   /* コンテナ幅 */
   --container-max: 1440px;
 }
+
+/* サイドバー用メインコンテンツ余白 */
+main {
+  padding-inline-start: var(--sidebar-width);
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-inline-start: 0;
+  }
+}
+
