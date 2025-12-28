@@ -42,26 +42,30 @@ const navItems = [
     </ul>
   </nav>
 
-  <!-- Mobile: Hamburger Button Only -->
-  <details class="header__mobile">
-    <summary class="header__hamburger" aria-label="メニューを開く">
+  <!-- Mobile: Hamburger + Slide-in Sidebar -->
+  <div class="header__mobile">
+    <button class="header__hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span class="header__hamburger-line"></span>
       <span class="header__hamburger-line"></span>
       <span class="header__hamburger-line"></span>
-    </summary>
-    <div class="header__dropdown">
-      <ul class="header__dropdown-list">
+    </button>
+    <div class="header__overlay"></div>
+    <nav class="header__mobile-sidebar" aria-label="モバイルナビゲーション">
+      <a href="/" class="header__logo">
+        <span class="header__logo-text">うぇぶ<br>まか</span>
+      </a>
+      <ul class="header__menu">
         {navItems.map((item) => (
-          <li>
-            <a href={item.href} class="header__dropdown-link">
-              <span class="header__dropdown-icon" set:html={item.icon} />
-              {item.label}
+          <li class="header__menu-item">
+            <a href={item.href} class="header__menu-link">
+              <span class="header__icon" set:html={item.icon} />
+              <span class="header__label">{item.label}</span>
             </a>
           </li>
         ))}
       </ul>
-    </div>
-  </details>
+    </nav>
+  </div>
 </header>
 
 <style>
@@ -151,14 +155,10 @@ const navItems = [
   }
 
   /* ================================
-     Mobile Hamburger
+     Mobile Hamburger + Sidebar
      ================================ */
   .header__mobile {
     display: none;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 50;
   }
 
   @media (max-width: 767px) {
@@ -168,7 +168,11 @@ const navItems = [
   }
 
   .header__hamburger {
-    list-style: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 60;
+    border: none;
     cursor: pointer;
     width: 48px;
     height: 48px;
@@ -187,64 +191,79 @@ const navItems = [
     width: 20px;
     height: 2px;
     background-color: #fff;
-    transition: transform 0.2s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
   }
 
-  .header__mobile[open] .header__hamburger-line:nth-child(1) {
-    transform: rotate(45deg) translateY(5px);
+  .header__mobile.is-open .header__hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
   }
 
-  .header__mobile[open] .header__hamburger-line:nth-child(2) {
+  .header__mobile.is-open .header__hamburger-line:nth-child(2) {
     opacity: 0;
   }
 
-  .header__mobile[open] .header__hamburger-line:nth-child(3) {
-    transform: rotate(-45deg) translateY(-5px);
+  .header__mobile.is-open .header__hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
-  .header__dropdown {
-    position: absolute;
-    top: 56px;
+  /* Overlay */
+  .header__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 49;
+  }
+
+  .header__mobile.is-open .header__overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Mobile Sidebar */
+  .header__mobile-sidebar {
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 200px;
-    background-color: var(--color-bg-main);
-    border: 1px solid var(--color-bg-section);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
-  }
-
-  .header__dropdown-list {
-    list-style: none;
-    margin: 0;
-    padding-block: 0.5rem;
-    padding-inline: 0;
-  }
-
-  .header__dropdown-link {
+    width: var(--sidebar-width);
+    height: 100dvh;
+    background-color: var(--color-primary);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding-block: 0.75rem;
-    padding-inline: 1rem;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: color 0.2s, background-color 0.2s;
+    padding-block: 1.5rem;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
   }
 
-  .header__dropdown-link:hover {
-    color: var(--color-primary);
-    background-color: var(--color-bg-section);
-  }
-
-  .header__dropdown-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary);
-  }
-
-  .header__dropdown-icon :global(svg) {
-    width: 18px;
-    height: 18px;
+  .header__mobile.is-open .header__mobile-sidebar {
+    transform: translateX(0);
   }
 </style>
+
+<script>
+  const mobileNav = document.querySelector('.header__mobile');
+  const hamburger = document.querySelector('.header__hamburger');
+  const overlay = document.querySelector('.header__overlay');
+  const menuLinks = document.querySelectorAll('.header__mobile-sidebar .header__menu-link');
+
+  function toggleMenu() {
+    const isOpen = mobileNav?.classList.toggle('is-open');
+    hamburger?.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    mobileNav?.classList.remove('is-open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', toggleMenu);
+  overlay?.addEventListener('click', closeMenu);
+  menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+</script>
