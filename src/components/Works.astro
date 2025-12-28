@@ -2,16 +2,42 @@
 import SectionTitle from './ui/SectionTitle.astro';
 ---
 
-<section id="works" class="py-20 md:py-28 bg-bg-main">
-  <div class="max-w-5xl mx-auto px-4">
+<section id="works" class="works">
+  <div class="works__container">
     <SectionTitle title="Works" subtitle="制作実績" />
-    <p class="text-xl text-text-muted text-center py-12">
+    <p class="works__coming-soon">
       Coming Soon
     </p>
     <!-- 将来の実績グリッド用の構造
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="works__grid">
       実績カードをここに追加
     </div>
     -->
   </div>
 </section>
+
+<style>
+  .works {
+    padding-block: 5rem 6rem;
+    background-color: var(--color-bg-main);
+  }
+
+  @media (min-width: 768px) {
+    .works {
+      padding-block: 7rem 8rem;
+    }
+  }
+
+  .works__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .works__coming-soon {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    padding-block: 3rem;
+  }
+</style>

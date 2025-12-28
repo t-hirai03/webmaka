@@ -1,23 +1,28 @@
 ---
 import SectionTitle from './ui/SectionTitle.astro';
+import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
 
-const steps = [
+const flows = [
   {
+    icon: Mail,
     number: 1,
     title: 'お問い合わせ',
     description: 'フォームからご連絡ください',
   },
   {
+    icon: MessageCircle,
     number: 2,
     title: 'ヒアリング・お見積もり',
     description: 'ご要望を伺い、お見積もりを提示します',
   },
   {
+    icon: PenTool,
     number: 3,
     title: '制作・確認',
     description: '制作を進めながら確認・修正を行います',
   },
   {
+    icon: Rocket,
     number: 4,
     title: '納品・公開',
     description: '完成後、納品・公開対応をします',
@@ -25,22 +30,115 @@ const steps = [
 ];
 ---
 
-<section id="flow" class="py-20 md:py-28 bg-bg-main">
-  <div class="max-w-5xl mx-auto px-4">
+<section id="flow" class="flow">
+  <div class="flow__container">
     <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
-    <ol class="grid md:grid-cols-4 gap-8">
-      {steps.map((step, index) => (
-        <li class="relative flex flex-col items-center text-center">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white font-bold text-lg mb-4">
-            {step.number}
-          </div>
-          <h3 class="text-lg font-bold text-text mb-2">{step.title}</h3>
-          <p class="text-text-muted text-sm">{step.description}</p>
-          {index < steps.length - 1 && (
-            <div class="hidden md:block absolute top-6 left-[calc(50%+24px)] w-[calc(100%-48px)] h-0.5 bg-primary/30" aria-hidden="true"></div>
-          )}
-        </li>
-      ))}
+    <ol class="flow__list">
+      {
+        flows.map((flow) => (
+          <li class="flow-card">
+            <div class="flow-card__icon-wrap">
+              <div class="flow-card__icon">
+                <flow.icon size={24} strokeWidth={1.5} />
+              </div>
+              <span class="flow-card__number">{flow.number}</span>
+            </div>
+            <h3 class="flow-card__title">{flow.title}</h3>
+            <p class="flow-card__description">{flow.description}</p>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </section>
+
+<style>
+  .flow {
+    padding-block: 5rem 6rem;
+    background-color: var(--color-bg-main);
+  }
+
+  @media (min-width: 768px) {
+    .flow {
+      padding-block: 7rem 8rem;
+    }
+  }
+
+  .flow__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .flow__list {
+    display: grid;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .flow__list {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  .flow-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+  }
+
+  .flow-card__icon-wrap {
+    position: relative;
+    width: fit-content;
+    margin-block-end: 1.25rem;
+  }
+
+  .flow-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 0.75rem;
+  }
+
+  .flow-card__number {
+    position: absolute;
+    inset-block-start: -0.5rem;
+    inset-inline-end: -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  .flow-card__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+    margin-block-end: 0.5rem;
+  }
+
+  .flow-card__description {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>
