@@ -3,41 +3,41 @@ import Button from './ui/Button.astro';
 import SectionTitle from './ui/SectionTitle.astro';
 ---
 
-<section id="contact" class="py-20 md:py-28 bg-primary">
-  <div class="max-w-[1440px] mx-auto px-4">
+<section id="contact" class="contact">
+  <div class="contact__container">
     <SectionTitle title="Contact" subtitle="お問い合わせ" light />
-    <form class="max-w-md mx-auto space-y-6">
-      <div>
-        <label for="name" class="block text-white mb-2">お名前</label>
+    <form class="contact__form">
+      <div class="contact__field">
+        <label for="name" class="contact__label">お名前</label>
         <input
           type="text"
           id="name"
           name="name"
           required
-          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent"
+          class="contact__input"
         />
       </div>
-      <div>
-        <label for="email" class="block text-white mb-2">メールアドレス</label>
+      <div class="contact__field">
+        <label for="email" class="contact__label">メールアドレス</label>
         <input
           type="email"
           id="email"
           name="email"
           required
-          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent"
+          class="contact__input"
         />
       </div>
-      <div>
-        <label for="message" class="block text-white mb-2">ご相談内容</label>
+      <div class="contact__field">
+        <label for="message" class="contact__label">ご相談内容</label>
         <textarea
           id="message"
           name="message"
           rows="5"
           required
-          class="w-full bg-white rounded-lg p-3 text-text focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+          class="contact__textarea"
         ></textarea>
       </div>
-      <div class="text-center">
+      <div class="contact__submit">
         <Button type="submit" variant="secondary" size="lg">
           送信する
         </Button>
@@ -45,3 +45,64 @@ import SectionTitle from './ui/SectionTitle.astro';
     </form>
   </div>
 </section>
+
+<style>
+  .contact {
+    padding-block: 5rem 6rem;
+    background-color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    .contact {
+      padding-block: 7rem 8rem;
+    }
+  }
+
+  .contact__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .contact__form {
+    max-width: 28rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact__label {
+    color: #fff;
+    margin-block-end: 0.5rem;
+  }
+
+  .contact__input,
+  .contact__textarea {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: var(--color-text);
+    border: none;
+  }
+
+  .contact__input:focus,
+  .contact__textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+
+  .contact__textarea {
+    resize: none;
+  }
+
+  .contact__submit {
+    text-align: center;
+  }
+</style>

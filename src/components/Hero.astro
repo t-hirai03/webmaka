@@ -2,13 +2,58 @@
 
 ---
 
-<section id="hero" class="min-h-[80vh] flex items-center justify-center bg-bg-main">
-  <div class="max-w-[1440px] mx-auto px-4 text-center">
-    <h1 class="text-3xl md:text-5xl font-bold text-text mb-6">
-      あなたの"やりたい"に、<br class="md:hidden" />柔軟に応えます。
+<section id="hero" class="hero">
+  <div class="hero__container">
+    <h1 class="hero__title">
+      あなたの"やりたい"に、<br class="hero__br-sp" />柔軟に応えます。
     </h1>
-    <p class="text-lg md:text-xl text-text-muted">
+    <p class="hero__subtitle">
       相談から納品まで、窓口ひとつで対応します
     </p>
   </div>
 </section>
+
+<style>
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-main);
+  }
+
+  .hero__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+    text-align: center;
+  }
+
+  .hero__title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-block-end: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero__title {
+      font-size: 3rem;
+    }
+
+    .hero__br-sp {
+      display: none;
+    }
+  }
+
+  .hero__subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .hero__subtitle {
+      font-size: 1.25rem;
+    }
+  }
+</style>
