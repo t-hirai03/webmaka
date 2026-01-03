@@ -55,11 +55,15 @@ const services = [
       {
         services.map((service) => (
           <article class="service-card">
-            <div class="service-card__icon">
-              <service.icon size={32} strokeWidth={1.5} />
+            <div class="service-card__header">
+              <div class="service-card__icon">
+                <service.icon size={32} strokeWidth={1.5} />
+              </div>
+              <div class="service-card__header-text">
+                <h3 class="service-card__title">{service.title}</h3>
+                <p class="service-card__subtitle">{service.subtitle}</p>
+              </div>
             </div>
-            <h3 class="service-card__title">{service.title}</h3>
-            <p class="service-card__subtitle">{service.subtitle}</p>
             <p class="service-card__description">{service.description}</p>
             <ul class="service-card__details">
               {service.details.map((detail) => (
@@ -132,30 +136,43 @@ const services = [
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
   }
 
+  .service-card__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-block-end: 1rem;
+  }
+
   .service-card__icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     width: 3.5rem;
     height: 3.5rem;
     background-color: var(--color-primary);
     color: #fff;
     border-radius: 0.75rem;
-    margin-block-end: 1.25rem;
+  }
+
+  .service-card__header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 3.5rem;
   }
 
   .service-card__title {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text);
-    margin-block-end: 0.25rem;
+    margin-block-end: 0.125rem;
   }
 
   .service-card__subtitle {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-primary);
-    margin-block-end: 1rem;
   }
 
   .service-card__description {

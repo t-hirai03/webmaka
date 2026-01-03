@@ -12,11 +12,17 @@
 
 <style>
   .hero {
-    min-height: 50vh;
+    padding-block-start: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-bg-main);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-block: 40px;
+    }
   }
 
   .hero__container {
