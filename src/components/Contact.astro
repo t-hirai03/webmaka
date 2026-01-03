@@ -70,7 +70,7 @@ import SectionTitle from './ui/SectionTitle.astro';
       <div id="contact-message" class="contact__message" aria-live="polite"></div>
       <div class="contact__submit">
         <Button type="submit" variant="secondary" size="lg">
-          送信する
+          確認する
         </Button>
       </div>
     </form>
@@ -78,18 +78,33 @@ import SectionTitle from './ui/SectionTitle.astro';
 </section>
 
 <script>
+  const STORAGE_KEY = 'contactFormData';
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const messageEl = document.getElementById('contact-message') as HTMLDivElement;
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  // 確認画面から戻った場合、入力内容を復元
+  function restoreFormData() {
+    const storedData = sessionStorage.getItem(STORAGE_KEY);
+    if (!storedData) return;
 
-    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const originalText = submitButton.textContent;
-    submitButton.disabled = true;
-    submitButton.textContent = '送信中...';
-    messageEl.textContent = '';
-    messageEl.className = 'contact__message';
+    const data = JSON.parse(storedData);
+    const nameInput = form.querySelector('#name') as HTMLInputElement;
+    const emailInput = form.querySelector('#email') as HTMLInputElement;
+    const inquiryTypeSelect = form.querySelector('#inquiry-type') as HTMLSelectElement;
+    const phoneInput = form.querySelector('#phone') as HTMLInputElement;
+    const messageTextarea = form.querySelector('#message') as HTMLTextAreaElement;
+
+    if (nameInput) nameInput.value = data.name || '';
+    if (emailInput) emailInput.value = data.email || '';
+    if (inquiryTypeSelect) inquiryTypeSelect.value = data.inquiryType || '';
+    if (phoneInput) phoneInput.value = data.phone || '';
+    if (messageTextarea) messageTextarea.value = data.message || '';
+  }
+
+  restoreFormData();
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
     const formData = new FormData(form);
     const data = {
@@ -100,30 +115,26 @@ import SectionTitle from './ui/SectionTitle.astro';
       message: formData.get('message') as string,
     };
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        messageEl.textContent = 'お問い合わせを送信しました。ありがとうございます。';
-        messageEl.classList.add('contact__message--success');
-        form.reset();
-      } else {
-        messageEl.textContent = result.error || '送信に失敗しました。もう一度お試しください。';
-        messageEl.classList.add('contact__message--error');
-      }
-    } catch {
-      messageEl.textContent = '通信エラーが発生しました。もう一度お試しください。';
+    // バリデーション
+    if (!data.name.trim()) {
+      messageEl.textContent = '氏名を入力してください。';
       messageEl.classList.add('contact__message--error');
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = originalText;
+      return;
     }
+    if (!data.email.includes('@')) {
+      messageEl.textContent = '正しいメールアドレスを入力してください。';
+      messageEl.classList.add('contact__message--error');
+      return;
+    }
+    if (!data.message.trim()) {
+      messageEl.textContent = 'お問い合わせ内容を入力してください。';
+      messageEl.classList.add('contact__message--error');
+      return;
+    }
+
+    // sessionStorageに保存して確認画面へ遷移
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    window.location.href = '/contact/confirm';
   });
 </script>
 

@@ -1,0 +1,266 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+
+const INQUIRY_TYPE_LABELS: Record<string, string> = {
+  website: 'Webサイト制作',
+  lp: 'LP制作',
+  cms: 'CMS導入・移行',
+  coding: 'コーディング代行',
+  other: 'その他',
+};
+---
+
+<Layout title="入力内容の確認 | うぇぶまか" noindex>
+  <section class="confirm">
+    <div class="confirm__container">
+      <SectionTitle title="Confirm" subtitle="入力内容の確認" />
+
+      <div id="confirm-content" class="confirm__content">
+        <p class="confirm__loading">読み込み中...</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ INQUIRY_TYPE_LABELS }}>
+  const STORAGE_KEY = 'contactFormData';
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function init() {
+    const contentEl = document.getElementById('confirm-content');
+    const storedData = sessionStorage.getItem(STORAGE_KEY);
+
+    if (!storedData) {
+      window.location.href = '/#contact';
+      return;
+    }
+
+    const data = JSON.parse(storedData);
+    const inquiryLabel = INQUIRY_TYPE_LABELS[data.inquiryType] || '未選択';
+
+    contentEl.innerHTML = `
+      <dl class="confirm__list">
+        <div class="confirm__item">
+          <dt class="confirm__label">氏名</dt>
+          <dd class="confirm__value">${escapeHtml(data.name)}</dd>
+        </div>
+        <div class="confirm__item">
+          <dt class="confirm__label">メールアドレス</dt>
+          <dd class="confirm__value">${escapeHtml(data.email)}</dd>
+        </div>
+        <div class="confirm__item">
+          <dt class="confirm__label">お問い合わせ種別</dt>
+          <dd class="confirm__value">${escapeHtml(inquiryLabel)}</dd>
+        </div>
+        <div class="confirm__item">
+          <dt class="confirm__label">お電話番号</dt>
+          <dd class="confirm__value">${escapeHtml(data.phone || '未入力')}</dd>
+        </div>
+        <div class="confirm__item">
+          <dt class="confirm__label">お問い合わせ内容</dt>
+          <dd class="confirm__value confirm__value--message">${escapeHtml(data.message)}</dd>
+        </div>
+      </dl>
+      <div id="confirm-message" class="confirm__message" aria-live="polite"></div>
+      <div class="confirm__actions">
+        <button type="button" id="back-button" class="confirm__back">戻って修正する</button>
+        <button type="button" id="submit-button" class="confirm__submit">送信する</button>
+      </div>
+    `;
+
+    document.getElementById('back-button').addEventListener('click', () => {
+      window.location.href = '/#contact';
+    });
+
+    document.getElementById('submit-button').addEventListener('click', async () => {
+      const submitButton = document.getElementById('submit-button');
+      const backButton = document.getElementById('back-button');
+      const messageEl = document.getElementById('confirm-message');
+
+      submitButton.disabled = true;
+      submitButton.textContent = '送信中...';
+      backButton.disabled = true;
+      messageEl.textContent = '';
+      messageEl.className = 'confirm__message';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: storedData,
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          sessionStorage.removeItem(STORAGE_KEY);
+          window.location.href = '/contact/thanks';
+        } else {
+          messageEl.textContent = result.error || '送信に失敗しました。もう一度お試しください。';
+          messageEl.classList.add('confirm__message--error');
+          submitButton.disabled = false;
+          submitButton.textContent = '送信する';
+          backButton.disabled = false;
+        }
+      } catch {
+        messageEl.textContent = '通信エラーが発生しました。もう一度お試しください。';
+        messageEl.classList.add('confirm__message--error');
+        submitButton.disabled = false;
+        submitButton.textContent = '送信する';
+        backButton.disabled = false;
+      }
+    });
+  }
+
+  init();
+</script>
+
+<style is:global>
+  .confirm {
+    padding-block: 3rem 4rem;
+    background-color: var(--color-bg-section);
+    min-height: calc(100dvh - 80px);
+  }
+
+  @media (min-width: 768px) {
+    .confirm {
+      padding-block: 7rem 8rem;
+    }
+  }
+
+  .confirm__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .confirm__content {
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .confirm__loading {
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .confirm__list {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .confirm__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-block-end: 1px solid #e5e7eb;
+  }
+
+  .confirm__item:last-child {
+    border-block-end: none;
+  }
+
+  @media (min-width: 640px) {
+    .confirm__item {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  .confirm__label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .confirm__value {
+    color: var(--color-text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .confirm__value--message {
+    white-space: pre-wrap;
+    font-size: 1rem;
+  }
+
+  .confirm__message {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-block-start: 1.5rem;
+  }
+
+  .confirm__message:empty {
+    display: none;
+  }
+
+  .confirm__message--error {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  .confirm__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block-start: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .confirm__actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .confirm__back,
+  .confirm__submit {
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+  }
+
+  .confirm__back {
+    background-color: #e5e7eb;
+    color: var(--color-text);
+    border: none;
+  }
+
+  .confirm__back:hover:not(:disabled) {
+    background-color: #d1d5db;
+  }
+
+  .confirm__submit {
+    background-color: var(--color-accent);
+    color: #fff;
+    border: none;
+  }
+
+  .confirm__submit:hover:not(:disabled) {
+    background-color: var(--color-accent-dark);
+  }
+
+  .confirm__back:disabled,
+  .confirm__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
