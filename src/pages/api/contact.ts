@@ -17,6 +17,8 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 	other: 'その他',
 };
 
+const FROM_EMAIL = 'うぇぶまか <admin@webmaka.com>';
+
 function isValidContactFormData(data: unknown): data is ContactFormData {
 	if (typeof data !== 'object' || data === null) return false;
 
@@ -69,8 +71,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const resend = new Resend(resendApiKey);
 
 	try {
+		// 管理者への通知メール
 		await resend.emails.send({
-			from: 'お問い合わせフォーム <onboarding@resend.dev>',
+			from: FROM_EMAIL,
 			to: contactEmail,
 			subject: `【お問い合わせ】${name}様より`,
 			html: `
@@ -97,6 +100,56 @@ export const POST: APIRoute = async ({ request, locals }) => {
 						<td style="padding: 8px; border-bottom: 1px solid #ddd; white-space: pre-wrap;">${escapeHtml(message)}</td>
 					</tr>
 				</table>
+			`,
+		});
+
+		// ユーザーへの自動返信メール
+		await resend.emails.send({
+			from: FROM_EMAIL,
+			to: email,
+			subject: '【うぇぶまか】お問い合わせありがとうございます',
+			html: `
+				<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+					<p>${escapeHtml(name)} 様</p>
+					<p>この度はお問い合わせいただき、誠にありがとうございます。</p>
+					<p>以下の内容でお問い合わせを受け付けました。<br>
+					内容を確認の上、担当者より改めてご連絡いたします。</p>
+					<hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
+					<h3 style="font-size: 16px; margin-bottom: 16px;">お問い合わせ内容</h3>
+					<table style="border-collapse: collapse; width: 100%;">
+						<tr>
+							<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd; width: 30%;">氏名</th>
+							<td style="padding: 8px; border-bottom: 1px solid #ddd;">${escapeHtml(name)}</td>
+						</tr>
+						<tr>
+							<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">メールアドレス</th>
+							<td style="padding: 8px; border-bottom: 1px solid #ddd;">${escapeHtml(email)}</td>
+						</tr>
+						<tr>
+							<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">お問い合わせ種別</th>
+							<td style="padding: 8px; border-bottom: 1px solid #ddd;">${escapeHtml(inquiryLabel)}</td>
+						</tr>
+						<tr>
+							<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">電話番号</th>
+							<td style="padding: 8px; border-bottom: 1px solid #ddd;">${escapeHtml(phone || '未入力')}</td>
+						</tr>
+						<tr>
+							<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd; vertical-align: top;">お問い合わせ内容</th>
+							<td style="padding: 8px; border-bottom: 1px solid #ddd; white-space: pre-wrap;">${escapeHtml(message)}</td>
+						</tr>
+					</table>
+					<hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
+					<p style="color: #666; font-size: 14px;">
+						※ このメールは自動送信されています。<br>
+						※ このメールに心当たりがない場合は、お手数ですが破棄してください。
+					</p>
+					<p style="margin-top: 24px;">
+						━━━━━━━━━━━━━━━━━━━━<br>
+						うぇぶまか<br>
+						https://webmaka.com<br>
+						━━━━━━━━━━━━━━━━━━━━
+					</p>
+				</div>
 			`,
 		});
 

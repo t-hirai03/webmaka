@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import { FileQuestion } from 'lucide-astro';
+---
+
+<Layout title="ページが見つかりません | うぇぶまか" noindex>
+  <section class="not-found">
+    <div class="not-found__container">
+      <div class="not-found__content">
+        <div class="not-found__icon">
+          <FileQuestion size={64} strokeWidth={1.5} />
+        </div>
+        <h1 class="not-found__code">404</h1>
+        <p class="not-found__title">ページが見つかりません</p>
+        <p class="not-found__message">
+          お探しのページは移動または削除された可能性があります。<br />
+          URLをご確認いただくか、トップページからお探しください。
+        </p>
+        <div class="not-found__action">
+          <Button href="/" variant="secondary" size="lg">
+            トップページに戻る
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    padding-block: 3rem 4rem;
+    background-color: var(--color-bg-section);
+    min-height: calc(100dvh - 80px);
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .not-found {
+      padding-block: 7rem 8rem;
+    }
+  }
+
+  .not-found__container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+    width: 100%;
+  }
+
+  .not-found__content {
+    max-width: 36rem;
+    margin-inline: auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 3rem 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .not-found__icon {
+    color: var(--color-text-muted);
+    margin-block-end: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .not-found__code {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-block-end: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .not-found__code {
+      font-size: 6rem;
+    }
+  }
+
+  .not-found__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-block-end: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .not-found__title {
+      font-size: 1.5rem;
+    }
+  }
+
+  .not-found__message {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-block-end: 2rem;
+  }
+
+  .not-found__action {
+    display: flex;
+    justify-content: center;
+  }
+</style>
