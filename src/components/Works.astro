@@ -1,25 +1,89 @@
 ---
 import SectionTitle from './ui/SectionTitle.astro';
+import { ExternalLink } from 'lucide-astro';
+
+interface WorkItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+const works: WorkItem[] = [
+  {
+    id: 'beyerdynamic',
+    title: 'beyerdynamic',
+    category: 'ブランドサイト',
+    description: 'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
+    url: 'https://beyerdynamic.co.jp/',
+    image: '/works/beyerdynamic.png',
+  },
+  {
+    id: 'jgi',
+    title: '地球科学総合研究所',
+    category: 'コーポレートサイト',
+    description: '物理探査・地震探査を行う企業のコーポレートサイト。多数のページと情報を整理した大規模サイト。',
+    url: 'https://jgi-inc.com/',
+    image: '/works/jgi.png',
+  },
+  {
+    id: 'obata',
+    title: '小畑製紙所',
+    category: 'LP',
+    description: '越前和紙の透かし入れ卒業証書を製造する老舗のランディングページ。伝統と技術を訴求。',
+    url: 'https://obataseishijo.jp/lp/',
+    image: '/works/obata.png',
+  },
+  {
+    id: 'takazen',
+    title: '高善産業',
+    category: 'コーポレートサイト',
+    description: 'オーダーメイド家具を製造する企業のサイト。職人の技術と製品の魅力を伝えるデザイン。',
+    url: 'https://takazen-sangyo.com/',
+    image: '/works/takazen.png',
+  },
+  {
+    id: 'kaneki',
+    title: 'カネキ運輸',
+    category: 'コーポレートサイト',
+    description: '運送事業・倉庫業を営む企業のコーポレートサイト。シンプルで見やすい構成。',
+    url: 'https://kaneki-unyu.co.jp/',
+    image: '/works/kaneki.png',
+  },
+];
 ---
 
 <section id="works" class="works">
   <div class="works__container">
     <SectionTitle title="Works" subtitle="制作実績" />
-    <p class="works__coming-soon">
-      Coming Soon
-    </p>
-    <!-- 将来の実績グリッド用の構造
     <div class="works__grid">
-      実績カードをここに追加
+      {works.map((work) => (
+        <article class="work-card">
+          <a href={work.url} target="_blank" rel="noopener noreferrer" class="work-card__link">
+            <div class="work-card__image">
+              <img src={work.image} alt={work.title} loading="lazy" />
+            </div>
+            <div class="work-card__content">
+              <div class="work-card__header">
+                <span class="work-card__category">{work.category}</span>
+                <ExternalLink class="work-card__icon" size={16} />
+              </div>
+              <h3 class="work-card__title">{work.title}</h3>
+              <p class="work-card__description">{work.description}</p>
+            </div>
+          </a>
+        </article>
+      ))}
     </div>
-    -->
   </div>
 </section>
 
 <style>
   .works {
     padding-block: 3rem 4rem;
-    background-color: var(--color-bg-main);
+    background-color: var(--color-bg-section);
   }
 
   @media (min-width: 768px) {
@@ -34,10 +98,92 @@ import SectionTitle from './ui/SectionTitle.astro';
     padding-inline: 1rem;
   }
 
-  .works__coming-soon {
-    font-size: 1.25rem;
+  .works__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .works__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .works__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .work-card {
+    background-color: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+  }
+
+  .work-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .work-card__image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .work-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .work-card__content {
+    padding: 1.5rem;
+  }
+
+  .work-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 1rem;
+  }
+
+  .work-card__category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background-color: rgb(61 139 110 / 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .work-card__icon {
     color: var(--color-text-muted);
-    text-align: center;
-    padding-block: 3rem;
+    transition: color 0.2s;
+  }
+
+  .work-card:hover .work-card__icon {
+    color: var(--color-primary);
+  }
+
+  .work-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-block-end: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .work-card__description {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
   }
 </style>
