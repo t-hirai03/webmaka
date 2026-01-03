@@ -1,3 +1,11 @@
 name = "webmaka"
 compatibility_date = "2025-12-13"
 pages_build_output_dir = "dist"
+
+# 環境変数の設定
+# 本番環境: Cloudflare Pages ダッシュボード > Settings > Environment variables で設定
+# ローカル開発: .dev.vars ファイルを作成して設定
+#
+# 必要な環境変数:
+# - RESEND_API_KEY: Resend APIキー
+# - CONTACT_EMAIL: お問い合わせ受信用メールアドレス
