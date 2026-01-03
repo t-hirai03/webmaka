@@ -7,7 +7,7 @@ const flows = [
     icon: Mail,
     number: 1,
     title: 'お問い合わせ',
-    description: 'フォームからご連絡ください',
+    description: '<a href="#contact" class="flow-card__link">フォーム</a>からご連絡ください',
   },
   {
     icon: MessageCircle,
@@ -44,7 +44,7 @@ const flows = [
               <span class="flow-card__number">{flow.number}</span>
             </div>
             <h3 class="flow-card__title">{flow.title}</h3>
-            <p class="flow-card__description">{flow.description}</p>
+            <p class="flow-card__description" set:html={flow.description} />
           </li>
         ))
       }
@@ -140,5 +140,15 @@ const flows = [
     line-height: 1.6;
     color: var(--color-text-muted);
     margin: 0;
+  }
+
+  .flow-card__description :global(.flow-card__link) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .flow-card__description :global(.flow-card__link:hover) {
+    text-decoration: none;
   }
 </style>

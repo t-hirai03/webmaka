@@ -58,7 +58,7 @@ const works: WorkItem[] = [
 <section id="works" class="works">
   <div class="works__container">
     <SectionTitle title="Works" subtitle="制作実績" />
-    <div class="works__grid">
+    <div class="works__grid" id="works-slider">
       {works.map((work) => (
         <article class="work-card">
           <a href={work.url} target="_blank" rel="noopener noreferrer" class="work-card__link">
@@ -77,8 +77,63 @@ const works: WorkItem[] = [
         </article>
       ))}
     </div>
+    <div class="works__pagination" id="works-pagination">
+      {works.map((_, index) => (
+        <button
+          class={`works__dot ${index === 0 ? 'is-active' : ''}`}
+          data-index={index}
+          aria-label={`スライド ${index + 1} へ移動`}
+        />
+      ))}
+    </div>
   </div>
 </section>
+
+<script>
+  const slider = document.getElementById('works-slider');
+  const pagination = document.getElementById('works-pagination');
+  const dots = pagination?.querySelectorAll('.works__dot');
+  const cards = slider?.querySelectorAll('.work-card');
+
+  if (slider && dots && cards) {
+    // スクロール時にアクティブなドットを更新
+    const updateActiveDot = () => {
+      const sliderRect = slider.getBoundingClientRect();
+      const sliderCenter = sliderRect.left + sliderRect.width / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      cards.forEach((card, index) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const distance = Math.abs(sliderCenter - cardCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('is-active', index === closestIndex);
+      });
+    };
+
+    slider.addEventListener('scroll', updateActiveDot, { passive: true });
+
+    // ドットクリックでスライドへ移動
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.dataset.index);
+        const targetCard = cards[index];
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    });
+  }
+</script>
 
 <style>
   .works {
@@ -98,16 +153,47 @@ const works: WorkItem[] = [
     padding-inline: 1rem;
   }
 
+  /* スマホ版: 横スクロールスライダー */
   .works__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    padding-block-end: 1rem;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
   }
 
+  .works__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .works__grid {
+    scrollbar-width: none;
+  }
+
+  .works__grid > .work-card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+  }
+
+  /* タブレット以上: グリッド表示 */
   @media (min-width: 768px) {
     .works__grid {
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      margin-inline: 0;
+      padding-inline: 0;
+      padding-block-end: 0;
+    }
+
+    .works__grid > .work-card {
+      flex: none;
     }
   }
 
@@ -185,5 +271,37 @@ const works: WorkItem[] = [
     font-size: 0.875rem;
     color: var(--color-text-muted);
     line-height: 1.7;
+  }
+
+  /* ページネーション */
+  .works__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-block-start: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .works__pagination {
+      display: none;
+    }
+  }
+
+  .works__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-text-muted);
+    opacity: 0.3;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .works__dot.is-active {
+    opacity: 1;
+    background-color: var(--color-primary);
+    transform: scale(1.25);
   }
 </style>
