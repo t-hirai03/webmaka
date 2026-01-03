@@ -92,7 +92,7 @@ const works: WorkItem[] = [
 <script>
   const slider = document.getElementById('works-slider');
   const pagination = document.getElementById('works-pagination');
-  const dots = pagination?.querySelectorAll('.works__dot');
+  const dots = pagination?.querySelectorAll<HTMLButtonElement>('.works__dot');
   const cards = slider?.querySelectorAll('.work-card');
 
   if (slider && dots && cards) {
