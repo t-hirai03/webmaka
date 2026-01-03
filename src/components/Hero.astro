@@ -5,17 +5,14 @@
 <section id="hero" class="hero">
   <div class="hero__container">
     <h1 class="hero__title">
-      Webサイト制作を、<br class="hero__br-sp" />ワンストップで。
+      <span class="hero__marker">Webサイト制作を、<br class="hero__br-sp" />ワンストップで</span>
     </h1>
-    <p class="hero__subtitle">
-      相談から納品まで、窓口ひとつで対応します
-    </p>
   </div>
 </section>
 
 <style>
   .hero {
-    min-height: 80vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,14 +43,16 @@
     }
   }
 
-  .hero__subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
+  .hero__marker {
+    background: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    animation: marker-draw 1s ease-out 0.3s forwards;
   }
 
-  @media (min-width: 768px) {
-    .hero__subtitle {
-      font-size: 1.25rem;
+  @keyframes marker-draw {
+    to {
+      background-size: 100% 100%;
     }
   }
 </style>
