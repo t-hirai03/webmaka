@@ -6,7 +6,7 @@ import SectionTitle from './ui/SectionTitle.astro';
 <section id="contact" class="contact">
   <div class="contact__container">
     <SectionTitle title="Contact" subtitle="お問い合わせ" />
-    <form class="contact__form">
+    <form id="contact-form" class="contact__form">
       <div class="contact__field">
         <label for="name" class="contact__label">
           氏名<span class="contact__required">*</span>
@@ -67,6 +67,7 @@ import SectionTitle from './ui/SectionTitle.astro';
           class="contact__textarea"
         ></textarea>
       </div>
+      <div id="contact-message" class="contact__message" aria-live="polite"></div>
       <div class="contact__submit">
         <Button type="submit" variant="secondary" size="lg">
           送信する
@@ -75,6 +76,56 @@ import SectionTitle from './ui/SectionTitle.astro';
     </form>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const messageEl = document.getElementById('contact-message') as HTMLDivElement;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = '送信中...';
+    messageEl.textContent = '';
+    messageEl.className = 'contact__message';
+
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      inquiryType: formData.get('inquiry-type') as string,
+      phone: formData.get('phone') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        messageEl.textContent = 'お問い合わせを送信しました。ありがとうございます。';
+        messageEl.classList.add('contact__message--success');
+        form.reset();
+      } else {
+        messageEl.textContent = result.error || '送信に失敗しました。もう一度お試しください。';
+        messageEl.classList.add('contact__message--error');
+      }
+    } catch {
+      messageEl.textContent = '通信エラーが発生しました。もう一度お試しください。';
+      messageEl.classList.add('contact__message--error');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  });
+</script>
 
 <style>
   .contact {
@@ -150,5 +201,25 @@ import SectionTitle from './ui/SectionTitle.astro';
 
   .contact__submit {
     text-align: center;
+  }
+
+  .contact__message {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+
+  .contact__message:empty {
+    display: none;
+  }
+
+  .contact__message--success {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+
+  .contact__message--error {
+    background-color: #fee2e2;
+    color: #991b1b;
   }
 </style>

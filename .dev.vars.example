@@ -1,0 +1,5 @@
+# ローカル開発用環境変数
+# このファイルを .dev.vars にコピーして使用
+
+RESEND_API_KEY=re_xxxxxxxxxxxx
+CONTACT_EMAIL=your-email@example.com
