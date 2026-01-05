@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Toyomare';
+  src: url('/fonts/Toyomare-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* サイドバー幅 */
   --sidebar-width: 80px;
@@ -7,6 +15,10 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Toyomare', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
