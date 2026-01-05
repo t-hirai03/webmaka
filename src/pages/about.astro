@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="運営者について | うぇぶまか">
+  <section class="about">
+    <div class="about__container">
+      <h1 class="about__heading">運営者について</h1>
+
+      <div class="about__content">
+        <div class="about__profile">
+          <div class="about__image-wrapper">
+            <div class="about__image-placeholder">
+              <span>Photo</span>
+            </div>
+          </div>
+
+          <div class="about__info">
+            <p class="about__name">平井 隆裕</p>
+            <p class="about__role">フロントエンドエンジニア</p>
+          </div>
+        </div>
+
+        <div class="about__bio">
+          <h2 class="about__section-title">自己紹介</h2>
+          <p class="about__text">
+            はじめまして、平井隆裕です。フロントエンドエンジニアとして、Webサイトやランディングページの制作を行っています。
+          </p>
+          <p class="about__text">
+            「使いやすく、見やすく、伝わりやすい」をモットーに、お客様のビジネスに貢献できるWeb制作を心がけています。デザインからコーディング、公開後の運用サポートまで一貫して対応いたします。
+          </p>
+          <p class="about__text">
+            お気軽にご相談ください。
+          </p>
+        </div>
+
+        <div class="about__skills">
+          <h2 class="about__section-title">スキル・経験</h2>
+          <ul class="about__skill-list">
+            <li class="about__skill-item">HTML / CSS / JavaScript</li>
+            <li class="about__skill-item">TypeScript</li>
+            <li class="about__skill-item">React / Next.js</li>
+            <li class="about__skill-item">Astro</li>
+            <li class="about__skill-item">WordPress</li>
+            <li class="about__skill-item">レスポンシブデザイン</li>
+            <li class="about__skill-item">アクセシビリティ対応</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about__cta">
+        <a href="/#contact" class="about__cta-button">お問い合わせはこちら</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about {
+    padding-block: 60px;
+    background-color: var(--color-bg-main);
+  }
+
+  @media (min-width: 768px) {
+    .about {
+      padding-block: 80px;
+    }
+  }
+
+  .about__container {
+    max-width: 800px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .about__heading {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-align: center;
+    margin-block-end: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .about__heading {
+      font-size: 2.5rem;
+    }
+  }
+
+  .about__content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .about__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .about__profile {
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  .about__image-wrapper {
+    flex-shrink: 0;
+  }
+
+  .about__image-placeholder {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: var(--color-bg-section);
+    border: 3px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .about__info {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .about__info {
+      text-align: left;
+    }
+  }
+
+  .about__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-block-end: 0.5rem;
+  }
+
+  .about__role {
+    font-size: 1rem;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .about__section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-block-end: 1rem;
+    padding-block-end: 0.5rem;
+    border-block-end: 2px solid var(--color-primary);
+  }
+
+  .about__text {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-block-end: 1rem;
+  }
+
+  .about__text:last-child {
+    margin-block-end: 0;
+  }
+
+  .about__skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .about__skill-item {
+    background-color: var(--color-bg-section);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    border: 1px solid var(--color-primary-light);
+  }
+
+  .about__cta {
+    margin-block-start: 4rem;
+    text-align: center;
+  }
+
+  .about__cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .about__cta-button:hover {
+    background-color: var(--color-primary-dark);
+  }
+</style>
