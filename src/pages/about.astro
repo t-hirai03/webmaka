@@ -24,13 +24,16 @@ import Layout from '../layouts/Layout.astro';
         <div class="about__bio">
           <h2 class="about__section-title">自己紹介</h2>
           <p class="about__text">
-            はじめまして、平井隆裕です。フロントエンドエンジニアとして、Webサイトやランディングページの制作を行っています。
+            東京でフロントエンドエンジニアをしております。
           </p>
           <p class="about__text">
-            「使いやすく、見やすく、伝わりやすい」をモットーに、お客様のビジネスに貢献できるWeb制作を心がけています。デザインからコーディング、公開後の運用サポートまで一貫して対応いたします。
+            2018年より福井県でSEの会社に勤める。<br>
+            2022年からWebサイト制作会社でWeb制作業務を行う。<br>
+            2024年より東京で事業会社のフロントエンドエンジニアへ転向。
           </p>
           <p class="about__text">
-            お気軽にご相談ください。
+            お仕事のお問い合わせは<br>
+            <a href="/contact">CONTACTページ</a>のフォームからお願いいたします。
           </p>
         </div>
 
@@ -164,6 +167,11 @@ import Layout from '../layouts/Layout.astro';
 
   .about__text:last-child {
     margin-block-end: 0;
+  }
+
+  .about__text a {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
   }
 
   .about__skill-list {
