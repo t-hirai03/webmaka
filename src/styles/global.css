@@ -51,6 +51,7 @@ html {
 
 body {
   font-family: 'TsugumiMaruGothic', sans-serif;
+  font-weight: 500;
 }
 
 @media (prefers-reduced-motion: reduce) {
