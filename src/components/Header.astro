@@ -1,24 +1,29 @@
 ---
 const navItems = [
   {
-    href: '#service',
+    href: '/#service',
     label: 'Service',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
   },
   {
-    href: '#flow',
+    href: '/#flow',
     label: 'Flow',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="14"/><circle cx="12" cy="19" r="3"/><line x1="12" y1="16" x2="12" y2="14"/></svg>`
   },
   {
-    href: '#works',
+    href: '/#works',
     label: 'Works',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
   },
   {
-    href: '#contact',
+    href: '/contact',
     label: 'Contact',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+  },
+  {
+    href: '/about',
+    label: 'About',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
   },
 ];
 ---
@@ -27,7 +32,7 @@ const navItems = [
   <!-- Desktop: Sidebar -->
   <nav class="header__sidebar" aria-label="メインナビゲーション">
     <a href="/" class="header__logo">
-      <span class="header__logo-text">うぇぶ<br>まか</span>
+      <img src="/images/common/logo.jpg" alt="うぇぶまか" class="header__logo-image" />
     </a>
 
     <ul class="header__menu">
@@ -52,7 +57,7 @@ const navItems = [
     <div class="header__overlay"></div>
     <nav class="header__mobile-sidebar" aria-label="モバイルナビゲーション">
       <a href="/" class="header__logo">
-        <span class="header__logo-text">うぇぶ<br>まか</span>
+        <img src="/images/common/logo.jpg" alt="うぇぶまか" class="header__logo-image" />
       </a>
       <ul class="header__menu">
         {navItems.map((item) => (
@@ -97,12 +102,10 @@ const navItems = [
     margin-block-end: 2rem;
   }
 
-  .header__logo-text {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #fff;
-    text-align: center;
-    line-height: 1.3;
+  .header__logo-image {
+    width: 160px;
+    height: auto;
+    border-radius: 4px;
   }
 
   .header__menu {
@@ -116,19 +119,19 @@ const navItems = [
 
   .header__menu-item {
     display: flex;
-    justify-content: center;
   }
 
   .header__menu-link {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.75rem;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
     color: rgb(255 255 255 / 0.7);
     text-decoration: none;
     border-radius: 8px;
     transition: color 0.2s, background-color 0.2s;
+    width: 100%;
   }
 
   .header__menu-link:hover {
@@ -148,9 +151,8 @@ const navItems = [
   }
 
   .header__label {
-    font-size: 0.625rem;
-    font-weight: 500;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
   }
 

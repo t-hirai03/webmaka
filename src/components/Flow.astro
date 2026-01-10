@@ -7,7 +7,7 @@ const flows = [
     icon: Mail,
     number: 1,
     title: 'お問い合わせ',
-    description: '<a href="#contact" class="flow-card__link">フォーム</a>からご連絡ください',
+    description: '<a href="/contact" class="flow-card__link">フォーム</a>からご連絡ください',
   },
   {
     icon: MessageCircle,
@@ -49,6 +49,9 @@ const flows = [
         ))
       }
     </ol>
+    <div class="flow__cta">
+      <a href="/contact" class="flow__cta-button">お問い合わせはこちら</a>
+    </div>
   </div>
 </section>
 
@@ -150,5 +153,25 @@ const flows = [
 
   .flow-card__description :global(.flow-card__link:hover) {
     text-decoration: none;
+  }
+
+  .flow__cta {
+    margin-block-start: 3rem;
+    text-align: center;
+  }
+
+  .flow__cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .flow__cta-button:hover {
+    background-color: var(--color-primary-dark);
   }
 </style>

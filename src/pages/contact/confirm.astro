@@ -37,7 +37,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
     const storedData = sessionStorage.getItem(STORAGE_KEY);
 
     if (!storedData) {
-      window.location.href = '/#contact';
+      window.location.href = '/contact';
       return;
     }
 
@@ -75,7 +75,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
     `;
 
     document.getElementById('back-button').addEventListener('click', () => {
-      window.location.href = '/#contact';
+      window.location.href = '/contact';
     });
 
     document.getElementById('submit-button').addEventListener('click', async () => {
