@@ -1,9 +1,41 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Toyomare';
-  src: url('/fonts/Toyomare-Medium.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'TsugumiMaruGothic';
+  src: url('/fonts/TsugumiMaruGothic-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TsugumiMaruGothic';
+  src: url('/fonts/TsugumiMaruGothic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TsugumiMaruGothic';
+  src: url('/fonts/TsugumiMaruGothic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TsugumiMaruGothic';
+  src: url('/fonts/TsugumiMaruGothic-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TsugumiMaruGothic';
+  src: url('/fonts/TsugumiMaruGothic-Bold.ttf') format('truetype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -18,7 +50,7 @@ html {
 }
 
 body {
-  font-family: 'Toyomare', sans-serif;
+  font-family: 'TsugumiMaruGothic', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
