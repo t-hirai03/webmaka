@@ -11,9 +11,7 @@ import { Icon } from 'astro-icon/components';
       <div class="about__content">
         <div class="about__profile">
           <div class="about__image-wrapper">
-            <div class="about__image-placeholder">
-              <span>Photo</span>
-            </div>
+            <img src="/images/about/me.png" alt="平井 隆裕" class="about__image" />
           </div>
 
           <div class="about__info">
@@ -156,17 +154,12 @@ import { Icon } from 'astro-icon/components';
     flex-shrink: 0;
   }
 
-  .about__image-placeholder {
+  .about__image {
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    background-color: var(--color-bg-section);
     border: 3px solid var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
+    object-fit: cover;
   }
 
   .about__info {
