@@ -48,43 +48,43 @@ body {
   --min-height-page: calc(100dvh - var(--height-header));
 
   /* フォントサイズ */
-  --font-size-2xs: 0.8125rem;
-  --font-size-sm-plus: 0.9375rem;
+  --font-size-2xs: 0.8125rem; /* スキルタグ等の小さいテキスト */
+  --font-size-sm-plus: 0.9375rem; /* カード説明文等 */
 
   /* 行間 */
-  --leading-relaxed-plus: 1.8;
-  --leading-normal-plus: 1.6;
+  --leading-relaxed-plus: 1.8; /* 本文の読みやすい行間 */
+  --leading-normal-plus: 1.6; /* フォーム等の行間 */
 
   /* 間隔 */
-  --spacing-15: 60px;
-  --spacing-1-25: 5px;
+  --spacing-15: 60px; /* aboutページのセクション余白 */
+  --spacing-1-25: 5px; /* ハンバーガーメニューのline間隔 */
 
   /* ボーダー */
-  --border-width-3: 3px;
+  --border-width-3: 3px; /* プロフィール画像の枠線 */
 
   /* z-index */
-  --z-modal: 60;
-  --z-overlay: 49;
+  --z-modal: 60; /* モバイルメニューボタン */
+  --z-overlay: 49; /* オーバーレイ背景 */
 
   /* アスペクト比 */
-  --aspect-card: 16/10;
+  --aspect-card: 16/10; /* Works実績カードの画像比率 */
 
   /* basis */
-  --basis-card: 85%;
+  --basis-card: 85%; /* モバイルスライダーのカード幅 */
 
   /* translate */
-  --translate-hamburger: 5px;
+  --translate-hamburger: 5px; /* ハンバーガーアイコンのアニメーション移動量 */
 
   /* 背景 */
-  --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%);
-  --background-size-zero: 0% 100%;
+  --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%); /* ヒーローのマーカー効果 */
+  --background-size-zero: 0% 100%; /* マーカーアニメーション開始状態 */
 
   /* Select用 */
-  --background-position-select: right 16px center;
-  --background-size-select: 16px 16px;
+  --background-position-select: right 16px center; /* セレクトボックスの矢印位置 */
+  --background-size-select: 16px 16px; /* セレクトボックスの矢印サイズ */
 
   /* アニメーション */
-  --animate-marker-draw: marker-draw 1s ease-out 0.3s forwards;
+  --animate-marker-draw: marker-draw 1s ease-out 0.3s forwards; /* ヒーローのマーカー描画アニメーション */
 }
 
 @keyframes marker-draw {
@@ -93,17 +93,6 @@ body {
   }
   to {
     background-size: 100% 100%;
-  }
-}
-
-/* サイドバー用メインコンテンツ余白 */
-main {
-  padding-inline-start: var(--width-sidebar);
-}
-
-@media (max-width: 767px) {
-  main {
-    padding-inline-start: 0;
   }
 }
 
