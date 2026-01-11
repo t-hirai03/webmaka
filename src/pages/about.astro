@@ -8,14 +8,14 @@ import meImg from '../assets/about/me.png';
 ---
 
 <Layout title="About | うぇぶまか" description="うぇぶまかの運営者、平井隆裕のプロフィール。フロントエンドエンジニアとしてWebサイト制作・LP制作を行っています。">
-  <section class="py-[60px] md:py-20 bg-bg-main">
-    <div class="max-w-[800px] mx-auto px-4">
+  <section class="py-15 md:py-20 bg-bg-main">
+    <div class="max-w-content mx-auto px-4">
       <Heading level={1} variant="page" class="mb-12">About</Heading>
 
       <div class="flex flex-col gap-12">
         <div class="flex flex-col items-center gap-6 md:flex-row md:gap-8">
           <div class="shrink-0">
-            <Image src={meImg} alt="平井 隆裕" width={160} height={160} format="webp" quality={80} class="w-40 h-40 rounded-full border-[3px] border-primary object-cover" />
+            <Image src={meImg} alt="平井 隆裕" width={160} height={160} format="webp" quality={80} class="w-40 h-40 rounded-full border-3 border-primary object-cover" />
           </div>
 
           <div class="text-center md:text-left">
@@ -26,17 +26,17 @@ import meImg from '../assets/about/me.png';
 
         <div>
           <h2 class="text-xl font-bold text-text mb-4 pb-2 border-b-2 border-primary">自己紹介</h2>
-          <p class="text-text leading-[1.8] mb-4">
+          <p class="text-text leading-relaxed-plus mb-4">
             東京でフロントエンドエンジニアをしております。
           </p>
-          <p class="text-text leading-[1.8] mb-4">
+          <p class="text-text leading-relaxed-plus mb-4">
             2018年より福井県でSEの会社に勤める。<br>
             2022年からWebサイト制作会社でWeb制作業務を行う。<br>
             2024年より東京で事業会社のフロントエンドエンジニアへ転向。
           </p>
-          <p class="text-text leading-[1.8]">
+          <p class="text-text leading-relaxed-plus">
             お仕事のお問い合わせは<br>
-            <a href="/contact" class="underline underline-offset-[0.25em]">CONTACTページ</a>のフォームからお願いいたします。
+            <a href="/contact" class="underline underline-offset-4">CONTACTページ</a>のフォームからお願いいたします。
           </p>
         </div>
 
@@ -44,51 +44,51 @@ import meImg from '../assets/about/me.png';
           <h2 class="text-xl font-bold text-text mb-4 pb-2 border-b-2 border-primary">スキル・経験</h2>
 
           <ul class="flex flex-col gap-3 list-none p-0 m-0">
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #E34F26">
-              <Icon name="simple-icons:html5" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">HTML / CSS</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:html5" class="w-6 h-6" style="color: #E34F26" />
+              <span class="flex-1 text-sm-plus text-text">HTML / CSS</span>
               <span class="text-base text-text-muted">8年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #F7DF1E">
-              <Icon name="simple-icons:javascript" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">JavaScript</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:javascript" class="w-6 h-6" style="color: #F7DF1E" />
+              <span class="flex-1 text-sm-plus text-text">JavaScript</span>
               <span class="text-base text-text-muted">8年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #3178C6">
-              <Icon name="simple-icons:typescript" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">TypeScript</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:typescript" class="w-6 h-6" style="color: #3178C6" />
+              <span class="flex-1 text-sm-plus text-text">TypeScript</span>
               <span class="text-base text-text-muted">2年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #61DAFB">
-              <Icon name="simple-icons:react" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">React / Next.js</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:react" class="w-6 h-6" style="color: #61DAFB" />
+              <span class="flex-1 text-sm-plus text-text">React / Next.js</span>
               <span class="text-base text-text-muted">2年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #BC52EE">
-              <Icon name="simple-icons:astro" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">Astro</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:astro" class="w-6 h-6" style="color: #BC52EE" />
+              <span class="flex-1 text-sm-plus text-text">Astro</span>
               <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #21759B">
-              <Icon name="simple-icons:wordpress" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">WordPress</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:wordpress" class="w-6 h-6" style="color: #21759B" />
+              <span class="flex-1 text-sm-plus text-text">WordPress</span>
               <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #36C7D0">
-              <svg class="w-6 h-6 text-[var(--card-color)]" viewBox="0 0 24 24" fill="currentColor">
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <svg class="w-6 h-6" style="color: #36C7D0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
-              <span class="flex-1 text-[0.9375rem] text-text">microCMS</span>
+              <span class="flex-1 text-sm-plus text-text">microCMS</span>
               <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light" style="--card-color: #4169E1">
-              <Icon name="simple-icons:postgresql" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">PostgreSQL</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:postgresql" class="w-6 h-6" style="color: #4169E1" />
+              <span class="flex-1 text-sm-plus text-text">PostgreSQL</span>
               <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="flex items-center gap-3 py-3" style="--card-color: #2496ED">
-              <Icon name="simple-icons:docker" class="w-6 h-6 text-[var(--card-color)]" />
-              <span class="flex-1 text-[0.9375rem] text-text">Docker</span>
+            <li class="flex items-center gap-3 py-3">
+              <Icon name="simple-icons:docker" class="w-6 h-6" style="color: #2496ED" />
+              <span class="flex-1 text-sm-plus text-text">Docker</span>
               <span class="text-base text-text-muted">2年</span>
             </li>
           </ul>

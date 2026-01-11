@@ -12,11 +12,11 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 ---
 
 <Layout title="入力内容の確認 | うぇぶまか" noindex>
-  <section class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section min-h-[calc(100dvh-80px)]">
-    <div class="max-w-[var(--container-max)] mx-auto px-4">
+  <section class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section min-h-page">
+    <div class="max-w-container mx-auto px-4">
       <SectionTitle title="Confirm" subtitle="入力内容の確認" />
 
-      <div id="confirm-content" class="max-w-[36rem] mx-auto">
+      <div id="confirm-content" class="max-w-xl mx-auto">
         <p class="text-center text-text-muted">読み込み中...</p>
       </div>
     </div>
@@ -48,23 +48,23 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
       <dl class="flex flex-col bg-white p-0 rounded-xl overflow-hidden shadow-sm">
         <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
           <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">氏名</dt>
-          <dd class="text-text text-lg leading-[1.6]">${escapeHtml(data.name)}</dd>
+          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.name)}</dd>
         </div>
         <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
           <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">メールアドレス</dt>
-          <dd class="text-text text-lg leading-[1.6]">${escapeHtml(data.email)}</dd>
+          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.email)}</dd>
         </div>
         <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
           <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お問い合わせ種別</dt>
-          <dd class="text-text text-lg leading-[1.6]">${escapeHtml(inquiryLabel)}</dd>
+          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(inquiryLabel)}</dd>
         </div>
         <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
           <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お電話番号</dt>
-          <dd class="text-text text-lg leading-[1.6]">${escapeHtml(data.phone || '未入力')}</dd>
+          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.phone || '未入力')}</dd>
         </div>
         <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6">
           <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お問い合わせ内容</dt>
-          <dd class="text-text text-base leading-[1.6] whitespace-pre-wrap">${escapeHtml(data.message)}</dd>
+          <dd class="text-text text-base leading-normal-plus whitespace-pre-wrap">${escapeHtml(data.message)}</dd>
         </div>
       </dl>
       <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center mt-6" aria-live="polite"></div>

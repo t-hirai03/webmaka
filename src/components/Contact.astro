@@ -8,9 +8,9 @@ import Textarea from './ui/Textarea.astro';
 ---
 
 <section id="contact" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
-  <div class="max-w-[var(--container-max)] mx-auto px-4">
+  <div class="max-w-container mx-auto px-4">
     <SectionTitle title="Contact" subtitle="お問い合わせ" />
-    <form id="contact-form" class="max-w-[36rem] mx-auto flex flex-col gap-6">
+    <form id="contact-form" class="max-w-xl mx-auto flex flex-col gap-6">
       <FormField label="氏名" name="name" required>
         <Input type="text" name="name" id="name" required class="border-none" />
       </FormField>

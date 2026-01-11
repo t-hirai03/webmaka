@@ -104,16 +104,16 @@ const plans = [
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
   <!-- Hero -->
   <section id="hero" class="pt-10 md:py-10 flex items-center justify-center bg-bg-main">
-    <div class="max-w-[var(--container-max)] mx-auto px-4 text-center">
+    <div class="max-w-container mx-auto px-4 text-center">
       <h1 class="text-3xl md:text-5xl font-bold text-text mb-6">
-        <span class="hero__marker">Webサイト・LP制作、<br class="md:hidden" />既存サイトのCMS化対応いたします。</span>
+        <span class="bg-marker bg-no-repeat bg-size-zero animate-marker-draw">Webサイト・LP制作、<br class="md:hidden" />既存サイトのCMS化対応いたします。</span>
       </h1>
     </div>
   </section>
 
   <!-- Service -->
   <section id="service" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
-    <div class="max-w-[var(--container-max)] mx-auto px-4">
+    <div class="max-w-container mx-auto px-4">
       <SectionTitle title="Service" subtitle="サービス内容" />
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {
@@ -128,10 +128,10 @@ const plans = [
                   <p class="text-sm font-medium text-primary">{service.subtitle}</p>
                 </div>
               </div>
-              <p class="text-[0.9375rem] leading-relaxed text-text-muted mb-5">{service.description}</p>
+              <p class="text-sm-plus leading-relaxed text-text-muted mb-5">{service.description}</p>
               <ul class="flex flex-wrap gap-2 list-none p-0 m-0 mb-6">
                 {service.details.map((detail) => (
-                  <li class="text-[0.8125rem] text-text bg-bg-section px-3 py-1.5 rounded-md">{detail}</li>
+                  <li class="text-2xs text-text bg-bg-section px-3 py-1.5 rounded-md">{detail}</li>
                 ))}
               </ul>
               <div class="mt-auto pt-5 border-t border-gray-200">
@@ -156,7 +156,7 @@ const plans = [
 
   <!-- Flow -->
   <section id="flow" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-main">
-    <div class="max-w-[var(--container-max)] mx-auto px-4">
+    <div class="max-w-container mx-auto px-4">
       <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
       <ol class="grid gap-6 md:grid-cols-4 list-none p-0 m-0">
         {
@@ -201,18 +201,3 @@ const plans = [
 
   <Contact />
 </Layout>
-
-<style>
-  .hero__marker {
-    background: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%);
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    animation: marker-draw 1s ease-out 0.3s forwards;
-  }
-
-  @keyframes marker-draw {
-    to {
-      background-size: 100% 100%;
-    }
-  }
-</style>

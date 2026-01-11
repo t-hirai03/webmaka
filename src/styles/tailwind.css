@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  /* サイドバー幅 */
-  --sidebar-width: 200px;
-}
 
 html {
   scroll-behavior: smooth;
@@ -39,17 +35,81 @@ body {
   --color-text-muted: #6B7280;
 
   /* コンテナ幅 */
-  --container-max: 1440px;
+  --max-width-container: 1440px;
+  --max-width-content: 800px;
+
+  /* サイドバー幅 */
+  --width-sidebar: 200px;
+
+  /* 最小高さ */
+  --min-height-page: calc(100dvh - 80px);
+
+  /* フォントサイズ */
+  --font-size-2xs: 0.8125rem;
+  --font-size-sm-plus: 0.9375rem;
+
+  /* 行間 */
+  --leading-relaxed-plus: 1.8;
+  --leading-normal-plus: 1.6;
+
+  /* 間隔 */
+  --spacing-15: 60px;
+  --spacing-1_25: 5px;
+
+  /* ボーダー */
+  --border-width-3: 3px;
+
+  /* z-index */
+  --z-modal: 60;
+  --z-overlay: 49;
+
+  /* アスペクト比 */
+  --aspect-card: 16/10;
+
+  /* basis */
+  --basis-card: 85%;
+
+  /* translate */
+  --translate-hamburger: 5px;
+
+  /* 背景 */
+  --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%);
+  --background-size-zero: 0% 100%;
+
+  /* Select用 */
+  --background-position-select: right 16px center;
+  --background-size-select: 16px 16px;
+
+  /* アニメーション */
+  --animate-marker-draw: marker-draw 1s ease-out 0.3s forwards;
+}
+
+@keyframes marker-draw {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
 }
 
 /* サイドバー用メインコンテンツ余白 */
 main {
-  padding-inline-start: var(--sidebar-width);
+  padding-inline-start: var(--width-sidebar);
 }
 
 @media (max-width: 767px) {
   main {
     padding-inline-start: 0;
+  }
+}
+
+/* スクロールバー非表示 */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 

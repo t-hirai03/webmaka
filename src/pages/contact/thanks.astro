@@ -5,22 +5,22 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="送信完了 | うぇぶまか" noindex>
-  <section class="thanks">
-    <div class="thanks__container">
-      <div class="thanks__content">
-        <div class="thanks__icon">
+  <section class="py-12 pb-16 md:py-28 md:pb-32 bg-bg-section min-h-page flex items-center">
+    <div class="max-w-container mx-auto px-4 w-full">
+      <div class="max-w-xl mx-auto text-center bg-white py-12 px-8 rounded-lg">
+        <div class="text-emerald-500 mb-6 flex justify-center">
           <CircleCheck size={64} strokeWidth={1.5} />
         </div>
-        <h1 class="thanks__title">送信完了</h1>
-        <p class="thanks__message">
+        <h1 class="text-2xl md:text-3xl font-bold text-text mb-6">送信完了</h1>
+        <p class="text-text leading-relaxed-plus mb-6">
           お問い合わせいただきありがとうございます。<br />
           内容を確認の上、担当者よりご連絡いたします。
         </p>
-        <p class="thanks__note">
+        <p class="text-text-muted text-sm leading-relaxed-plus mb-8">
           ※ 自動返信メールをお送りしております。<br />
           届かない場合は、迷惑メールフォルダをご確認ください。
         </p>
-        <div class="thanks__action">
+        <div class="flex justify-center">
           <Button href="/" variant="secondary" size="lg">
             トップページに戻る
           </Button>
@@ -29,73 +29,3 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
-
-<style>
-  .thanks {
-    padding-block: 3rem 4rem;
-    background-color: var(--color-bg-section);
-    min-height: calc(100dvh - 80px);
-    display: flex;
-    align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .thanks {
-      padding-block: 7rem 8rem;
-    }
-  }
-
-  .thanks__container {
-    max-width: var(--container-max);
-    margin-inline: auto;
-    padding-inline: 1rem;
-    width: 100%;
-  }
-
-  .thanks__content {
-    max-width: 36rem;
-    margin-inline: auto;
-    text-align: center;
-    background-color: #fff;
-    padding: 3rem 2rem;
-    border-radius: 0.5rem;
-  }
-
-  .thanks__icon {
-    color: #10b981;
-    margin-block-end: 1.5rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  .thanks__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .thanks__title {
-      font-size: 2rem;
-    }
-  }
-
-  .thanks__message {
-    color: var(--color-text);
-    line-height: 1.8;
-    margin-block-end: 1.5rem;
-  }
-
-  .thanks__note {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    line-height: 1.8;
-    margin-block-end: 2rem;
-  }
-
-  .thanks__action {
-    display: flex;
-    justify-content: center;
-  }
-</style>
