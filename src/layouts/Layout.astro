@@ -4,10 +4,16 @@ import Header from '../components/Header.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 	noindex?: boolean;
 }
 
-const { title, noindex = false } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
+
+const defaultDescription = 'Webサイト制作・LP制作ならうぇぶまか。デザインからコーディングまで一貫対応。お気軽にご相談ください。';
+const metaDescription = description || defaultDescription;
+const siteUrl = Astro.site?.href || 'https://webmaka.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 ---
 
 <!doctype html>
@@ -20,9 +26,27 @@ const { title, noindex = false } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet" />
-    <meta name="description" content="Webサイト制作・LP制作ならうぇぶまか。デザインからコーディングまで一貫対応。お気軽にご相談ください。" />
+    <link rel="canonical" href={canonicalUrl.href} />
+    <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
+    <!-- JSON-LD 構造化データ -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "うぇぶまか",
+      "url": siteUrl,
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "うぇぶまか",
+      "url": siteUrl,
+      "description": defaultDescription,
+      "priceRange": "¥30,000〜",
+      "areaServed": "JP",
+      "serviceType": ["Webサイト制作", "LP制作", "CMS導入", "コーディング代行"],
+    })} />
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEDJ65JEPR"></script>
     <script is:inline>
