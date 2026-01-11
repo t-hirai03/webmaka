@@ -1,0 +1,20 @@
+---
+interface Props {
+	label: string;
+	name: string;
+	required?: boolean;
+	class?: string;
+}
+
+const { label, name, required = false, class: className = '' } = Astro.props;
+
+const classes = ['form-field space-y-2', className].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  <label for={name} class="block text-sm font-medium text-text">
+    {label}
+    {required && <span class="text-red-500 ml-1">*</span>}
+  </label>
+  <slot />
+</div>

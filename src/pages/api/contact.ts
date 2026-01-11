@@ -42,27 +42,27 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const contactEmail = runtime?.env?.CONTACT_EMAIL ?? import.meta.env.CONTACT_EMAIL;
 
 	if (!resendApiKey || !contactEmail) {
-		return new Response(
-			JSON.stringify({ success: false, error: '環境変数が設定されていません' }),
-			{ status: 500, headers: { 'Content-Type': 'application/json' } }
-		);
+		return new Response(JSON.stringify({ success: false, error: '環境変数が設定されていません' }), {
+			status: 500,
+			headers: { 'Content-Type': 'application/json' },
+		});
 	}
 
 	let formData: unknown;
 	try {
 		formData = await request.json();
 	} catch {
-		return new Response(
-			JSON.stringify({ success: false, error: '不正なリクエストです' }),
-			{ status: 400, headers: { 'Content-Type': 'application/json' } }
-		);
+		return new Response(JSON.stringify({ success: false, error: '不正なリクエストです' }), {
+			status: 400,
+			headers: { 'Content-Type': 'application/json' },
+		});
 	}
 
 	if (!isValidContactFormData(formData)) {
-		return new Response(
-			JSON.stringify({ success: false, error: '必須項目を入力してください' }),
-			{ status: 400, headers: { 'Content-Type': 'application/json' } }
-		);
+		return new Response(JSON.stringify({ success: false, error: '必須項目を入力してください' }), {
+			status: 400,
+			headers: { 'Content-Type': 'application/json' },
+		});
 	}
 
 	const { name, email, inquiryType, phone, message } = formData;
@@ -159,10 +159,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	} catch (error) {
 		console.error('Resend error:', error);
-		return new Response(
-			JSON.stringify({ success: false, error: 'メール送信に失敗しました' }),
-			{ status: 500, headers: { 'Content-Type': 'application/json' } }
-		);
+		return new Response(JSON.stringify({ success: false, error: 'メール送信に失敗しました' }), {
+			status: 500,
+			headers: { 'Content-Type': 'application/json' },
+		});
 	}
 };
 

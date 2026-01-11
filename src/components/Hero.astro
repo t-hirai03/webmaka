@@ -2,53 +2,15 @@
 
 ---
 
-<section id="hero" class="hero">
-  <div class="hero__container">
-    <h1 class="hero__title">
-      <span class="hero__marker">Webサイト・LP制作、<br class="hero__br-sp" />既存サイトのCMS化対応いたします。</span>
+<section id="hero" class="pt-10 md:py-10 flex items-center justify-center bg-bg-main">
+  <div class="max-w-[var(--container-max)] mx-auto px-4 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold text-text mb-6">
+      <span class="hero__marker">Webサイト・LP制作、<br class="md:hidden" />既存サイトのCMS化対応いたします。</span>
     </h1>
   </div>
 </section>
 
 <style>
-  .hero {
-    padding-block-start: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-bg-main);
-  }
-
-  @media (min-width: 768px) {
-    .hero {
-      padding-block: 40px;
-    }
-  }
-
-  .hero__container {
-    max-width: var(--container-max);
-    margin-inline: auto;
-    padding-inline: 1rem;
-    text-align: center;
-  }
-
-  .hero__title {
-    font-size: 1.875rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .hero__title {
-      font-size: 3rem;
-    }
-
-    .hero__br-sp {
-      display: none;
-    }
-  }
-
   .hero__marker {
     background: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%);
     background-size: 0% 100%;

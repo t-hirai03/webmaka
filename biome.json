@@ -19,8 +19,27 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"noUnusedVariables": "off",
-				"noUnusedImports": "off"
+				"noUnusedVariables": "error",
+				"noUnusedImports": "error"
+			},
+			"a11y": {
+				"useAltText": "error",
+				"useAriaPropsForRole": "error",
+				"useValidAriaProps": "error",
+				"useValidAriaValues": "error"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "error"
+			},
+			"suspicious": {
+				"noDoubleEquals": "warn",
+				"noExplicitAny": "warn"
+			},
+			"complexity": {
+				"noForEach": "warn"
+			},
+			"performance": {
+				"noAccumulatingSpread": "warn"
 			}
 		}
 	},
@@ -37,5 +56,18 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		}
+	]
 }

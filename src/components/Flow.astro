@@ -1,177 +1,59 @@
 ---
-import SectionTitle from './ui/SectionTitle.astro';
 import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
+import Button from './ui/Button.astro';
+import Heading from './ui/Heading.astro';
+import SectionTitle from './ui/SectionTitle.astro';
 
 const flows = [
-  {
-    icon: Mail,
-    number: 1,
-    title: 'お問い合わせ',
-    description: '<a href="/contact" class="flow-card__link">フォーム</a>からご連絡ください',
-  },
-  {
-    icon: MessageCircle,
-    number: 2,
-    title: 'ヒアリング・お見積もり',
-    description: 'ご要望を伺い、お見積もりを提示します',
-  },
-  {
-    icon: PenTool,
-    number: 3,
-    title: '制作・確認',
-    description: '制作を進めながら確認・修正を行います',
-  },
-  {
-    icon: Rocket,
-    number: 4,
-    title: '納品・公開',
-    description: '完成後、納品・公開対応をします',
-  },
+	{
+		icon: Mail,
+		number: 1,
+		title: 'お問い合わせ',
+		description:
+			'<a href="/contact" class="text-primary underline underline-offset-2 hover:no-underline">フォーム</a>からご連絡ください',
+	},
+	{
+		icon: MessageCircle,
+		number: 2,
+		title: 'ヒアリング・お見積もり',
+		description: 'ご要望を伺い、お見積もりを提示します',
+	},
+	{
+		icon: PenTool,
+		number: 3,
+		title: '制作・確認',
+		description: '制作を進めながら確認・修正を行います',
+	},
+	{
+		icon: Rocket,
+		number: 4,
+		title: '納品・公開',
+		description: '完成後、納品・公開対応をします',
+	},
 ];
 ---
 
-<section id="flow" class="flow">
-  <div class="flow__container">
+<section id="flow" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-main">
+  <div class="max-w-[var(--container-max)] mx-auto px-4">
     <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
-    <ol class="flow__list">
+    <ol class="grid gap-6 md:grid-cols-4 list-none p-0 m-0">
       {
         flows.map((flow) => (
-          <li class="flow-card">
-            <div class="flow-card__icon-wrap">
-              <div class="flow-card__icon">
+          <li class="flex flex-col bg-white rounded-2xl px-6 py-8 shadow-sm">
+            <div class="relative w-fit mb-5">
+              <div class="flex items-center justify-center w-14 h-14 bg-primary text-white rounded-xl">
                 <flow.icon size={24} strokeWidth={1.5} />
               </div>
-              <span class="flow-card__number">{flow.number}</span>
+              <span class="absolute -top-2 -right-2 flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-accent rounded-full">{flow.number}</span>
             </div>
-            <h3 class="flow-card__title">{flow.title}</h3>
-            <p class="flow-card__description" set:html={flow.description} />
+            <Heading level={3} variant="card" class="mb-2">{flow.title}</Heading>
+            <p class="text-sm leading-relaxed text-text-muted m-0" set:html={flow.description} />
           </li>
         ))
       }
     </ol>
-    <div class="flow__cta">
-      <a href="/contact" class="flow__cta-button">お問い合わせはこちら</a>
+    <div class="mt-12 text-center">
+      <Button href="/contact" class="rounded-full">お問い合わせはこちら</Button>
     </div>
   </div>
 </section>
-
-<style>
-  .flow {
-    padding-block: 3rem 4rem;
-    background-color: var(--color-bg-main);
-  }
-
-  @media (min-width: 768px) {
-    .flow {
-      padding-block: 7rem 8rem;
-    }
-  }
-
-  .flow__container {
-    max-width: var(--container-max);
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-
-  .flow__list {
-    display: grid;
-    gap: 1.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    .flow__list {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-  }
-
-  .flow-card {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 1rem;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
-  }
-
-  .flow-card__icon-wrap {
-    position: relative;
-    width: fit-content;
-    margin-block-end: 1.25rem;
-  }
-
-  .flow-card__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    background-color: var(--color-primary);
-    color: #fff;
-    border-radius: 0.75rem;
-  }
-
-  .flow-card__number {
-    position: absolute;
-    inset-block-start: -0.5rem;
-    inset-inline-end: -0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #fff;
-    background-color: var(--color-accent);
-    border-radius: 50%;
-  }
-
-  .flow-card__title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 0;
-    margin-block-end: 0.5rem;
-  }
-
-  .flow-card__description {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin: 0;
-  }
-
-  .flow-card__description :global(.flow-card__link) {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .flow-card__description :global(.flow-card__link:hover) {
-    text-decoration: none;
-  }
-
-  .flow__cta {
-    margin-block-start: 3rem;
-    text-align: center;
-  }
-
-  .flow__cta-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .flow__cta-button:hover {
-    background-color: var(--color-primary-dark);
-  }
-</style>
