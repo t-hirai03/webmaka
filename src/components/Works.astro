@@ -1,7 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import { ExternalLink } from 'lucide-astro';
 import Heading from './ui/Heading.astro';
 import SectionTitle from './ui/SectionTitle.astro';
+
+import beyerdynamicImg from '../assets/works/beyerdynamic.png';
+import jgiImg from '../assets/works/jgi.png';
+import obataImg from '../assets/works/obata.png';
+import takazenImg from '../assets/works/takazen.png';
+import kanekiImg from '../assets/works/kaneki.png';
 
 interface WorkItem {
 	id: string;
@@ -9,7 +16,7 @@ interface WorkItem {
 	category: string;
 	description: string;
 	url: string;
-	image: string;
+	image: ImageMetadata;
 }
 
 const works: WorkItem[] = [
@@ -20,7 +27,7 @@ const works: WorkItem[] = [
 		description:
 			'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
 		url: 'https://beyerdynamic.co.jp/',
-		image: '/works/beyerdynamic.png',
+		image: beyerdynamicImg,
 	},
 	{
 		id: 'jgi',
@@ -29,7 +36,7 @@ const works: WorkItem[] = [
 		description:
 			'物理探査・地震探査を行う企業のコーポレートサイト。多数のページと情報を整理した大規模サイト。',
 		url: 'https://jgi-inc.com/',
-		image: '/works/jgi.png',
+		image: jgiImg,
 	},
 	{
 		id: 'obata',
@@ -38,7 +45,7 @@ const works: WorkItem[] = [
 		description:
 			'越前和紙の透かし入れ卒業証書を製造する老舗のランディングページ。伝統と技術を訴求。',
 		url: 'https://obataseishijo.jp/lp/',
-		image: '/works/obata.png',
+		image: obataImg,
 	},
 	{
 		id: 'takazen',
@@ -47,7 +54,7 @@ const works: WorkItem[] = [
 		description:
 			'オーダーメイド家具を製造する企業のサイト。職人の技術と製品の魅力を伝えるデザイン。',
 		url: 'https://takazen-sangyo.com/',
-		image: '/works/takazen.png',
+		image: takazenImg,
 	},
 	{
 		id: 'kaneki',
@@ -55,7 +62,7 @@ const works: WorkItem[] = [
 		category: 'コーポレートサイト',
 		description: '運送事業・倉庫業を営む企業のコーポレートサイト。シンプルで見やすい構成。',
 		url: 'https://kaneki-unyu.co.jp/',
-		image: '/works/kaneki.png',
+		image: kanekiImg,
 	},
 ];
 ---
@@ -68,7 +75,7 @@ const works: WorkItem[] = [
         <article class="work-card shrink-0 basis-[85%] snap-center bg-white rounded-2xl overflow-hidden shadow-sm md:shrink md:basis-auto">
           <a href={work.url} target="_blank" rel="noopener noreferrer" class="block no-underline text-inherit h-full group">
             <div class="aspect-[16/10] overflow-hidden">
-              <img src={work.image} alt={work.title} loading="lazy" class="w-full h-full object-cover object-top" />
+              <Image src={work.image} alt={work.title} width={640} format="webp" quality={80} loading="lazy" class="w-full h-full object-cover object-top" />
             </div>
             <div class="p-6">
               <div class="flex justify-between items-center mb-4">

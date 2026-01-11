@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/common/logo.jpg';
+
 const navItems = [
 	{
 		href: '/#service',
@@ -32,7 +35,7 @@ const navItems = [
   <!-- Desktop: Sidebar -->
   <nav class="fixed top-0 left-0 w-[var(--sidebar-width)] h-dvh bg-primary hidden md:flex flex-col items-center py-6 z-50" aria-label="メインナビゲーション">
     <a href="/" class="no-underline mb-8">
-      <img src="/images/common/logo.jpg" alt="うぇぶまか" class="w-40 h-auto rounded" />
+      <Image src={logoImg} alt="うぇぶまか" width={160} format="webp" quality={80} class="w-40 h-auto rounded" />
     </a>
 
     <ul class="flex flex-col gap-2 list-none m-0 p-0">
@@ -57,7 +60,7 @@ const navItems = [
     <div class="header__overlay fixed inset-0 bg-black/50 opacity-0 invisible transition-all duration-300 z-[49] group-[.is-open]:opacity-100 group-[.is-open]:visible"></div>
     <nav class="header__mobile-sidebar fixed top-0 left-0 w-[var(--sidebar-width)] h-dvh bg-primary flex flex-col items-center py-6 z-50 -translate-x-full transition-transform duration-300 ease-in-out group-[.is-open]:translate-x-0" aria-label="モバイルナビゲーション">
       <a href="/" class="no-underline mb-8">
-        <img src="/images/common/logo.jpg" alt="うぇぶまか" class="w-40 h-auto rounded" />
+        <Image src={logoImg} alt="うぇぶまか" width={160} format="webp" quality={80} class="w-40 h-auto rounded" />
       </a>
       <ul class="flex flex-col gap-2 list-none m-0 p-0">
         {navItems.map((item) => (
