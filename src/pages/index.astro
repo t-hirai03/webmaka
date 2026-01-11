@@ -12,7 +12,6 @@ import {
 import Contact from '../components/Contact.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
 import Heading from '../components/ui/Heading.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import Works from '../components/Works.astro';
@@ -91,23 +90,6 @@ const flows = [
 	},
 ];
 
-const plans = [
-	{
-		title: 'ランディングページ',
-		price: '¥50,000〜',
-		description: '1ページ構成のLP',
-	},
-	{
-		title: 'コーポレートサイト',
-		price: '¥100,000〜',
-		description: '5ページ程度の企業サイト',
-	},
-	{
-		title: '保守・運用',
-		price: '¥5,000/月〜',
-		description: '更新・修正対応',
-	},
-];
 ---
 
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
@@ -190,23 +172,6 @@ const plans = [
   </section>
 
   <Works />
-
-  <!-- Price -->
-  <section id="price" class="py-20 md:py-28 bg-bg-section">
-    <div class="max-w-5xl mx-auto px-4">
-      <SectionTitle title="Price" subtitle="料金プラン" />
-      <div class="grid md:grid-cols-3 gap-6">
-        {plans.map((plan) => (
-          <Card title={plan.title} description={plan.description}>
-            <p class="text-2xl font-bold text-primary mt-4">{plan.price}</p>
-          </Card>
-        ))}
-      </div>
-      <p class="text-sm text-text-muted text-center mt-8">
-        ※価格は目安です。詳細はお問い合わせください
-      </p>
-    </div>
-  </section>
 
   <Contact />
 </Layout>

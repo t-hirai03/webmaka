@@ -79,9 +79,6 @@ body {
   --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%); /* ヒーローのマーカー効果 */
   --background-size-zero: 0% 100%; /* マーカーアニメーション開始状態 */
 
-  /* Select用 */
-  --background-position-select: right 16px center; /* セレクトボックスの矢印位置 */
-  --background-size-select: 16px 16px; /* セレクトボックスの矢印サイズ */
 
   /* アニメーション */
   --animate-marker-draw: marker-draw 1s ease-out 0.3s forwards; /* ヒーローのマーカー描画アニメーション */
@@ -103,5 +100,15 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* セレクトボックスの矢印位置（右端）*/
+@utility bg-position-select {
+  background-position: right 16px center;
+}
+
+/* セレクトボックスの矢印サイズ */
+@utility bg-size-select {
+  background-size: 16px 16px;
 }
 
