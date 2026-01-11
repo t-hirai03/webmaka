@@ -8,7 +8,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://webmaka.jp',
+	site: 'https://webmaka.com',
 	integrations: [
 		sitemap({
 			filter: (page) =>
