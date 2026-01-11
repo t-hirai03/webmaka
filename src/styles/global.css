@@ -1,29 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'TsugumiMaruGothic';
-  src: url('/fonts/TsugumiMaruGothic-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'TsugumiMaruGothic';
-  src: url('/fonts/TsugumiMaruGothic-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'TsugumiMaruGothic';
-  src: url('/fonts/TsugumiMaruGothic-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* サイドバー幅 */
   --sidebar-width: 200px;
@@ -34,8 +10,7 @@ html {
 }
 
 body {
-  font-family: 'TsugumiMaruGothic', sans-serif;
-  font-weight: 500;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
