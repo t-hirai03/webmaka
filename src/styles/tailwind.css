@@ -38,8 +38,8 @@ body {
   --max-width-container: 1440px;
   --max-width-content: 800px;
 
-  /* サイドバー幅 */
-  --width-sidebar: 200px;
+  /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
+  --spacing-sidebar: 200px;
 
   /* ヘッダー高さ */
   --height-header: 80px;
@@ -68,9 +68,6 @@ body {
 
   /* アスペクト比 */
   --aspect-card: 16/10; /* Works実績カードの画像比率 */
-
-  /* basis */
-  --basis-card: 85%; /* モバイルスライダーのカード幅 */
 
   /* translate */
   --translate-hamburger: 5px; /* ハンバーガーアイコンのアニメーション移動量 */
@@ -110,5 +107,10 @@ body {
 /* セレクトボックスの矢印サイズ */
 @utility bg-size-select {
   background-size: 16px 16px;
+}
+
+/* モバイルスライダーのカード幅 */
+@utility basis-card {
+  flex-basis: 85%;
 }
 
