@@ -14,6 +14,7 @@ const defaultDescription = 'Webサイト制作・LP制作ならうぇぶまか�
 const metaDescription = description || defaultDescription;
 const siteUrl = Astro.site?.href || 'https://webmaka.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const ogImageUrl = new URL('/images/common/ogp.png', siteUrl);
 ---
 
 <!doctype html>
@@ -30,6 +31,19 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
     <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={ogImageUrl.href} />
+    <meta property="og:site_name" content="うぇぶまか" />
+    <meta property="og:locale" content="ja_JP" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl.href} />
     <!-- JSON-LD 構造化データ -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
