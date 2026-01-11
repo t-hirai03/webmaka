@@ -1,0 +1,22 @@
+---
+interface Props {
+	level: 1 | 2 | 3;
+	variant?: 'page' | 'section' | 'card' | 'subtle';
+	class?: string;
+}
+
+const { level, variant = 'section', class: className = '' } = Astro.props;
+
+const variantClasses = {
+	page: 'text-3xl md:text-4xl font-bold text-text',
+	section: 'text-xl md:text-2xl font-bold text-text',
+	card: 'text-lg font-semibold text-text',
+	subtle: 'text-sm text-text-muted',
+};
+
+const classes = [variantClasses[variant], className].filter(Boolean).join(' ');
+---
+
+{level === 1 && <h1 class={classes}><slot /></h1>}
+{level === 2 && <h2 class={classes}><slot /></h2>}
+{level === 3 && <h3 class={classes}><slot /></h3>}

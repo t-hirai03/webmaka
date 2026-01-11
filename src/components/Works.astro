@@ -1,86 +1,97 @@
 ---
-import SectionTitle from './ui/SectionTitle.astro';
+import { Image } from 'astro:assets';
 import { ExternalLink } from 'lucide-astro';
+import beyerdynamicImg from '../assets/works/beyerdynamic.png';
+import jgiImg from '../assets/works/jgi.png';
+import kanekiImg from '../assets/works/kaneki.png';
+import obataImg from '../assets/works/obata.png';
+import takazenImg from '../assets/works/takazen.png';
+import Heading from './ui/Heading.astro';
+import SectionTitle from './ui/SectionTitle.astro';
 
 interface WorkItem {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  url: string;
-  image: string;
+	id: string;
+	title: string;
+	category: string;
+	description: string;
+	url: string;
+	image: ImageMetadata;
 }
 
 const works: WorkItem[] = [
-  {
-    id: 'beyerdynamic',
-    title: 'beyerdynamic',
-    category: 'ブランドサイト',
-    description: 'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
-    url: 'https://beyerdynamic.co.jp/',
-    image: '/works/beyerdynamic.png',
-  },
-  {
-    id: 'jgi',
-    title: '地球科学総合研究所',
-    category: 'コーポレートサイト',
-    description: '物理探査・地震探査を行う企業のコーポレートサイト。多数のページと情報を整理した大規模サイト。',
-    url: 'https://jgi-inc.com/',
-    image: '/works/jgi.png',
-  },
-  {
-    id: 'obata',
-    title: '小畑製紙所',
-    category: 'LP',
-    description: '越前和紙の透かし入れ卒業証書を製造する老舗のランディングページ。伝統と技術を訴求。',
-    url: 'https://obataseishijo.jp/lp/',
-    image: '/works/obata.png',
-  },
-  {
-    id: 'takazen',
-    title: '高善産業',
-    category: 'コーポレートサイト',
-    description: 'オーダーメイド家具を製造する企業のサイト。職人の技術と製品の魅力を伝えるデザイン。',
-    url: 'https://takazen-sangyo.com/',
-    image: '/works/takazen.png',
-  },
-  {
-    id: 'kaneki',
-    title: 'カネキ運輸',
-    category: 'コーポレートサイト',
-    description: '運送事業・倉庫業を営む企業のコーポレートサイト。シンプルで見やすい構成。',
-    url: 'https://kaneki-unyu.co.jp/',
-    image: '/works/kaneki.png',
-  },
+	{
+		id: 'beyerdynamic',
+		title: 'beyerdynamic',
+		category: 'ブランドサイト',
+		description:
+			'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
+		url: 'https://beyerdynamic.co.jp/',
+		image: beyerdynamicImg,
+	},
+	{
+		id: 'jgi',
+		title: '地球科学総合研究所',
+		category: 'コーポレートサイト',
+		description:
+			'物理探査・地震探査を行う企業のコーポレートサイト。多数のページと情報を整理した大規模サイト。',
+		url: 'https://jgi-inc.com/',
+		image: jgiImg,
+	},
+	{
+		id: 'obata',
+		title: '小畑製紙所',
+		category: 'LP',
+		description:
+			'越前和紙の透かし入れ卒業証書を製造する老舗のランディングページ。伝統と技術を訴求。',
+		url: 'https://obataseishijo.jp/lp/',
+		image: obataImg,
+	},
+	{
+		id: 'takazen',
+		title: '高善産業',
+		category: 'コーポレートサイト',
+		description:
+			'オーダーメイド家具を製造する企業のサイト。職人の技術と製品の魅力を伝えるデザイン。',
+		url: 'https://takazen-sangyo.com/',
+		image: takazenImg,
+	},
+	{
+		id: 'kaneki',
+		title: 'カネキ運輸',
+		category: 'コーポレートサイト',
+		description: '運送事業・倉庫業を営む企業のコーポレートサイト。シンプルで見やすい構成。',
+		url: 'https://kaneki-unyu.co.jp/',
+		image: kanekiImg,
+	},
 ];
 ---
 
-<section id="works" class="works">
-  <div class="works__container">
+<section id="works" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
+  <div class="max-w-container mx-auto px-4">
     <SectionTitle title="Works" subtitle="制作実績" />
-    <div class="works__grid" id="works-slider">
+    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-4 -mx-4 px-4 scrollbar-none md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:snap-none md:mx-0 md:px-0 md:pb-0 xl:grid-cols-3" id="works-slider">
       {works.map((work) => (
-        <article class="work-card">
-          <a href={work.url} target="_blank" rel="noopener noreferrer" class="work-card__link">
-            <div class="work-card__image">
-              <img src={work.image} alt={work.title} loading="lazy" />
+        <article class="work-card shrink-0 basis-card snap-center bg-white rounded-2xl overflow-hidden shadow-sm md:shrink md:basis-auto">
+          <a href={work.url} target="_blank" rel="noopener noreferrer" class="block no-underline text-inherit h-full group">
+            <div class="aspect-card overflow-hidden">
+              <Image src={work.image} alt={work.title} width={640} format="webp" quality={80} loading="lazy" class="w-full h-full object-cover object-top" />
             </div>
-            <div class="work-card__content">
-              <div class="work-card__header">
-                <span class="work-card__category">{work.category}</span>
-                <ExternalLink class="work-card__icon" size={16} />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <span class="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">{work.category}</span>
+                <ExternalLink class="text-text-muted transition-colors duration-200 group-hover:text-primary" size={16} />
               </div>
-              <h3 class="work-card__title">{work.title}</h3>
-              <p class="work-card__description">{work.description}</p>
+              <Heading level={3} variant="card" class="mb-3 leading-snug">{work.title}</Heading>
+              <p class="text-sm text-text-muted leading-relaxed">{work.description}</p>
             </div>
           </a>
         </article>
       ))}
     </div>
-    <div class="works__pagination" id="works-pagination">
+    <div class="flex justify-center gap-2 mt-4 md:hidden" id="works-pagination">
       {works.map((_, index) => (
         <button
-          class={`works__dot ${index === 0 ? 'is-active' : ''}`}
+          class={`works-dot w-2 h-2 rounded-full border-none p-0 cursor-pointer transition-all duration-200 ${index === 0 ? 'is-active opacity-100 bg-primary scale-125' : 'opacity-30 bg-text-muted'}`}
           data-index={index}
           aria-label={`スライド ${index + 1} へ移動`}
         />
@@ -92,11 +103,10 @@ const works: WorkItem[] = [
 <script>
   const slider = document.getElementById('works-slider');
   const pagination = document.getElementById('works-pagination');
-  const dots = pagination?.querySelectorAll<HTMLButtonElement>('.works__dot');
+  const dots = pagination?.querySelectorAll<HTMLButtonElement>('.works-dot');
   const cards = slider?.querySelectorAll('.work-card');
 
   if (slider && dots && cards) {
-    // スクロール時にアクティブなドットを更新
     const updateActiveDot = () => {
       const sliderRect = slider.getBoundingClientRect();
       const sliderCenter = sliderRect.left + sliderRect.width / 2;
@@ -116,13 +126,18 @@ const works: WorkItem[] = [
       });
 
       dots.forEach((dot, index) => {
-        dot.classList.toggle('is-active', index === closestIndex);
+        const isActive = index === closestIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.classList.toggle('opacity-100', isActive);
+        dot.classList.toggle('bg-primary', isActive);
+        dot.classList.toggle('scale-125', isActive);
+        dot.classList.toggle('opacity-30', !isActive);
+        dot.classList.toggle('bg-text-muted', !isActive);
       });
     };
 
     slider.addEventListener('scroll', updateActiveDot, { passive: true });
 
-    // ドットクリックでスライドへ移動
     dots.forEach((dot) => {
       dot.addEventListener('click', () => {
         const index = Number(dot.dataset.index);
@@ -135,173 +150,3 @@ const works: WorkItem[] = [
   }
 </script>
 
-<style>
-  .works {
-    padding-block: 3rem 4rem;
-    background-color: var(--color-bg-section);
-  }
-
-  @media (min-width: 768px) {
-    .works {
-      padding-block: 7rem 8rem;
-    }
-  }
-
-  .works__container {
-    max-width: var(--container-max);
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-
-  /* スマホ版: 横スクロールスライダー */
-  .works__grid {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 1rem;
-    padding-block-end: 1rem;
-    margin-inline: -1rem;
-    padding-inline: 1rem;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .works__grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .works__grid {
-    scrollbar-width: none;
-  }
-
-  .works__grid > .work-card {
-    flex: 0 0 85%;
-    scroll-snap-align: center;
-  }
-
-  /* タブレット以上: グリッド表示 */
-  @media (min-width: 768px) {
-    .works__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      overflow-x: visible;
-      scroll-snap-type: none;
-      margin-inline: 0;
-      padding-inline: 0;
-      padding-block-end: 0;
-    }
-
-    .works__grid > .work-card {
-      flex: none;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .works__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .work-card {
-    background-color: #fff;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
-  }
-
-  .work-card__link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-  }
-
-  .work-card__image {
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-  }
-
-  .work-card__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
-
-  .work-card__content {
-    padding: 1.5rem;
-  }
-
-  .work-card__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-block-end: 1rem;
-  }
-
-  .work-card__category {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    background-color: rgb(61 139 110 / 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-  }
-
-  .work-card__icon {
-    color: var(--color-text-muted);
-    transition: color 0.2s;
-  }
-
-  .work-card:hover .work-card__icon {
-    color: var(--color-primary);
-  }
-
-  .work-card__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .work-card__description {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  /* ページネーション */
-  .works__pagination {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-block-start: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .works__pagination {
-      display: none;
-    }
-  }
-
-  .works__dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    border: none;
-    background-color: var(--color-text-muted);
-    opacity: 0.3;
-    padding: 0;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  .works__dot.is-active {
-    opacity: 1;
-    background-color: var(--color-primary);
-    transform: scale(1.25);
-  }
-</style>

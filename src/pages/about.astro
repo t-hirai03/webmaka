@@ -1,268 +1,103 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import meImg from '../assets/about/me.png';
+import Button from '../components/ui/Button.astro';
+import Heading from '../components/ui/Heading.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About | うぇぶまか" description="うぇぶまかの運営者、平井隆裕のプロフィール。フロントエンドエンジニアとしてWebサイト制作・LP制作を行っています。">
-  <section class="about">
-    <div class="about__container">
-      <h1 class="about__heading">About</h1>
+  <section class="py-15 md:py-20 bg-bg-main">
+    <div class="max-w-content mx-auto px-4">
+      <Heading level={1} variant="page" class="mb-12">About</Heading>
 
-      <div class="about__content">
-        <div class="about__profile">
-          <div class="about__image-wrapper">
-            <img src="/images/about/me.png" alt="平井 隆裕" class="about__image" />
+      <div class="flex flex-col gap-12">
+        <div class="flex flex-col items-center gap-6 md:flex-row md:gap-8">
+          <div class="shrink-0">
+            <Image src={meImg} alt="平井 隆裕" width={160} height={160} format="webp" quality={80} class="w-40 h-40 rounded-full border-3 border-primary object-cover" />
           </div>
 
-          <div class="about__info">
-            <p class="about__name">平井 隆裕</p>
-            <p class="about__role">フロントエンドエンジニア</p>
+          <div class="text-center md:text-left">
+            <p class="text-2xl font-bold text-text mb-2">平井 隆裕</p>
+            <p class="text-base text-primary font-medium">フロントエンドエンジニア</p>
           </div>
         </div>
 
-        <div class="about__bio">
-          <h2 class="about__section-title">自己紹介</h2>
-          <p class="about__text">
+        <div>
+          <h2 class="text-xl font-bold text-text mb-4 pb-2 border-b-2 border-primary">自己紹介</h2>
+          <p class="text-text leading-relaxed-plus mb-4">
             東京でフロントエンドエンジニアをしております。
           </p>
-          <p class="about__text">
+          <p class="text-text leading-relaxed-plus mb-4">
             2018年より福井県でSEの会社に勤める。<br>
             2022年からWebサイト制作会社でWeb制作業務を行う。<br>
             2024年より東京で事業会社のフロントエンドエンジニアへ転向。
           </p>
-          <p class="about__text">
+          <p class="text-text leading-relaxed-plus">
             お仕事のお問い合わせは<br>
-            <a href="/contact">CONTACTページ</a>のフォームからお願いいたします。
+            <a href="/contact" class="underline underline-offset-4">CONTACTページ</a>のフォームからお願いいたします。
           </p>
         </div>
 
-        <div class="about__skills">
-          <h2 class="about__section-title">スキル・経験</h2>
+        <div>
+          <h2 class="text-xl font-bold text-text mb-4 pb-2 border-b-2 border-primary">スキル・経験</h2>
 
-          <ul class="about__skill-list">
-            <li class="about__skill-card" style="--card-color: #E34F26">
-              <Icon name="simple-icons:html5" class="about__skill-icon" />
-              <span class="about__skill-name">HTML / CSS</span>
-              <span class="about__skill-years">8年</span>
+          <ul class="flex flex-col gap-3 list-none p-0 m-0">
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:html5" class="w-6 h-6" style="color: #E34F26" />
+              <span class="flex-1 text-sm-plus text-text">HTML / CSS</span>
+              <span class="text-base text-text-muted">8年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #F7DF1E">
-              <Icon name="simple-icons:javascript" class="about__skill-icon" />
-              <span class="about__skill-name">JavaScript</span>
-              <span class="about__skill-years">8年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:javascript" class="w-6 h-6" style="color: #F7DF1E" />
+              <span class="flex-1 text-sm-plus text-text">JavaScript</span>
+              <span class="text-base text-text-muted">8年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #3178C6">
-              <Icon name="simple-icons:typescript" class="about__skill-icon" />
-              <span class="about__skill-name">TypeScript</span>
-              <span class="about__skill-years">2年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:typescript" class="w-6 h-6" style="color: #3178C6" />
+              <span class="flex-1 text-sm-plus text-text">TypeScript</span>
+              <span class="text-base text-text-muted">2年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #61DAFB">
-              <Icon name="simple-icons:react" class="about__skill-icon" />
-              <span class="about__skill-name">React / Next.js</span>
-              <span class="about__skill-years">2年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:react" class="w-6 h-6" style="color: #61DAFB" />
+              <span class="flex-1 text-sm-plus text-text">React / Next.js</span>
+              <span class="text-base text-text-muted">2年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #BC52EE">
-              <Icon name="simple-icons:astro" class="about__skill-icon" />
-              <span class="about__skill-name">Astro</span>
-              <span class="about__skill-years">4年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:astro" class="w-6 h-6" style="color: #BC52EE" />
+              <span class="flex-1 text-sm-plus text-text">Astro</span>
+              <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #21759B">
-              <Icon name="simple-icons:wordpress" class="about__skill-icon" />
-              <span class="about__skill-name">WordPress</span>
-              <span class="about__skill-years">4年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:wordpress" class="w-6 h-6" style="color: #21759B" />
+              <span class="flex-1 text-sm-plus text-text">WordPress</span>
+              <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #36C7D0">
-              <svg class="about__skill-icon" viewBox="0 0 24 24" fill="currentColor">
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <svg class="w-6 h-6" style="color: #36C7D0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
-              <span class="about__skill-name">microCMS</span>
-              <span class="about__skill-years">4年</span>
+              <span class="flex-1 text-sm-plus text-text">microCMS</span>
+              <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #4169E1">
-              <Icon name="simple-icons:postgresql" class="about__skill-icon" />
-              <span class="about__skill-name">PostgreSQL</span>
-              <span class="about__skill-years">4年</span>
+            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
+              <Icon name="simple-icons:postgresql" class="w-6 h-6" style="color: #4169E1" />
+              <span class="flex-1 text-sm-plus text-text">PostgreSQL</span>
+              <span class="text-base text-text-muted">4年</span>
             </li>
-            <li class="about__skill-card" style="--card-color: #2496ED">
-              <Icon name="simple-icons:docker" class="about__skill-icon" />
-              <span class="about__skill-name">Docker</span>
-              <span class="about__skill-years">2年</span>
+            <li class="flex items-center gap-3 py-3">
+              <Icon name="simple-icons:docker" class="w-6 h-6" style="color: #2496ED" />
+              <span class="flex-1 text-sm-plus text-text">Docker</span>
+              <span class="text-base text-text-muted">2年</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="about__cta">
-        <a href="/contact" class="about__cta-button">お問い合わせはこちら</a>
+      <div class="mt-16 text-center">
+        <Button href="/contact" class="rounded-full">お問い合わせはこちら</Button>
       </div>
     </div>
   </section>
 </Layout>
-
-<style>
-  .about {
-    padding-block: 60px;
-    background-color: var(--color-bg-main);
-  }
-
-  @media (min-width: 768px) {
-    .about {
-      padding-block: 80px;
-    }
-  }
-
-  .about__container {
-    max-width: 800px;
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-
-  .about__heading {
-    font-size: 1.875rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 3rem;
-  }
-
-  @media (min-width: 768px) {
-    .about__heading {
-      font-size: 2.5rem;
-    }
-  }
-
-  .about__content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .about__profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .about__profile {
-      flex-direction: row;
-      gap: 2rem;
-    }
-  }
-
-  .about__image-wrapper {
-    flex-shrink: 0;
-  }
-
-  .about__image {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 3px solid var(--color-primary);
-    object-fit: cover;
-  }
-
-  .about__info {
-    text-align: center;
-  }
-
-  @media (min-width: 768px) {
-    .about__info {
-      text-align: left;
-    }
-  }
-
-  .about__name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 0.5rem;
-  }
-
-  .about__role {
-    font-size: 1rem;
-    color: var(--color-primary);
-    font-weight: 500;
-  }
-
-  .about__section-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-block-end: 1rem;
-    padding-block-end: 0.5rem;
-    border-block-end: 2px solid var(--color-primary);
-  }
-
-  .about__text {
-    color: var(--color-text);
-    line-height: 1.8;
-    margin-block-end: 1rem;
-  }
-
-  .about__text:last-child {
-    margin-block-end: 0;
-  }
-
-  .about__text a {
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-  }
-
-  .about__skill-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .about__skill-card {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-    border-block-end: 1px solid var(--color-primary-light);
-  }
-
-  .about__skill-card:last-child {
-    border-block-end: none;
-  }
-
-  .about__skill-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--card-color);
-  }
-
-  .about__skill-name {
-    flex: 1;
-    font-size: 0.9375rem;
-    color: var(--color-text);
-  }
-
-  .about__skill-years {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-  }
-
-  .about__cta {
-    margin-block-start: 4rem;
-    text-align: center;
-  }
-
-  .about__cta-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .about__cta-button:hover {
-    background-color: var(--color-primary-dark);
-  }
-</style>

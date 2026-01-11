@@ -1,16 +1,176 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Service from '../components/Service.astro';
-import Flow from '../components/Flow.astro';
-import Works from '../components/Works.astro';
+import {
+	Code,
+	Database,
+	FileText,
+	Mail,
+	MessageCircle,
+	Palette,
+	PenTool,
+	Rocket,
+} from 'lucide-astro';
 import Contact from '../components/Contact.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Heading from '../components/ui/Heading.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import Works from '../components/Works.astro';
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+	{
+		icon: Palette,
+		title: 'Webサイト制作',
+		subtitle: 'デザインからコーディングまで一貫対応',
+		description:
+			'デザイナーと連携し、企画・デザイン・実装まで窓口ひとつで対応します。レスポンシブ対応、表示速度を重視した実装が強みです。',
+		details: ['コーポレートサイト', 'サービスサイト', '採用サイト'],
+		tech: ['Astro', 'Next.js', 'WordPress'],
+		price: '15万円〜',
+		priceNote: '5ページ目安',
+	},
+	{
+		icon: FileText,
+		title: 'LP制作',
+		subtitle: '1ページ完結、デザイン込み',
+		description:
+			'商品・サービスの訴求に特化した1ページ構成のランディングページを制作します。デザインから実装まで一貫対応。',
+		details: ['商品・サービス紹介', 'キャンペーンLP', '採用LP'],
+		tech: ['Astro', 'HTML/CSS', 'JavaScript'],
+		price: '8万円〜',
+	},
+	{
+		icon: Database,
+		title: 'CMS導入・移行',
+		subtitle: '静的サイトをCMS化して自分で更新できるように',
+		description:
+			'「業者に頼まないと更新できない」を解消します。既存のHTMLサイトをWordPressやヘッドレスCMS（microCMS等）に移行し、お知らせやブログを自分で更新できる環境を構築します。',
+		details: ['既存HTMLサイトのCMS化', 'WordPress導入・構築', 'microCMS導入'],
+		tech: ['WordPress', 'microCMS'],
+		price: '10万円〜',
+	},
+	{
+		icon: Code,
+		title: 'コーディング代行',
+		subtitle: 'デザインカンプからの実装',
+		description:
+			'Figma・XD・Photoshopなどのデザインデータをお預かりし、HTML/CSS/JavaScriptに変換します。制作会社様からのご依頼も歓迎です。',
+		details: ['Figma/XDからの実装', 'レスポンシブ対応', 'アニメーション実装'],
+		tech: ['HTML/CSS', 'JavaScript', 'Astro'],
+		price: '3万円〜',
+		priceNote: '1ページ',
+	},
+];
+
+const flows = [
+	{
+		icon: Mail,
+		number: 1,
+		title: 'お問い合わせ',
+		description:
+			'<a href="/contact" class="text-primary underline underline-offset-2 hover:no-underline">フォーム</a>からご連絡ください',
+	},
+	{
+		icon: MessageCircle,
+		number: 2,
+		title: 'ヒアリング・お見積もり',
+		description: 'ご要望を伺い、お見積もりを提示します',
+	},
+	{
+		icon: PenTool,
+		number: 3,
+		title: '制作・確認',
+		description: '制作を進めながら確認・修正を行います',
+	},
+	{
+		icon: Rocket,
+		number: 4,
+		title: '納品・公開',
+		description: '完成後、納品・公開対応をします',
+	},
+];
 ---
 
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
-  <Hero />
-  <Service />
-  <Flow />
+  <!-- Hero -->
+  <section id="hero" class="pt-10 md:py-10 flex items-center justify-center bg-bg-main">
+    <div class="max-w-container mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold text-text mb-6">
+        <span class="bg-marker bg-no-repeat bg-size-zero animate-marker-draw">Webサイト・LP制作、<br class="md:hidden" />既存サイトのCMS化対応いたします。</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Service -->
+  <section id="service" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
+    <div class="max-w-container mx-auto px-4">
+      <SectionTitle title="Service" subtitle="サービス内容" />
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {
+          services.map((service) => (
+            <article class="flex flex-col bg-white rounded-2xl px-6 py-8 shadow-sm">
+              <div class="flex items-start gap-3 mb-4">
+                <div class="flex items-center justify-center shrink-0 w-14 h-14 bg-primary text-white rounded-xl">
+                  <service.icon size={32} strokeWidth={1.5} />
+                </div>
+                <div class="flex flex-col justify-center min-h-14">
+                  <Heading level={3} variant="card" class="mb-0.5">{service.title}</Heading>
+                  <p class="text-sm font-medium text-primary">{service.subtitle}</p>
+                </div>
+              </div>
+              <p class="text-sm-plus leading-relaxed text-text-muted mb-5">{service.description}</p>
+              <ul class="flex flex-wrap gap-2 list-none p-0 m-0 mb-6">
+                {service.details.map((detail) => (
+                  <li class="text-2xs text-text bg-bg-section px-3 py-1.5 rounded-md">{detail}</li>
+                ))}
+              </ul>
+              <div class="mt-auto pt-5 border-t border-gray-200">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  {service.tech.map((t) => (
+                    <Badge size="sm">{t}</Badge>
+                  ))}
+                </div>
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <p class="text-lg font-bold text-primary m-0">{service.price}</p>
+                  {service.priceNote && (
+                    <span class="text-xs text-text-muted">{service.priceNote}</span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow -->
+  <section id="flow" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-main">
+    <div class="max-w-container mx-auto px-4">
+      <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
+      <ol class="grid gap-6 md:grid-cols-4 list-none p-0 m-0">
+        {
+          flows.map((flow) => (
+            <li class="flex flex-col bg-white rounded-2xl px-6 py-8 shadow-sm">
+              <div class="relative w-fit mb-5">
+                <div class="flex items-center justify-center w-14 h-14 bg-primary text-white rounded-xl">
+                  <flow.icon size={24} strokeWidth={1.5} />
+                </div>
+                <span class="absolute -top-2 -right-2 flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-accent rounded-full">{flow.number}</span>
+              </div>
+              <Heading level={3} variant="card" class="mb-2">{flow.title}</Heading>
+              <p class="text-sm leading-relaxed text-text-muted m-0" set:html={flow.description} />
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-12 text-center">
+        <Button href="/contact" class="rounded-full">お問い合わせはこちら</Button>
+      </div>
+    </div>
+  </section>
+
   <Works />
+
   <Contact />
 </Layout>

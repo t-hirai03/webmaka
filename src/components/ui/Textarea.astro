@@ -1,0 +1,26 @@
+---
+interface Props {
+	name: string;
+	id?: string;
+	placeholder?: string;
+	rows?: number;
+	required?: boolean;
+	class?: string;
+}
+
+const { name, id, placeholder, rows = 5, required = false, class: className = '' } = Astro.props;
+
+const baseClasses =
+	'w-full bg-white rounded-lg px-4 py-3 text-text border border-gray-300 focus:ring-2 focus:ring-accent focus:border-transparent focus:outline-none transition-colors duration-200 resize-none';
+
+const classes = [baseClasses, className].filter(Boolean).join(' ');
+---
+
+<textarea
+  name={name}
+  id={id || name}
+  placeholder={placeholder}
+  rows={rows}
+  required={required}
+  class={classes}
+></textarea>

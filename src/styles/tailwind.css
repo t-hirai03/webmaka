@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@theme {
+  /* 背景色 */
+  --color-bg-main: #F7F4E9;
+  --color-bg-section: #F5F0E8;
+
+  /* メインカラー */
+  --color-primary: #3D8B6E;
+  --color-primary-dark: #2D6B52;
+  --color-primary-light: #4DA882;
+
+  /* アクセントカラー */
+  --color-accent: #E8A87C;
+  --color-accent-dark: #D8956A;
+  --color-accent-light: #F0BFA0;
+
+  /* テキストカラー */
+  --color-text: #374151;
+  --color-text-muted: #6B7280;
+
+  /* コンテナ幅 */
+  --max-width-container: 1440px;
+  --max-width-content: 800px;
+
+  /* サイドバー幅 */
+  --width-sidebar: 200px;
+
+  /* ヘッダー高さ */
+  --height-header: 80px;
+
+  /* 最小高さ */
+  --min-height-page: calc(100dvh - var(--height-header));
+
+  /* フォントサイズ */
+  --font-size-2xs: 0.8125rem; /* スキルタグ等の小さいテキスト */
+  --font-size-sm-plus: 0.9375rem; /* カード説明文等 */
+
+  /* 行間 */
+  --leading-relaxed-plus: 1.8; /* 本文の読みやすい行間 */
+  --leading-normal-plus: 1.6; /* フォーム等の行間 */
+
+  /* 間隔 */
+  --spacing-15: 60px; /* aboutページのセクション余白 */
+  --spacing-1-25: 5px; /* ハンバーガーメニューのline間隔 */
+
+  /* ボーダー */
+  --border-width-3: 3px; /* プロフィール画像の枠線 */
+
+  /* z-index */
+  --z-modal: 60; /* モバイルメニューボタン */
+  --z-overlay: 49; /* オーバーレイ背景 */
+
+  /* アスペクト比 */
+  --aspect-card: 16/10; /* Works実績カードの画像比率 */
+
+  /* basis */
+  --basis-card: 85%; /* モバイルスライダーのカード幅 */
+
+  /* translate */
+  --translate-hamburger: 5px; /* ハンバーガーアイコンのアニメーション移動量 */
+
+  /* 背景 */
+  --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%); /* ヒーローのマーカー効果 */
+  --background-size-zero: 0% 100%; /* マーカーアニメーション開始状態 */
+
+
+  /* アニメーション */
+  --animate-marker-draw: marker-draw 1s ease-out 0.3s forwards; /* ヒーローのマーカー描画アニメーション */
+}
+
+@keyframes marker-draw {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+/* スクロールバー非表示 */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* セレクトボックスの矢印位置（右端）*/
+@utility bg-position-select {
+  background-position: right 16px center;
+}
+
+/* セレクトボックスの矢印サイズ */
+@utility bg-size-select {
+  background-size: 16px 16px;
+}
+
