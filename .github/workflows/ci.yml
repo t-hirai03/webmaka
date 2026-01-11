@@ -11,44 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm biome check .
-      - run: pnpm biome format --check .
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx biome check .
+      - run: npx biome format --check .
 
   typecheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm astro check
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx astro check
 
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm astro build
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx astro build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
