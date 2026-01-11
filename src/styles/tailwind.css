@@ -41,8 +41,11 @@ body {
   /* サイドバー幅 */
   --width-sidebar: 200px;
 
+  /* ヘッダー高さ */
+  --height-header: 80px;
+
   /* 最小高さ */
-  --min-height-page: calc(100dvh - 80px);
+  --min-height-page: calc(100dvh - var(--height-header));
 
   /* フォントサイズ */
   --font-size-2xs: 0.8125rem;
