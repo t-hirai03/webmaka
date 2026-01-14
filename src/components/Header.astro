@@ -78,7 +78,7 @@ const navItems = [
 
 <script>
   const mobileNav = document.querySelector('[data-mobile-nav]');
-  const hamburger = document.querySelector('[data-hamburger]');
+  const hamburger = document.querySelector('[data-hamburger]') as HTMLButtonElement | null;
   const overlay = document.querySelector('[data-overlay]');
   const menuLinks = document.querySelectorAll('[data-menu-link]');
 
@@ -97,4 +97,12 @@ const navItems = [
   hamburger?.addEventListener('click', toggleMenu);
   overlay?.addEventListener('click', closeMenu);
   menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  // Escapeキーでメニューを閉じる
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileNav?.classList.contains('is-open')) {
+      closeMenu();
+      hamburger?.focus();
+    }
+  });
 </script>

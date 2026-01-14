@@ -1,6 +1,40 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
+// レート制限の設定
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1分
+const RATE_LIMIT_MAX_REQUESTS = 3; // 1分あたりの最大リクエスト数
+
+// IPアドレスごとのリクエスト記録
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
+function isRateLimited(ip: string): boolean {
+	const now = Date.now();
+	const record = rateLimitMap.get(ip);
+
+	if (!record || now > record.resetTime) {
+		rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+		return false;
+	}
+
+	if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
+		return true;
+	}
+
+	record.count++;
+	return false;
+}
+
+// 定期的に古いレコードをクリーンアップ
+function cleanupRateLimitMap() {
+	const now = Date.now();
+	for (const [ip, record] of rateLimitMap.entries()) {
+		if (now > record.resetTime) {
+			rateLimitMap.delete(ip);
+		}
+	}
+}
+
 interface ContactFormData {
 	name: string;
 	email: string;
@@ -19,6 +53,13 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 
 const FROM_EMAIL = 'うぇぶまか <admin@webmaka.com>';
 
+// メールアドレスの正規表現（RFC 5322準拠の簡易版）
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function isValidEmail(email: string): boolean {
+	return EMAIL_REGEX.test(email);
+}
+
 function isValidContactFormData(data: unknown): data is ContactFormData {
 	if (typeof data !== 'object' || data === null) return false;
 
@@ -28,7 +69,7 @@ function isValidContactFormData(data: unknown): data is ContactFormData {
 		typeof name === 'string' &&
 		name.trim().length > 0 &&
 		typeof email === 'string' &&
-		email.includes('@') &&
+		isValidEmail(email) &&
 		typeof message === 'string' &&
 		message.trim().length > 0
 	);
@@ -36,7 +77,25 @@ function isValidContactFormData(data: unknown): data is ContactFormData {
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
+	// 古いレコードのクリーンアップ
+	cleanupRateLimitMap();
+
+	// レート制限チェック
+	const ip = clientAddress || request.headers.get('cf-connecting-ip') || 'unknown';
+	if (isRateLimited(ip)) {
+		return new Response(
+			JSON.stringify({
+				success: false,
+				error: 'リクエストが多すぎます。しばらく待ってから再度お試しください。',
+			}),
+			{
+				status: 429,
+				headers: { 'Content-Type': 'application/json' },
+			},
+		);
+	}
+
 	const runtime = (locals as { runtime?: { env: Record<string, string> } }).runtime;
 	const resendApiKey = runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
 	const contactEmail = runtime?.env?.CONTACT_EMAIL ?? import.meta.env.CONTACT_EMAIL;

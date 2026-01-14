@@ -12,10 +12,12 @@ import Textarea from './ui/Textarea.astro';
     <SectionTitle title="Contact" subtitle="お問い合わせ" />
     <form id="contact-form" class="max-w-xl mx-auto flex flex-col gap-6">
       <FormField label="氏名" name="name" required>
-        <Input type="text" name="name" id="name" required class="border-none" />
+        <Input type="text" name="name" id="name" required class="border-none" aria-describedby="name-error" />
+        <span id="name-error" class="text-sm text-red-600 hidden" role="alert"></span>
       </FormField>
       <FormField label="メールアドレス" name="email" required>
-        <Input type="email" name="email" id="email" required class="border-none" />
+        <Input type="email" name="email" id="email" required class="border-none" aria-describedby="email-error" />
+        <span id="email-error" class="text-sm text-red-600 hidden" role="alert"></span>
       </FormField>
       <FormField label="お問い合わせ種別" name="inquiry-type">
         <Select name="inquiry-type" id="inquiry-type" class="border-none">
@@ -31,7 +33,8 @@ import Textarea from './ui/Textarea.astro';
         <Input type="tel" name="phone" id="phone" class="border-none" />
       </FormField>
       <FormField label="お問い合わせ内容" name="message" required>
-        <Textarea name="message" id="message" rows={5} required class="border-none" />
+        <Textarea name="message" id="message" rows={5} required class="border-none" aria-describedby="message-error" />
+        <span id="message-error" class="text-sm text-red-600 hidden" role="alert"></span>
       </FormField>
       <div id="contact-message" class="contact-message hidden px-4 py-3 rounded-lg text-center" aria-live="polite"></div>
       <div class="text-center">
@@ -69,14 +72,39 @@ import Textarea from './ui/Textarea.astro';
 
   restoreFormData();
 
-  function showError(text: string) {
-    messageEl.textContent = text;
-    messageEl.classList.remove('hidden', 'bg-green-100', 'text-green-800');
-    messageEl.classList.add('bg-red-100', 'text-red-800');
+  const nameInput = form.querySelector('#name') as HTMLInputElement;
+  const emailInput = form.querySelector('#email') as HTMLInputElement;
+  const messageTextarea = form.querySelector('#message') as HTMLTextAreaElement;
+  const nameError = document.getElementById('name-error') as HTMLSpanElement;
+  const emailError = document.getElementById('email-error') as HTMLSpanElement;
+  const messageError = document.getElementById('message-error') as HTMLSpanElement;
+
+  // メールアドレスの正規表現（RFC 5322準拠の簡易版）
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function clearFieldError(input: HTMLInputElement | HTMLTextAreaElement, errorEl: HTMLSpanElement) {
+    input.setAttribute('aria-invalid', 'false');
+    errorEl.textContent = '';
+    errorEl.classList.add('hidden');
+  }
+
+  function setFieldError(input: HTMLInputElement | HTMLTextAreaElement, errorEl: HTMLSpanElement, message: string) {
+    input.setAttribute('aria-invalid', 'true');
+    errorEl.textContent = message;
+    errorEl.classList.remove('hidden');
+    input.focus();
+  }
+
+  function clearAllErrors() {
+    clearFieldError(nameInput, nameError);
+    clearFieldError(emailInput, emailError);
+    clearFieldError(messageTextarea, messageError);
+    messageEl.classList.add('hidden');
   }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    clearAllErrors();
 
     const formData = new FormData(form);
     const data = {
@@ -89,15 +117,15 @@ import Textarea from './ui/Textarea.astro';
 
     // バリデーション
     if (!data.name.trim()) {
-      showError('氏名を入力してください。');
+      setFieldError(nameInput, nameError, '氏名を入力してください。');
       return;
     }
-    if (!data.email.includes('@')) {
-      showError('正しいメールアドレスを入力してください。');
+    if (!EMAIL_REGEX.test(data.email)) {
+      setFieldError(emailInput, emailError, '正しいメールアドレスを入力してください。');
       return;
     }
     if (!data.message.trim()) {
-      showError('お問い合わせ内容を入力してください。');
+      setFieldError(messageTextarea, messageError, 'お問い合わせ内容を入力してください。');
       return;
     }
 
