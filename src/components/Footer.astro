@@ -1,7 +1,27 @@
 ---
+const currentYear = new Date().getFullYear();
 
+const navigation = [
+	{ name: 'サービス', url: '/#service' },
+	{ name: '制作実績', url: '/#works' },
+	{ name: '自己紹介', url: '/about' },
+	{ name: 'お問い合わせ', url: '/contact' },
+];
 ---
 
-<footer class="py-8 bg-text text-white text-center">
-  <p>&copy; 2024 うぇぶまか</p>
+<footer class="py-8 bg-text text-white">
+	<div class="max-w-container mx-auto px-4">
+		<nav aria-label="フッターナビゲーション" class="mb-6">
+			<ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 list-none p-0 m-0">
+				{navigation.map((item) => (
+					<li>
+						<a href={item.url} class="text-sm text-white/80 hover:text-white transition-colors">
+							{item.name}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+		<p class="text-sm text-center text-white/60">&copy; {currentYear} うぇぶまか</p>
+	</div>
 </footer>
