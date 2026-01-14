@@ -28,4 +28,6 @@ pnpm-debug.log*
 
 .spec-workflow/*
 .playwright-mcp
-.lighthouseci/debug-storybook.log
+.lighthouseci/
+debug-storybook.log
+storybook-static/

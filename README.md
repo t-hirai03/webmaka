@@ -23,7 +23,22 @@ npm run lint
 
 # lint/format 自動修正
 npm run lint:fix
+
+# Storybook起動
+npm run storybook
+
+# Storybookビルド
+npm run build-storybook
 ```
+
+## Storybook
+
+UIコンポーネントのカタログ・ドキュメント
+
+<https://storybook.webmaka.com/>
+
+- mainブランチへのマージで自動デプロイ
+- ローカルでは `npm run storybook` で起動（localhost:6006）
 
 ## 技術スタック
 
@@ -32,6 +47,7 @@ npm run lint:fix
 | フレームワーク | Astro 5 |
 | CSS | Tailwind CSS v4 |
 | Linter/Formatter | Biome |
+| UIカタログ | Storybook 10 |
 | ホスティング | Cloudflare Pages |
 | CI | GitHub Actions |
 | Node.js | v22 |
