@@ -16,6 +16,71 @@ const metaDescription = description || defaultDescription;
 const siteUrl = Astro.site?.href || 'https://webmaka.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const ogImageUrl = new URL('/images/common/ogp.png', siteUrl);
+
+// ナビゲーション構造（サイトリンク用）
+const siteNavigation = [
+	{ name: 'サービス', url: '/#service' },
+	{ name: '制作実績', url: '/#works' },
+	{ name: '自己紹介', url: '/about' },
+	{ name: 'お問い合わせ', url: '/contact' },
+];
+
+// パンくずリスト自動生成
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+	{ name: 'ホーム', url: siteUrl },
+	...pathSegments.map((segment: string, index: number) => {
+		const url = new URL('/' + pathSegments.slice(0, index + 1).join('/'), siteUrl).href;
+		const nameMap: Record<string, string> = {
+			about: '自己紹介',
+			contact: 'お問い合わせ',
+			confirm: '確認',
+			thanks: '完了',
+		};
+		return { name: nameMap[segment] || segment, url };
+	}),
+];
+
+// 構造化データ
+const structuredData = {
+	webSite: {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'うぇぶまか',
+		url: siteUrl,
+	},
+	professionalService: {
+		'@context': 'https://schema.org',
+		'@type': 'ProfessionalService',
+		name: 'うぇぶまか',
+		url: siteUrl,
+		description: defaultDescription,
+		priceRange: '¥30,000〜',
+		areaServed: 'JP',
+		serviceType: ['Webサイト制作', 'LP制作', 'CMS導入', 'コーディング代行'],
+	},
+	siteNavigationElement: {
+		'@context': 'https://schema.org',
+		'@graph': siteNavigation.map((item) => ({
+			'@type': 'SiteNavigationElement',
+			name: item.name,
+			url: new URL(item.url, siteUrl).href,
+		})),
+	},
+	breadcrumbList:
+		pathSegments.length > 0
+			? {
+					'@context': 'https://schema.org',
+					'@type': 'BreadcrumbList',
+					itemListElement: breadcrumbItems.map((item, index) => ({
+						'@type': 'ListItem',
+						position: index + 1,
+						name: item.name,
+						item: item.url,
+					})),
+				}
+			: null,
+};
 ---
 
 <!doctype html>
@@ -43,22 +108,12 @@ const ogImageUrl = new URL('/images/common/ogp.png', siteUrl);
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImageUrl.href} />
     <!-- JSON-LD 構造化データ -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "うぇぶまか",
-      "url": siteUrl,
-    })} />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "うぇぶまか",
-      "url": siteUrl,
-      "description": defaultDescription,
-      "priceRange": "¥30,000〜",
-      "areaServed": "JP",
-      "serviceType": ["Webサイト制作", "LP制作", "CMS導入", "コーディング代行"],
-    })} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.webSite)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.professionalService)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.siteNavigationElement)} />
+    {structuredData.breadcrumbList && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.breadcrumbList)} />
+    )}
     <!-- Google Analytics -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-YEDJ65JEPR"></script>
     <script is:inline>
