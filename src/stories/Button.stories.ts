@@ -25,7 +25,12 @@ const sizeClasses = {
 
 const createButton = (args: ButtonArgs): string => {
 	const disabledClasses = args.disabled ? 'opacity-50 cursor-not-allowed' : '';
-	const classes = [baseClasses, variantClasses[args.variant], sizeClasses[args.size], disabledClasses]
+	const classes = [
+		baseClasses,
+		variantClasses[args.variant],
+		sizeClasses[args.size],
+		disabledClasses,
+	]
 		.filter(Boolean)
 		.join(' ');
 

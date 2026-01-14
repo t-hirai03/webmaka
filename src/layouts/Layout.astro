@@ -31,7 +31,7 @@ const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 const breadcrumbItems = [
 	{ name: 'ホーム', url: siteUrl },
 	...pathSegments.map((segment: string, index: number) => {
-		const url = new URL('/' + pathSegments.slice(0, index + 1).join('/'), siteUrl).href;
+		const url = new URL(`/${pathSegments.slice(0, index + 1).join('/')}`, siteUrl).href;
 		const nameMap: Record<string, string> = {
 			about: '自己紹介',
 			contact: 'お問い合わせ',
