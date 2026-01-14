@@ -66,10 +66,16 @@ const works: WorkItem[] = [
 ];
 ---
 
-<section id="works" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
+<section id="works" aria-label="制作実績" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
   <div class="max-w-container mx-auto px-4">
     <SectionTitle title="Works" subtitle="制作実績" />
-    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-4 -mx-4 px-4 scrollbar-none md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:snap-none md:mx-0 md:px-0 md:pb-0 xl:grid-cols-3" id="works-slider">
+    <div
+      class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-4 -mx-4 px-4 scrollbar-none md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:snap-none md:mx-0 md:px-0 md:pb-0 xl:grid-cols-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      id="works-slider"
+      tabindex="0"
+      role="region"
+      aria-roledescription="カルーセル"
+    >
       {works.map((work) => (
         <article class="work-card shrink-0 basis-card snap-center bg-white rounded-2xl overflow-hidden shadow-sm md:shrink md:basis-auto">
           <a href={work.url} target="_blank" rel="noopener noreferrer" class="block no-underline text-inherit h-full group">
@@ -107,6 +113,8 @@ const works: WorkItem[] = [
   const cards = slider?.querySelectorAll('.work-card');
 
   if (slider && dots && cards) {
+    let currentIndex = 0;
+
     const updateActiveDot = () => {
       const sliderRect = slider.getBoundingClientRect();
       const sliderCenter = sliderRect.left + sliderRect.width / 2;
@@ -125,6 +133,8 @@ const works: WorkItem[] = [
         }
       });
 
+      currentIndex = closestIndex;
+
       dots.forEach((dot, index) => {
         const isActive = index === closestIndex;
         dot.classList.toggle('is-active', isActive);
@@ -136,15 +146,38 @@ const works: WorkItem[] = [
       });
     };
 
+    const scrollToCard = (index: number) => {
+      const targetCard = cards[index];
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    };
+
+    // キーボード操作対応
+    slider.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = Math.min(currentIndex + 1, cards.length - 1);
+        scrollToCard(nextIndex);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = Math.max(currentIndex - 1, 0);
+        scrollToCard(prevIndex);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        scrollToCard(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        scrollToCard(cards.length - 1);
+      }
+    });
+
     slider.addEventListener('scroll', updateActiveDot, { passive: true });
 
     dots.forEach((dot) => {
       dot.addEventListener('click', () => {
         const index = Number(dot.dataset.index);
-        const targetCard = cards[index];
-        if (targetCard) {
-          targetCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
+        scrollToCard(index);
       });
     });
   }

@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '@/styles/tailwind.css';
 import Header from '@/components/Header.astro';
 
@@ -49,6 +50,22 @@ const structuredData = {
 		name: 'うぇぶまか',
 		url: siteUrl,
 	},
+	organization: {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'うぇぶまか',
+		url: siteUrl,
+		logo: new URL('/images/common/logo.jpg', siteUrl).href,
+		description: defaultDescription,
+		foundingDate: '2024',
+		areaServed: 'JP',
+		contactPoint: {
+			'@type': 'ContactPoint',
+			contactType: 'customer support',
+			url: new URL('/contact', siteUrl).href,
+			availableLanguage: 'Japanese',
+		},
+	},
 	professionalService: {
 		'@context': 'https://schema.org',
 		'@type': 'ProfessionalService',
@@ -91,6 +108,11 @@ const structuredData = {
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalUrl.href} />
+    <!-- フォントのPreload -->
+    <link rel="preload" href="/fonts/ZenMaruGothic-Regular-subset.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ZenMaruGothic-Bold-subset.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Client Router (View Transitions) -->
+    <ClientRouter />
     <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
@@ -109,6 +131,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImageUrl.href} />
     <!-- JSON-LD 構造化データ -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.webSite)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.organization)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.professionalService)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.siteNavigationElement)} />
     {structuredData.breadcrumbList && (
@@ -124,8 +147,14 @@ const structuredData = {
     </script>
   </head>
   <body class="min-h-dvh bg-bg-main text-text font-sans leading-relaxed">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md"
+    >
+      コンテンツにスキップ
+    </a>
     <Header />
-    <main class="ps-0 md:ps-sidebar">
+    <main id="main-content" class="ps-0 md:ps-sidebar">
       <slot />
     </main>
   </body>

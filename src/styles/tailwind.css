@@ -56,7 +56,7 @@ body {
 
   /* テキストカラー */
   --color-text: #374151;
-  --color-text-muted: #6B7280;
+  --color-text-muted: #5C6672; /* WCAG AA準拠（4.5:1以上） */
 
   /* コンテナ幅 */
   --max-width-container: 1440px;
