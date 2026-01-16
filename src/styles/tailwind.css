@@ -43,11 +43,13 @@ body {
   /* 背景色 */
   --color-bg-main: #F7F4E9;
   --color-bg-section: #F5F0E8;
+  --color-white-70: rgba(255, 255, 255, 0.7); /* White 70% - オーバーレイ等 */
 
   /* メインカラー */
   --color-primary: #3D8B6E;
   --color-primary-dark: #2D6B52;
   --color-primary-light: #4DA882;
+  --color-primary-10: rgba(61, 139, 110, 0.1); /* Viridian 10% - 背景のアクセント等 */
 
   /* アクセントカラー */
   --color-accent: #E8A87C;
@@ -56,7 +58,7 @@ body {
 
   /* テキストカラー */
   --color-text: #374151;
-  --color-text-muted: #5C6672; /* WCAG AA準拠（4.5:1以上） */
+  --color-text-muted: #6B7280; /* Pale Sky */
 
   /* コンテナ幅 */
   --max-width-container: 1440px;
