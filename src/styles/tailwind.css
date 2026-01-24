@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Storybookのソースをスキャン対象に追加 */
+@source "../stories/**/*.ts";
+
 /* Zen Maru Gothic - セルフホスト（サブセット版） */
 @font-face {
   font-family: 'Zen Maru Gothic';
@@ -55,6 +58,18 @@ body {
   --color-accent: #E8A87C;
   --color-accent-dark: #D8956A;
   --color-accent-light: #F0BFA0;
+
+  /* CTAボタン */
+  --color-cta: #D97757;
+  --color-cta-dark: #C86747;
+
+  /* 確認ボタン */
+  --color-confirm: #C9902E;
+  --color-confirm-dark: #AA700B;
+  --color-confirm-border: #AA700B;
+
+  /* ボタン影 */
+  --shadow-button: 0px 5px 0px 0px rgba(61, 61, 61, 0.2);
 
   /* テキストカラー */
   --color-text: #374151;
