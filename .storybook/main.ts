@@ -1,5 +1,5 @@
-import tailwindcss from '@tailwindcss/vite';
 import type { StorybookConfig } from '@storybook/html-vite';
+import tailwindcss from '@tailwindcss/vite';
 
 const config: StorybookConfig = {
 	stories: ['../src/stories/**/*.stories.@(js|ts)'],

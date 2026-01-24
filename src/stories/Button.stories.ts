@@ -101,29 +101,9 @@ const meta: Meta<ButtonArgs> = {
 export default meta;
 type Story = StoryObj<ButtonArgs>;
 
-export const Primary: Story = {
+export const Default: Story = {
 	args: {
 		variant: 'primary',
-		size: 'md',
-		label: 'ボタン',
-		disabled: false,
-		icon: 'none',
-	},
-};
-
-export const Secondary: Story = {
-	args: {
-		variant: 'secondary',
-		size: 'md',
-		label: 'ボタン',
-		disabled: false,
-		icon: 'none',
-	},
-};
-
-export const Ghost: Story = {
-	args: {
-		variant: 'ghost',
 		size: 'md',
 		label: 'ボタン',
 		disabled: false,
@@ -148,48 +128,5 @@ export const Confirm: Story = {
 		label: '確認する',
 		disabled: false,
 		icon: 'none',
-	},
-};
-
-export const Disabled: Story = {
-	args: {
-		variant: 'primary',
-		size: 'md',
-		label: '無効ボタン',
-		disabled: true,
-		icon: 'none',
-	},
-};
-
-export const AllVariants: Story = {
-	render: () => `
-		<div style="display: flex; flex-direction: column; gap: 24px; padding: 24px;">
-			<div>
-				<p style="margin-bottom: 12px; font-size: 14px; color: #6B7280;">Primary / Secondary / Ghost</p>
-				<div style="display: flex; gap: 12px; align-items: center;">
-					${createButton({ variant: 'primary', size: 'md', label: 'Primary', disabled: false, icon: 'none' })}
-					${createButton({ variant: 'secondary', size: 'md', label: 'Secondary', disabled: false, icon: 'none' })}
-					${createButton({ variant: 'ghost', size: 'md', label: 'Ghost', disabled: false, icon: 'none' })}
-				</div>
-			</div>
-			<div>
-				<p style="margin-bottom: 12px; font-size: 14px; color: #6B7280;">CTA / Confirm（影付き）</p>
-				<div style="display: flex; gap: 12px; align-items: center;">
-					${createButton({ variant: 'cta', size: 'lg', label: 'お問い合わせはこちら', disabled: false, icon: 'mail' })}
-					${createButton({ variant: 'confirm', size: 'md', label: '確認する', disabled: false, icon: 'none' })}
-				</div>
-			</div>
-			<div>
-				<p style="margin-bottom: 12px; font-size: 14px; color: #6B7280;">サイズ比較（Primary）</p>
-				<div style="display: flex; gap: 12px; align-items: center;">
-					${createButton({ variant: 'primary', size: 'sm', label: 'Small', disabled: false, icon: 'none' })}
-					${createButton({ variant: 'primary', size: 'md', label: 'Medium', disabled: false, icon: 'none' })}
-					${createButton({ variant: 'primary', size: 'lg', label: 'Large', disabled: false, icon: 'none' })}
-				</div>
-			</div>
-		</div>
-	`,
-	parameters: {
-		layout: 'fullscreen',
 	},
 };

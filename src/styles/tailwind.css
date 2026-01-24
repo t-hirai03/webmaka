@@ -91,6 +91,8 @@ body {
   /* フォントサイズ */
   --font-size-2xs: 0.8125rem; /* スキルタグ等の小さいテキスト */
   --font-size-sm-plus: 0.9375rem; /* カード説明文等 */
+  --font-size-section-title: clamp(2rem, 1.5rem + 2vw, 3rem); /* セクションタイトル: 32px → 48px */
+  --font-size-section-subtitle: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* セクションサブタイトル: 16px → 18px */
 
   /* 行間 */
   --leading-relaxed-plus: 1.8; /* 本文の読みやすい行間 */
