@@ -1,7 +1,7 @@
 ---
 interface Props {
 	level: 1 | 2 | 3;
-	variant?: 'page' | 'section' | 'card' | 'subtle';
+	variant?: 'page' | 'section' | 'card' | 'subtle' | 'bordered';
 	class?: string;
 }
 
@@ -12,6 +12,7 @@ const variantClasses = {
 	section: 'text-xl md:text-2xl font-bold text-text',
 	card: 'text-lg font-semibold text-text',
 	subtle: 'text-sm text-text-muted',
+	bordered: 'text-xl font-bold text-text pb-2 border-b-2 border-primary',
 };
 
 const classes = [variantClasses[variant], className].filter(Boolean).join(' ');

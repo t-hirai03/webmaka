@@ -2,19 +2,15 @@
 interface Props {
 	title: string;
 	subtitle?: string;
-	light?: boolean;
 	class?: string;
 }
 
-const { title, subtitle, light = false, class: className = '' } = Astro.props;
-
-const titleColor = light ? 'text-white' : 'text-text';
-const subtitleColor = light ? 'text-white/80' : 'text-text-muted';
+const { title, subtitle, class: className = '' } = Astro.props;
 ---
 
-<div class={`text-center mb-12 ${className}`.trim()}>
-  <h2 class={`text-2xl md:text-3xl font-bold ${titleColor}`}>{title}</h2>
+<div class={`text-center ${className}`.trim()}>
+  <h2 class="text-section-title font-bold leading-tight text-text">{title}</h2>
   {subtitle && (
-    <p class={`mt-2 ${subtitleColor}`}>{subtitle}</p>
+    <p class="mt-1 text-section-subtitle text-text-muted">{subtitle}</p>
   )}
 </div>
