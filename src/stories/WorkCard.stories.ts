@@ -84,6 +84,6 @@ export const Default: Story = {
 		description:
 			'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
 		url: 'https://beyerdynamic.co.jp/',
-		imageUrl: '/src/assets/works/beyerdynamic.png',
+		imageUrl: 'https://webmaka.com/_astro/beyerdynamic.BYrXdvo3_Bl75y.webp',
 	},
 };
