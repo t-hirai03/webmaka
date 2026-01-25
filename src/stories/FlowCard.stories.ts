@@ -42,7 +42,7 @@ const createFlowCard = (args: FlowCardArgs): string => {
 					</div>
 
 					<!-- Text Area -->
-					<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; width: 252px;">
+					<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: left; width: 252px;">
 						<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #3D8B6E; line-height: 29.25px;">${args.title}</h3>
 						<p style="margin: 0; font-size: 14px; line-height: 24px; color: #6B7280;">${descriptionHtml}</p>
 					</div>
