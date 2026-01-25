@@ -134,52 +134,70 @@ export const Default: Story = {
 	},
 };
 
-export const SkillList: Story = {
-	render: () => {
-		const skills = [
-			{ icon: 'html5' as const, name: 'HTML / CSS', years: '8年' },
-			{ icon: 'javascript' as const, name: 'JavaScript', years: '8年' },
-			{ icon: 'typescript' as const, name: 'TypeScript', years: '2年' },
-			{ icon: 'react' as const, name: 'React / Next.js', years: '2年' },
-			{ icon: 'astro' as const, name: 'Astro', years: '4年' },
-			{ icon: 'wordpress' as const, name: 'WordPress', years: '4年' },
-			{ icon: 'microcms' as const, name: 'microCMS', years: '4年' },
-			{ icon: 'postgresql' as const, name: 'PostgreSQL', years: '4年' },
-			{ icon: 'docker' as const, name: 'Docker', years: '2年' },
-		];
+interface SkillListArgs {
+	device: 'PC' | 'SP';
+}
 
-		const leftColumn = skills.filter((_, i) => i % 2 === 0);
-		const rightColumn = skills.filter((_, i) => i % 2 === 1);
+const createSkillList = (args: SkillListArgs): string => {
+	const skills = [
+		{ icon: 'html5' as const, name: 'HTML / CSS', years: '8年' },
+		{ icon: 'javascript' as const, name: 'JavaScript', years: '8年' },
+		{ icon: 'typescript' as const, name: 'TypeScript', years: '2年' },
+		{ icon: 'react' as const, name: 'React / Next.js', years: '2年' },
+		{ icon: 'astro' as const, name: 'Astro', years: '4年' },
+		{ icon: 'wordpress' as const, name: 'WordPress', years: '4年' },
+		{ icon: 'microcms' as const, name: 'microCMS', years: '4年' },
+		{ icon: 'postgresql' as const, name: 'PostgreSQL', years: '4年' },
+		{ icon: 'docker' as const, name: 'Docker', years: '2年' },
+	];
 
-		const renderItem = (
-			skill: { icon: SkillIcon; name: string; years: string },
-			isLast: boolean,
-		) => {
-			const { svg, color } = iconSvgs[skill.icon];
-			return `
-				<div style="display: flex; align-items: center; gap: 12px; padding-block: 12px;">
-					<svg viewBox="0 0 24 24" style="width: 24px; height: 24px; color: ${color}; flex-shrink: 0;">
-						${svg}
-					</svg>
-					<span style="flex: 1; font-size: 20px; color: #374151;">${skill.name}</span>
-					<span style="font-size: 20px; color: #6B7280;">${skill.years}</span>
-				</div>
-				${!isLast ? '<div style="height: 1px; background-color: #d9d9d9;"></div>' : ''}
-			`;
-		};
-
+	const renderItem = (skill: { icon: SkillIcon; name: string; years: string }, isLast: boolean) => {
+		const { svg, color } = iconSvgs[skill.icon];
 		return `
-			<div style="display: grid; grid-template-columns: 350px 350px; gap: 16px 64px;">
-				<div>
-					${leftColumn.map((s, i) => renderItem(s, i === leftColumn.length - 1)).join('')}
-				</div>
-				<div>
-					${rightColumn.map((s, i) => renderItem(s, i === rightColumn.length - 1)).join('')}
-				</div>
+			<div style="display: flex; align-items: center; gap: 12px; padding-block: 12px;">
+				<svg viewBox="0 0 24 24" style="width: 24px; height: 24px; color: ${color}; flex-shrink: 0;">
+					${svg}
+				</svg>
+				<span style="flex: 1; font-size: 20px; color: #374151;">${skill.name}</span>
+				<span style="font-size: 20px; color: #6B7280;">${skill.years}</span>
+			</div>
+			${!isLast ? '<div style="height: 1px; background-color: #d9d9d9;"></div>' : ''}
+		`;
+	};
+
+	if (args.device === 'SP') {
+		return `
+			<div style="width: 350px;">
+				${skills.map((s, i) => renderItem(s, i === skills.length - 1)).join('')}
 			</div>
 		`;
+	}
+
+	const leftColumn = skills.filter((_, i) => i % 2 === 0);
+	const rightColumn = skills.filter((_, i) => i % 2 === 1);
+
+	return `
+		<div style="display: grid; grid-template-columns: 350px 350px; gap: 16px 64px;">
+			<div>
+				${leftColumn.map((s, i) => renderItem(s, i === leftColumn.length - 1)).join('')}
+			</div>
+			<div>
+				${rightColumn.map((s, i) => renderItem(s, i === rightColumn.length - 1)).join('')}
+			</div>
+		</div>
+	`;
+};
+
+export const SkillList: StoryObj<SkillListArgs> = {
+	render: (args) => createSkillList(args),
+	args: {
+		device: 'PC',
 	},
-	parameters: {
-		controls: { disable: true },
+	argTypes: {
+		device: {
+			control: 'select',
+			options: ['PC', 'SP'],
+			description: 'デバイス表示切替',
+		},
 	},
 };
