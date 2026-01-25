@@ -59,3 +59,29 @@ export const Default: Story = {
 		subtitle: 'サービス内容',
 	},
 };
+
+// Bordered variant (About page section headings)
+interface BorderedHeadingArgs {
+	title: string;
+}
+
+const createBorderedHeading = (args: BorderedHeadingArgs): string => {
+	return `
+		<div style="width: 800px;">
+			<h2 class="text-xl font-bold text-text pb-2 border-b-2 border-primary">${args.title}</h2>
+		</div>
+	`;
+};
+
+export const Bordered: StoryObj<BorderedHeadingArgs> = {
+	render: (args) => createBorderedHeading(args),
+	args: {
+		title: 'スキル・経験',
+	},
+	argTypes: {
+		title: {
+			control: 'text',
+			description: '見出しテキスト',
+		},
+	},
+};

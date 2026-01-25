@@ -25,10 +25,10 @@ const svgPaths = {
 };
 
 const createStep = (
-	index: number,
+	_index: number,
 	label: string,
 	isActive: boolean,
-	position: 'first' | 'middle' | 'last'
+	position: 'first' | 'middle' | 'last',
 ): string => {
 	const bgColorClass = isActive ? 'text-primary' : 'text-grey-91';
 	const textColorClass = isActive ? 'text-white' : 'text-text';
