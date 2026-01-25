@@ -10,10 +10,10 @@ interface FlowCardArgs {
 }
 
 const iconPaths: Record<FlowCardArgs['icon'], string> = {
-	mail: '/src/assets/icons/flow-mail.png',
-	hearing: '/src/assets/icons/flow-hearing.png',
-	check: '/src/assets/icons/flow-check.png',
-	delivery: '/src/assets/icons/flow-delivery.png',
+	mail: 'https://webmaka.com/icons/flow-mail.png',
+	hearing: 'https://webmaka.com/icons/flow-hearing.png',
+	check: 'https://webmaka.com/icons/flow-check.png',
+	delivery: 'https://webmaka.com/icons/flow-delivery.png',
 };
 
 const createFlowCard = (args: FlowCardArgs): string => {
