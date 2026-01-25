@@ -2,9 +2,6 @@ import type { Preview } from '@storybook/html';
 import '../src/styles/tailwind.css';
 
 const preview: Preview = {
-	decorators: [
-		(story) => `<div style="font-family: 'Zen Maru Gothic', sans-serif;">${story()}</div>`,
-	],
 	parameters: {
 		viewport: {
 			viewports: {
