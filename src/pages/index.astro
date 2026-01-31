@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import {
 	Code,
 	Database,
@@ -9,7 +10,7 @@ import {
 	PenTool,
 	Rocket,
 } from 'lucide-astro';
-import { Image } from 'astro:assets';
+import mvImage from '@/assets/top/mv.png';
 import Contact from '@/components/Contact.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
@@ -17,7 +18,6 @@ import Heading from '@/components/ui/Heading.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import Works from '@/components/Works.astro';
 import Layout from '@/layouts/Layout.astro';
-import mvImage from '@/assets/top/mv.png';
 
 const services = [
 	{
@@ -95,22 +95,41 @@ const flows = [
 
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
   <!-- MV -->
-  <section id="hero" aria-label="メインビジュアル" class="py-10 bg-bg-main">
+  <section id="hero" aria-label="メインビジュアル" class="pt-16 pb-8 md:py-10 bg-bg-main">
     <div class="max-w-content mx-auto px-4 md:px-10">
-      <div class="flex flex-col md:flex-row items-center gap-6 md:gap-3">
-        <div class="flex flex-col items-center md:items-start shrink-0">
-          <div class="relative">
-            <p class="text-xl md:text-[28px] font-bold text-text leading-relaxed">
+      <div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-3">
+        <div class="flex flex-col items-start md:items-start shrink-0">
+          <!-- SP用テキスト -->
+          <div class="md:hidden">
+            <p class="text-lg font-bold text-text leading-relaxed">
               Webサイト・LP制作、既存サイトの
             </p>
-            <h1 class="text-3xl md:text-5xl font-bold text-text leading-tight mt-1">
+            <h1 class="font-bold text-text leading-tight mt-7">
+              <span class="relative inline-block">
+                <span class="relative z-10 text-[54px]">CMS</span><span class="relative z-10 text-[42px]">化</span>
+                <span class="absolute bottom-1 left-0 w-[167px] h-4 bg-marker-gold rounded-[3px]" aria-hidden="true"></span>
+              </span>
+              <br />
+              <span class="relative inline-block mt-2">
+                <span class="relative z-10 text-[42px]">対応いたします。</span>
+                <span class="absolute bottom-1 left-0 w-full h-4 bg-marker-gold rounded-[3px]" aria-hidden="true"></span>
+              </span>
+            </h1>
+          </div>
+          <!-- PC用テキスト -->
+          <div class="hidden md:block relative">
+            <p class="text-[28px] font-bold text-text leading-relaxed">
+              Webサイト・LP制作、既存サイトの
+            </p>
+            <h1 class="text-5xl font-bold text-text leading-tight mt-1">
               <span class="relative inline-block">
                 <span class="relative z-10">CMS化対応いたします。</span>
                 <span class="absolute bottom-0 left-0 w-full h-5 bg-marker-gold rounded-[3px]" aria-hidden="true"></span>
               </span>
             </h1>
           </div>
-          <div class="mt-18">
+          <!-- ボタン（PCのみ） -->
+          <div class="hidden md:block mt-18">
             <Button href="/contact" variant="cta" size="lg" icon="mail">
               お問い合わせはこちら
             </Button>
@@ -120,9 +139,15 @@ const flows = [
           <Image
             src={mvImage}
             alt="PC・スマートフォンでのWebサイト表示イメージ"
-            class="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-3xl"
+            class="w-full max-w-[359px] md:max-w-lg lg:max-w-xl rounded-3xl"
             loading="eager"
           />
+        </div>
+        <!-- ボタン（SPのみ） -->
+        <div class="md:hidden w-full">
+          <Button href="/contact" variant="cta" size="md" icon="mail" class="w-full py-[18px] text-[22px]">
+            お問い合わせはこちら
+          </Button>
         </div>
       </div>
     </div>
