@@ -5,21 +5,24 @@ interface Props {
 
 const { currentStep } = Astro.props;
 
-const stepLabels = ['ご入力', 'ご確認', '完了'];
+const steps = [
+	{ number: 1, label: 'ご入力' },
+	{ number: 2, label: 'ご確認' },
+	{ number: 3, label: '完了' },
+].map((step) => ({
+	...step,
+	isActive: step.number <= currentStep,
+}));
 ---
 
 <nav aria-label="お問い合わせ進捗" class="w-full max-w-progress">
 	<ol class="progressbar">
-		{stepLabels.map((label, index) => {
-			const stepNumber = index + 1;
-			const isActive = stepNumber <= currentStep;
-			return (
-				<li class:list={['item', { active: isActive }]}>
-					<span class="font-medium">STEP.{stepNumber}</span>
-					<br />
-					{label}
-				</li>
-			);
-		})}
+		{steps.map((step) => (
+			<li class:list={['item', { active: step.isActive }]}>
+				<span class="font-medium">STEP.{step.number}</span>
+				<br />
+				{step.label}
+			</li>
+		))}
 	</ol>
 </nav>

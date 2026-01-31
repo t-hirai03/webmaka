@@ -1,0 +1,179 @@
+---
+import Button from '@/components/ui/Button.astro';
+import ContactProgress from '@/components/ui/ContactProgress.astro';
+import FlowCard from '@/components/ui/FlowCard.astro';
+import Input from '@/components/ui/Input.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Select from '@/components/ui/Select.astro';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
+import SkillItem from '@/components/ui/SkillItem.astro';
+import Textarea from '@/components/ui/Textarea.astro';
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="コンポーネント一覧 | うぇぶまか" noindex>
+	<div class="min-h-page bg-bg-section px-4 py-16">
+		<div class="mx-auto max-w-content">
+			<h1 class="mb-12 text-center text-3xl font-bold text-text">コンポーネント一覧</h1>
+
+			<!-- SectionTitle -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">SectionTitle</h2>
+				<div class="rounded-xl bg-white p-8">
+					<SectionTitle title="Service" subtitle="サービス内容" />
+				</div>
+			</section>
+
+			<!-- Button -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">Button</h2>
+				<div class="flex flex-wrap gap-4 rounded-xl bg-white p-8">
+					<Button variant="primary">Primary</Button>
+					<Button variant="secondary">Secondary</Button>
+					<Button variant="ghost">Ghost</Button>
+					<Button variant="cta" icon="mail">CTA</Button>
+					<Button variant="confirm">Confirm</Button>
+				</div>
+				<div class="mt-4 flex flex-wrap gap-4 rounded-xl bg-white p-8">
+					<Button size="sm">Small</Button>
+					<Button size="md">Medium</Button>
+					<Button size="lg">Large</Button>
+				</div>
+			</section>
+
+			<!-- ContactProgress -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">ContactProgress</h2>
+				<div class="space-y-6 rounded-xl bg-white p-8">
+					<div>
+						<p class="mb-2 text-sm text-text-muted">Step 1</p>
+						<ContactProgress currentStep={1} />
+					</div>
+					<div>
+						<p class="mb-2 text-sm text-text-muted">Step 2</p>
+						<ContactProgress currentStep={2} />
+					</div>
+					<div>
+						<p class="mb-2 text-sm text-text-muted">Step 3</p>
+						<ContactProgress currentStep={3} />
+					</div>
+				</div>
+			</section>
+
+			<!-- FlowCard -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">FlowCard</h2>
+				<div class="grid gap-6 rounded-xl bg-bg-section p-8 md:grid-cols-2 lg:grid-cols-4">
+					<FlowCard
+						stepNumber={1}
+						icon="mail"
+						title="お問い合わせ"
+						description="{link}からご連絡ください。"
+						linkText="フォーム"
+						linkHref="/contact/"
+					/>
+					<FlowCard
+						stepNumber={2}
+						icon="hearing"
+						title="ヒアリング"
+						description="ご要望やご予算をお伺いし、最適なプランをご提案します。"
+					/>
+					<FlowCard
+						stepNumber={3}
+						icon="check"
+						title="制作・確認"
+						description="デザイン・コーディングを進め、随時ご確認いただきます。"
+					/>
+					<FlowCard
+						stepNumber={4}
+						icon="delivery"
+						title="納品"
+						description="テストを行い、問題なければ納品完了です。"
+					/>
+				</div>
+			</section>
+
+			<!-- ServiceCard -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">ServiceCard</h2>
+				<div class="grid gap-6 rounded-xl bg-bg-section p-8 md:grid-cols-2 lg:grid-cols-3">
+					<ServiceCard
+						label="Webサイト制作"
+						pageCount="5ページ目安"
+						priceNumber="15"
+						priceUnit="万円〜"
+						tagline="デザインからコーディングまで一貫対応"
+						description="デザイナーと連携し、企画・デザイン・実装まで窓口ひとつで対応します。"
+						tags={['Astro', 'Next.js', 'WordPress']}
+					/>
+					<ServiceCard
+						label="LP制作"
+						pageCount="1ページ"
+						priceNumber="8"
+						priceUnit="万円〜"
+						tagline="成果につながるLP"
+						description="コンバージョン重視のLP制作を行います。"
+						tags={['HTML', 'CSS', 'JavaScript']}
+					/>
+					<ServiceCard
+						label="コーディング代行"
+						pageCount="1ページ〜"
+						priceNumber="3"
+						priceUnit="万円〜"
+						tagline="デザインを忠実に再現"
+						description="Figma/XDからのコーディングに対応します。"
+						tags={['Tailwind', 'SCSS']}
+					/>
+				</div>
+			</section>
+
+			<!-- SkillItem -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">SkillItem</h2>
+				<div class="grid gap-8 rounded-xl bg-white p-8 md:grid-cols-2">
+					<div>
+						<SkillItem icon="html5" name="HTML / CSS" years="8年" />
+						<SkillItem icon="javascript" name="JavaScript" years="8年" />
+						<SkillItem icon="typescript" name="TypeScript" years="2年" />
+						<SkillItem icon="react" name="React / Next.js" years="2年" />
+						<SkillItem icon="astro" name="Astro" years="4年" showDivider={false} />
+					</div>
+					<div>
+						<SkillItem icon="wordpress" name="WordPress" years="4年" />
+						<SkillItem icon="microcms" name="microCMS" years="4年" />
+						<SkillItem icon="postgresql" name="PostgreSQL" years="4年" />
+						<SkillItem icon="docker" name="Docker" years="2年" showDivider={false} />
+					</div>
+				</div>
+			</section>
+
+			<!-- Form Components -->
+			<section class="mb-16">
+				<h2 class="mb-6 border-b-2 border-primary pb-2 text-xl font-bold text-text">Form Components</h2>
+				<div class="space-y-6 rounded-xl bg-white p-8">
+					<div>
+						<label for="sample-input" class="mb-2 block text-sm font-medium text-text">Input</label>
+						<Input name="sample-input" placeholder="山田 太郎" />
+					</div>
+					<div>
+						<label for="sample-email" class="mb-2 block text-sm font-medium text-text">Email Input</label>
+						<Input type="email" name="sample-email" placeholder="example@example.com" />
+					</div>
+					<div>
+						<label for="sample-select" class="mb-2 block text-sm font-medium text-text">Select</label>
+						<Select name="sample-select">
+							<option value="">選択してください</option>
+							<option value="web">Webサイト制作</option>
+							<option value="lp">LP制作</option>
+							<option value="coding">コーディング代行</option>
+						</Select>
+					</div>
+					<div>
+						<label for="sample-textarea" class="mb-2 block text-sm font-medium text-text">Textarea</label>
+						<Textarea name="sample-textarea" placeholder="お問い合わせ内容をご入力ください" />
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</Layout>
