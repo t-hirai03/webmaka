@@ -1,15 +1,6 @@
 ---
 import { getImage } from 'astro:assets';
-import {
-	Code,
-	Database,
-	FileText,
-	Mail,
-	MessageCircle,
-	Palette,
-	PenTool,
-	Rocket,
-} from 'lucide-astro';
+import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
 import mvImage from '@/assets/top/mv.png';
 import mvSpImage from '@/assets/top/mv-sp.png';
 
@@ -17,55 +8,52 @@ const mvPc = await getImage({ src: mvImage, format: 'webp' });
 const mvSp = await getImage({ src: mvSpImage, format: 'webp' });
 
 import Contact from '@/components/Contact.astro';
-import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ServiceCard from '@/components/ui/ServiceCard.astro';
 import Works from '@/components/Works.astro';
 import Layout from '@/layouts/Layout.astro';
 
 const services = [
 	{
-		icon: Palette,
 		title: 'Webサイト制作',
-		subtitle: 'デザインからコーディングまで一貫対応',
+		pageNote: '5ページ目安',
+		priceNumber: '15',
+		priceUnit: '万円〜',
+		tagline: 'デザインからコーディングまで<br>一貫対応',
 		description:
 			'デザイナーと連携し、企画・デザイン・実装まで窓口ひとつで対応します。レスポンシブ対応、表示速度を重視した実装が強みです。',
-		details: ['コーポレートサイト', 'サービスサイト', '採用サイト'],
-		tech: ['Astro', 'Next.js', 'WordPress'],
-		price: '15万円〜',
-		priceNote: '5ページ目安',
+		tags: ['Astro', 'Next.js', 'WordPress'],
 	},
 	{
-		icon: FileText,
 		title: 'LP制作',
-		subtitle: '1ページ完結、デザイン込み',
+		pageNote: '5ページ目安',
+		priceNumber: '15',
+		priceUnit: '万円〜',
+		tagline: '1ページ完結/デザイン込み',
 		description:
 			'商品・サービスの訴求に特化した1ページ構成のランディングページを制作します。デザインから実装まで一貫対応。',
-		details: ['商品・サービス紹介', 'キャンペーンLP', '採用LP'],
-		tech: ['Astro', 'HTML/CSS', 'JavaScript'],
-		price: '8万円〜',
+		tags: ['Astro', 'HTML/CSS', 'JavaScript'],
 	},
 	{
-		icon: Database,
 		title: 'CMS導入・移行',
-		subtitle: '静的サイトをCMS化して自分で更新できるように',
+		priceNumber: '10',
+		priceUnit: '万円〜',
+		tagline: '静的サイトをCMS化して自分<br>で更新できるように',
 		description:
-			'「業者に頼まないと更新できない」を解消します。既存のHTMLサイトをWordPressやヘッドレスCMS（microCMS等）に移行し、お知らせやブログを自分で更新できる環境を構築します。',
-		details: ['既存HTMLサイトのCMS化', 'WordPress導入・構築', 'microCMS導入'],
-		tech: ['WordPress', 'microCMS'],
-		price: '10万円〜',
+			'「業者に頼まないと更新できない」を解消します。既存HTMLサイトをWordPressやヘッドレスCMS（microCMS等）に移行し、お知らせやブログを自分で更新できる環境を構築します。',
+		tags: ['WordPress', 'microCMS'],
 	},
 	{
-		icon: Code,
 		title: 'コーディング代行',
-		subtitle: 'デザインカンプからの実装',
+		pageNote: '5ページ目安',
+		priceNumber: '3',
+		priceUnit: '万円〜',
+		tagline: 'デザインカンプからの実装',
 		description:
 			'Figma・XD・Photoshopなどのデザインデータをお預かりし、HTML/CSS/JavaScriptに変換します。制作会社様からのご依頼も歓迎です。',
-		details: ['Figma/XDからの実装', 'レスポンシブ対応', 'アニメーション実装'],
-		tech: ['HTML/CSS', 'JavaScript', 'Astro'],
-		price: '3万円〜',
-		priceNote: '1ページ',
+		tags: ['HTML/CSS', 'JavaScript', 'Astro'],
 	},
 ];
 
@@ -164,42 +152,21 @@ const flows = [
   </section>
 
   <!-- Service -->
-  <section id="service" aria-label="サービス内容" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
-    <div class="max-w-container mx-auto px-4">
+  <section id="service" aria-label="サービス内容" class="bg-bg-section px-40px py-112px">
+    <div class="mx-auto flex flex-col items-center gap-64px">
       <SectionTitle title="Service" subtitle="サービス内容" />
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div class="flex flex-wrap justify-center gap-20px">
         {
           services.map((service) => (
-            <article class="flex flex-col bg-white rounded-2xl px-6 py-8 shadow-sm">
-              <div class="flex items-start gap-3 mb-4">
-                <div class="flex items-center justify-center shrink-0 w-14 h-14 bg-primary text-white rounded-xl">
-                  <service.icon size={32} strokeWidth={1.5} />
-                </div>
-                <div class="flex flex-col justify-center min-h-14">
-                  <Heading level={3} variant="card" class="mb-0.5">{service.title}</Heading>
-                  <p class="text-sm font-medium text-primary">{service.subtitle}</p>
-                </div>
-              </div>
-              <p class="text-sm-plus leading-relaxed text-text-muted mb-5">{service.description}</p>
-              <ul class="flex flex-wrap gap-2 list-none p-0 m-0 mb-6">
-                {service.details.map((detail) => (
-                  <li class="text-2xs text-text bg-bg-section px-3 py-1.5 rounded-md">{detail}</li>
-                ))}
-              </ul>
-              <div class="mt-auto pt-5 border-t border-gray-200">
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  {service.tech.map((t) => (
-                    <Badge size="sm">{t}</Badge>
-                  ))}
-                </div>
-                <div class="flex items-baseline gap-2 flex-wrap">
-                  <p class="text-lg font-bold text-primary m-0">{service.price}</p>
-                  {service.priceNote && (
-                    <span class="text-xs text-text-muted">{service.priceNote}</span>
-                  )}
-                </div>
-              </div>
-            </article>
+            <ServiceCard
+              title={service.title}
+              pageNote={service.pageNote}
+              priceNumber={service.priceNumber}
+              priceUnit={service.priceUnit}
+              tagline={service.tagline}
+              description={service.description}
+              tags={service.tags}
+            />
           ))
         }
       </div>

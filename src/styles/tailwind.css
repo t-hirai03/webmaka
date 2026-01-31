@@ -451,6 +451,37 @@ body {
   --spacing-168px: 168px;
   --spacing-169px: 169px;
   --spacing-170px: 170px;
+  --spacing-171px: 171px;
+  --spacing-172px: 172px;
+  --spacing-173px: 173px;
+  --spacing-174px: 174px;
+  --spacing-175px: 175px;
+  --spacing-176px: 176px;
+  --spacing-177px: 177px;
+  --spacing-178px: 178px;
+  --spacing-179px: 179px;
+  --spacing-180px: 180px;
+  --spacing-181px: 181px;
+  --spacing-182px: 182px;
+  --spacing-183px: 183px;
+  --spacing-184px: 184px;
+  --spacing-185px: 185px;
+  --spacing-186px: 186px;
+  --spacing-187px: 187px;
+  --spacing-188px: 188px;
+  --spacing-189px: 189px;
+  --spacing-190px: 190px;
+  --spacing-191px: 191px;
+  --spacing-192px: 192px;
+  --spacing-193px: 193px;
+  --spacing-194px: 194px;
+  --spacing-195px: 195px;
+  --spacing-196px: 196px;
+  --spacing-197px: 197px;
+  --spacing-198px: 198px;
+  --spacing-199px: 199px;
+  --spacing-200px: 200px;
+  --spacing-275px: 275px; /* サービスカード幅 */
 
   /* 特殊用途の間隔 */
   --spacing-15: 60px; /* aboutページのセクション余白 */
