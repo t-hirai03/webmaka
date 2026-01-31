@@ -217,6 +217,15 @@ body {
   flex-basis: 85%;
 }
 
+/* セクションタイトル用フォントサイズ（レスポンシブ） */
+@utility text-section-title {
+  font-size: var(--font-size-section-title);
+}
+
+@utility text-section-subtitle {
+  font-size: var(--font-size-section-subtitle);
+}
+
 /* ===== プログレスバー ===== */
 
 /* プログレスバーコンテナ */
