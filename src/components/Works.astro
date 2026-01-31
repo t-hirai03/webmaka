@@ -1,13 +1,11 @@
 ---
-import { Image } from 'astro:assets';
-import { ExternalLink } from 'lucide-astro';
 import beyerdynamicImg from '@/assets/works/beyerdynamic.png';
 import jgiImg from '@/assets/works/jgi.png';
 import kanekiImg from '@/assets/works/kaneki.png';
 import obataImg from '@/assets/works/obata.png';
 import takazenImg from '@/assets/works/takazen.png';
-import Heading from '@/components/ui/Heading.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
+import WorkCard from '@/components/ui/WorkCard.astro';
 
 interface WorkItem {
 	id: string;
@@ -22,7 +20,7 @@ const works: WorkItem[] = [
 	{
 		id: 'beyerdynamic',
 		title: 'beyerdynamic',
-		category: 'ブランドサイト',
+		category: 'コーポレートサイト',
 		description:
 			'ドイツの高品質オーディオ機器ブランドの日本向けサイト。製品の魅力を伝えるビジュアル重視のデザイン。',
 		url: 'https://beyerdynamic.co.jp/',
@@ -40,7 +38,7 @@ const works: WorkItem[] = [
 	{
 		id: 'obata',
 		title: '小畑製紙所',
-		category: 'LP',
+		category: 'コーポレートサイト',
 		description:
 			'越前和紙の透かし入れ卒業証書を製造する老舗のランディングページ。伝統と技術を訴求。',
 		url: 'https://obataseishijo.jp/lp/',
@@ -66,32 +64,24 @@ const works: WorkItem[] = [
 ];
 ---
 
-<section id="works" aria-label="制作実績" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
-  <div class="max-w-container mx-auto px-4">
+<section id="works" aria-label="制作実績" class="bg-bg-section px-16px py-64px md:px-40px md:py-112px">
+  <div class="mx-auto flex max-w-1160px flex-col items-center gap-32px md:gap-64px">
     <SectionTitle title="Works" subtitle="制作実績" />
     <div
-      class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-4 -mx-4 px-4 scrollbar-none md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:snap-none md:mx-0 md:px-0 md:pb-0 xl:grid-cols-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      class="flex w-full gap-16px overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-4 scrollbar-none md:grid md:grid-cols-2 md:gap-20px md:overflow-x-visible md:snap-none md:pb-0 xl:grid-cols-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       id="works-slider"
       tabindex="0"
       role="region"
       aria-roledescription="カルーセル"
     >
       {works.map((work) => (
-        <article class="work-card shrink-0 basis-card snap-center bg-white rounded-2xl overflow-hidden shadow-sm md:shrink md:basis-auto">
-          <a href={work.url} target="_blank" rel="noopener noreferrer" class="block no-underline text-inherit h-full group">
-            <div class="aspect-card overflow-hidden">
-              <Image src={work.image} alt={work.title} width={640} format="webp" quality={80} loading="lazy" class="w-full h-full object-cover object-top" />
-            </div>
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <span class="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">{work.category}</span>
-                <ExternalLink class="text-text-muted transition-colors duration-200 group-hover:text-primary" size={16} />
-              </div>
-              <Heading level={3} variant="card" class="mb-3 leading-snug">{work.title}</Heading>
-              <p class="text-sm text-text-muted leading-relaxed">{work.description}</p>
-            </div>
-          </a>
-        </article>
+        <WorkCard
+          title={work.title}
+          category={work.category}
+          description={work.description}
+          url={work.url}
+          image={work.image}
+        />
       ))}
     </div>
     <div class="flex justify-center gap-2 mt-4 md:hidden" id="works-pagination">

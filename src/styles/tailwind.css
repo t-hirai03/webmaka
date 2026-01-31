@@ -112,6 +112,11 @@ body {
   /* コンテナ幅 */
   --max-width-container: 1440px;
   --max-width-content: 1240px;
+  --max-width-1160px: 1160px; /* Worksセクションのコンテンツ幅 */
+
+  /* カード幅 */
+  --width-275px: 275px; /* WorkCard SP幅 */
+  --width-373px: 373px; /* WorkCard PC幅 */
 
   /* プログレスバー幅 */
   --width-progress: 600px;
