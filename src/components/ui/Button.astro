@@ -1,6 +1,6 @@
 ---
 interface Props {
-	variant?: 'primary' | 'secondary' | 'ghost' | 'cta' | 'confirm';
+	variant?: 'primary' | 'secondary' | 'ghost' | 'cta' | 'gold';
 	size?: 'sm' | 'md' | 'lg';
 	href?: string;
 	type?: 'button' | 'submit';
@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const baseClasses =
-	'inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+	'inline-flex items-center justify-center font-semibold rounded-lg leading-none transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
 const variantClasses = {
 	primary:
@@ -28,14 +28,13 @@ const variantClasses = {
 	secondary: 'bg-accent text-white hover:bg-accent-dark focus:ring-accent disabled:hover:bg-accent',
 	ghost: 'bg-gray-200 text-text hover:bg-gray-300 focus:ring-gray-400 disabled:hover:bg-gray-200',
 	cta: 'bg-cta text-white hover:bg-cta-dark focus:ring-cta shadow-button',
-	confirm:
-		'bg-confirm text-white hover:bg-confirm-dark focus:ring-confirm shadow-button border-2 border-confirm-border',
+	gold: 'bg-gold text-white hover:bg-gold-dark focus:ring-gold shadow-button border-2 border-gold-border',
 };
 
 const sizeClasses = {
-	sm: 'px-4 py-2 text-sm',
-	md: 'px-6 py-3 text-base',
-	lg: 'px-8 py-4 text-lg',
+	sm: 'px-4 py-2 text-sm gap-1.5',
+	md: 'px-6 py-3 text-base gap-2',
+	lg: 'px-[clamp(2.1875rem,1.72rem+1.17vw,3.125rem)] py-[clamp(0.875rem,0.75rem+0.31vw,1.125rem)] text-[clamp(1.375rem,1.1875rem+0.47vw,1.75rem)] gap-[clamp(0.3125rem,0.25rem+0.16vw,0.4375rem)]',
 };
 
 const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
@@ -51,12 +50,18 @@ const classes = [
 	.join(' ');
 
 const showMailIcon = icon === 'mail';
+
+const iconSizeClasses = {
+	sm: 'w-4 h-4',
+	md: 'w-5 h-5',
+	lg: 'w-full max-w-[clamp(1.5rem,1.25rem+0.47vw,1.875rem)] h-auto',
+};
 ---
 
 {href ? (
   <a href={disabled ? undefined : href} class={classes} aria-disabled={disabled ? 'true' : undefined}>
     {showMailIcon && (
-      <svg class="mr-2 size-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <svg class={iconSizeClasses[size]} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
       </svg>
@@ -66,7 +71,7 @@ const showMailIcon = icon === 'mail';
 ) : (
   <button type={type} class={classes} disabled={disabled}>
     {showMailIcon && (
-      <svg class="mr-2 size-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <svg class={iconSizeClasses[size]} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
       </svg>

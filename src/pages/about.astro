@@ -1,15 +1,27 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import meImg from '@/assets/about/me.jpg';
 import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
+import SkillItem from '@/components/ui/SkillItem.astro';
 import Layout from '@/layouts/Layout.astro';
+
+const skills = [
+	{ icon: 'html5' as const, name: 'HTML / CSS', years: '8年' },
+	{ icon: 'javascript' as const, name: 'JavaScript', years: '8年' },
+	{ icon: 'typescript' as const, name: 'TypeScript', years: '2年' },
+	{ icon: 'react' as const, name: 'React / Next.js', years: '2年' },
+	{ icon: 'astro' as const, name: 'Astro', years: '4年' },
+	{ icon: 'wordpress' as const, name: 'WordPress', years: '4年' },
+	{ icon: 'microcms' as const, name: 'microCMS', years: '4年' },
+	{ icon: 'postgresql' as const, name: 'PostgreSQL', years: '4年' },
+	{ icon: 'docker' as const, name: 'Docker', years: '2年' },
+];
 ---
 
 <Layout title="About | うぇぶまか" description="うぇぶまかの運営者、平井隆裕のプロフィール。フロントエンドエンジニアとしてWebサイト制作・LP制作を行っています。">
   <section aria-label="自己紹介" class="py-15 md:py-20 bg-bg-main">
-    <div class="max-w-content mx-auto px-4">
+    <div class="max-w-3xl mx-auto px-4">
       <Heading level={1} variant="page" class="mb-12">About</Heading>
 
       <div class="flex flex-col gap-12">
@@ -35,68 +47,40 @@ import Layout from '@/layouts/Layout.astro';
             2024年より東京で事業会社のフロントエンドエンジニアへ転向。
           </p>
           <p class="text-text leading-relaxed-plus">
-            お仕事のお問い合わせは<br>
-            <a href="/contact" class="underline underline-offset-4">CONTACTページ</a>のフォームからお願いいたします。
+            仕事のご依頼は<a href="/contact" class="text-primary underline underline-offset-4">お問い合わせフォーム</a>からお願いいたします。
           </p>
         </div>
 
         <div>
           <Heading level={2} variant="bordered" class="mb-4">スキル・経験</Heading>
 
-          <ul class="flex flex-col gap-3 list-none p-0 m-0">
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:html5" class="w-6 h-6" style="color: #E34F26" />
-              <span class="flex-1 text-sm-plus text-text">HTML / CSS</span>
-              <span class="text-base text-text-muted">8年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:javascript" class="w-6 h-6" style="color: #F7DF1E" />
-              <span class="flex-1 text-sm-plus text-text">JavaScript</span>
-              <span class="text-base text-text-muted">8年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:typescript" class="w-6 h-6" style="color: #3178C6" />
-              <span class="flex-1 text-sm-plus text-text">TypeScript</span>
-              <span class="text-base text-text-muted">2年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:react" class="w-6 h-6" style="color: #61DAFB" />
-              <span class="flex-1 text-sm-plus text-text">React / Next.js</span>
-              <span class="text-base text-text-muted">2年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:astro" class="w-6 h-6" style="color: #BC52EE" />
-              <span class="flex-1 text-sm-plus text-text">Astro</span>
-              <span class="text-base text-text-muted">4年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:wordpress" class="w-6 h-6" style="color: #21759B" />
-              <span class="flex-1 text-sm-plus text-text">WordPress</span>
-              <span class="text-base text-text-muted">4年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <svg class="w-6 h-6" style="color: #36C7D0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
-              <span class="flex-1 text-sm-plus text-text">microCMS</span>
-              <span class="text-base text-text-muted">4年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3 border-b border-primary-light">
-              <Icon name="simple-icons:postgresql" class="w-6 h-6" style="color: #4169E1" />
-              <span class="flex-1 text-sm-plus text-text">PostgreSQL</span>
-              <span class="text-base text-text-muted">4年</span>
-            </li>
-            <li class="flex items-center gap-3 py-3">
-              <Icon name="simple-icons:docker" class="w-6 h-6" style="color: #2496ED" />
-              <span class="flex-1 text-sm-plus text-text">Docker</span>
-              <span class="text-base text-text-muted">2年</span>
-            </li>
-          </ul>
+          <div class="grid gap-x-8 md:grid-cols-2">
+            <div>
+              {skills.slice(0, 5).map((skill, index) => (
+                <SkillItem
+                  icon={skill.icon}
+                  name={skill.name}
+                  years={skill.years}
+                  showDivider={index < 4}
+                />
+              ))}
+            </div>
+            <div>
+              {skills.slice(5).map((skill, index) => (
+                <SkillItem
+                  icon={skill.icon}
+                  name={skill.name}
+                  years={skill.years}
+                  showDivider={index < skills.slice(5).length - 1}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="mt-16 text-center">
-        <Button href="/contact" class="rounded-full">お問い合わせはこちら</Button>
+        <Button href="/contact" variant="cta" size="lg" icon="mail">お問い合わせはこちら</Button>
       </div>
     </div>
   </section>

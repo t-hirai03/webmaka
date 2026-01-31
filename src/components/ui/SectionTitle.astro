@@ -9,7 +9,7 @@ const { title, subtitle, class: className = '' } = Astro.props;
 ---
 
 <div class={`text-center ${className}`.trim()}>
-  <h2 class="text-section-title font-bold leading-tight text-text">{title}</h2>
+  <h2 class="text-section-title font-display font-bold leading-tight text-text">{title}</h2>
   {subtitle && (
     <p class="mt-1 text-section-subtitle text-text-muted">{subtitle}</p>
   )}
