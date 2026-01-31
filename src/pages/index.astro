@@ -155,7 +155,7 @@ const flows = [
   <section id="service" aria-label="サービス内容" class="bg-bg-section px-40px py-112px">
     <div class="mx-auto flex flex-col items-center gap-64px">
       <SectionTitle title="Service" subtitle="サービス内容" />
-      <div class="flex flex-wrap justify-center gap-20px">
+      <div class="grid grid-cols-1 gap-20px md:grid-cols-2 xl:grid-cols-4">
         {
           services.map((service) => (
             <ServiceCard
