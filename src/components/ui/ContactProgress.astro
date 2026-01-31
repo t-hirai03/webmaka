@@ -19,7 +19,7 @@ const steps = [
 	<ol class="progressbar">
 		{steps.map((step) => (
 			<li class:list={['item', { active: step.isActive }]}>
-				<span class="font-medium text-lg">{step.label}</span>
+				<span class="font-medium">{step.label}</span>
 			</li>
 		))}
 	</ol>

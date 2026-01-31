@@ -629,7 +629,9 @@ body {
   width: 33%;
   text-align: center;
   padding: 13px 0;
-  line-height: 1.5;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.8;
   background: var(--color-grey-91);
   color: var(--color-text);
   border-radius: 8px 0 0 8px;
@@ -649,7 +651,7 @@ body {
   position: absolute;
   z-index: 2;
   top: 0;
-  left: 100%;
+  left: calc(100% - 1px);
   content: '';
   width: 12px;
   height: 100%;
@@ -680,9 +682,9 @@ body {
 /* レスポンシブ */
 @media screen and (max-width: 767px) {
   .progressbar .item {
-    font-size: 11px;
-    line-height: 1.4;
-    padding: 10px 0;
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 8px 0;
     border-radius: 6px 0 0 6px;
   }
 
