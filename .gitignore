@@ -31,3 +31,7 @@ pnpm-debug.log*
 .lighthouseci/
 debug-storybook.log
 storybook-static/
+
+# playwright
+test-results/
+playwright-report/

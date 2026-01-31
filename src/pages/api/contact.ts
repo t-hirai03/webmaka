@@ -1,5 +1,11 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import {
+	escapeHtml,
+	getInquiryTypeLabel,
+	isValidContactFormData,
+	validateContactForm,
+} from '../../lib/validation';
 
 // レート制限の設定
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1分
@@ -35,46 +41,7 @@ function cleanupRateLimitMap() {
 	}
 }
 
-interface ContactFormData {
-	name: string;
-	email: string;
-	inquiryType: string;
-	phone: string;
-	message: string;
-	sourceUrl?: string;
-}
-
-const INQUIRY_TYPE_LABELS: Record<string, string> = {
-	website: 'Webサイト制作',
-	lp: 'LP制作',
-	cms: 'CMS導入・移行',
-	coding: 'コーディング代行',
-	other: 'その他',
-};
-
 const FROM_EMAIL = 'うぇぶまか <admin@webmaka.com>';
-
-// メールアドレスの正規表現（RFC 5322準拠の簡易版）
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function isValidEmail(email: string): boolean {
-	return EMAIL_REGEX.test(email);
-}
-
-function isValidContactFormData(data: unknown): data is ContactFormData {
-	if (typeof data !== 'object' || data === null) return false;
-
-	const { name, email, message } = data as Record<string, unknown>;
-
-	return (
-		typeof name === 'string' &&
-		name.trim().length > 0 &&
-		typeof email === 'string' &&
-		isValidEmail(email) &&
-		typeof message === 'string' &&
-		message.trim().length > 0
-	);
-}
 
 export const prerender = false;
 
@@ -118,15 +85,30 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 		});
 	}
 
+	const validation = validateContactForm(formData);
+	if (!validation.valid) {
+		return new Response(
+			JSON.stringify({
+				success: false,
+				error: '必須項目を入力してください',
+				errors: validation.errors,
+			}),
+			{
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			},
+		);
+	}
+
 	if (!isValidContactFormData(formData)) {
-		return new Response(JSON.stringify({ success: false, error: '必須項目を入力してください' }), {
+		return new Response(JSON.stringify({ success: false, error: '不正なデータです' }), {
 			status: 400,
 			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 
 	const { name, email, inquiryType, phone, message, sourceUrl } = formData;
-	const inquiryLabel = INQUIRY_TYPE_LABELS[inquiryType] ?? '未選択';
+	const inquiryLabel = getInquiryTypeLabel(inquiryType);
 
 	const resend = new Resend(resendApiKey);
 
@@ -226,14 +208,3 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 		});
 	}
 };
-
-function escapeHtml(text: string): string {
-	const map: Record<string, string> = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		"'": '&#039;',
-	};
-	return text.replace(/[&<>"']/g, (char) => map[char] ?? char);
-}
