@@ -59,7 +59,7 @@ test.describe('お問い合わせフォーム', () => {
 
 			await expect(page.locator('#message-error')).toBeVisible();
 			await expect(page.locator('#message-error')).toHaveText(
-				'お問い合わせ内容を入力してください。'
+				'お問い合わせ内容を入力してください。',
 			);
 		});
 
@@ -75,7 +75,7 @@ test.describe('お問い合わせフォーム', () => {
 
 			await expect(page.locator('#email-error')).toBeVisible();
 			await expect(page.locator('#email-error')).toHaveText(
-				'正しいメールアドレスを入力してください。'
+				'正しいメールアドレスを入力してください。',
 			);
 		});
 
@@ -241,9 +241,7 @@ test.describe('お問い合わせフォーム', () => {
 		test('完了メッセージが表示される', async ({ page }) => {
 			await page.goto('/contact/thanks');
 
-			await expect(
-				page.getByText('お問い合わせいただきありがとうございます。')
-			).toBeVisible();
+			await expect(page.getByText('お問い合わせいただきありがとうございます。')).toBeVisible();
 			await expect(page.getByRole('link', { name: 'トップページに戻る' })).toBeVisible();
 		});
 
@@ -288,9 +286,7 @@ test.describe('お問い合わせフォーム', () => {
 
 			// 5. 完了画面
 			await expect(page).toHaveURL('/contact/thanks');
-			await expect(
-				page.getByText('お問い合わせいただきありがとうございます。')
-			).toBeVisible();
+			await expect(page.getByText('お問い合わせいただきありがとうございます。')).toBeVisible();
 		});
 	});
 });
