@@ -630,6 +630,15 @@ body {
   font-size: var(--font-size-42px);
 }
 
+/* ===== z-index ===== */
+@utility z-menu {
+  z-index: 9999;
+}
+
+@utility z-menu-overlay {
+  z-index: 9998;
+}
+
 /* ===== プログレスバー ===== */
 
 /* プログレスバーコンテナ */
