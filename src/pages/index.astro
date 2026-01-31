@@ -1,6 +1,5 @@
 ---
 import { getImage } from 'astro:assets';
-import { Mail, MessageCircle, PenTool, Rocket } from 'lucide-astro';
 import mvImage from '@/assets/top/mv.png';
 import mvSpImage from '@/assets/top/mv-sp.png';
 
@@ -9,7 +8,7 @@ const mvSp = await getImage({ src: mvSpImage, format: 'webp' });
 
 import Contact from '@/components/Contact.astro';
 import Button from '@/components/ui/Button.astro';
-import Heading from '@/components/ui/Heading.astro';
+import FlowCard from '@/components/ui/FlowCard.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import ServiceCard from '@/components/ui/ServiceCard.astro';
 import Works from '@/components/Works.astro';
@@ -59,29 +58,30 @@ const services = [
 
 const flows = [
 	{
-		icon: Mail,
+		icon: 'mail' as const,
 		number: 1,
 		title: 'お問い合わせ',
-		description:
-			'<a href="/contact" class="text-primary underline underline-offset-2 hover:no-underline">フォーム</a>からご連絡ください',
+		description: '{link}からご連絡ください。',
+		linkText: 'フォーム',
+		linkHref: '/contact',
 	},
 	{
-		icon: MessageCircle,
+		icon: 'hearing' as const,
 		number: 2,
 		title: 'ヒアリング・お見積もり',
-		description: 'ご要望を伺い、お見積もりを提示します',
+		description: 'ご要望を伺い、お見積もりを提示します。',
 	},
 	{
-		icon: PenTool,
+		icon: 'check' as const,
 		number: 3,
 		title: '制作・確認',
-		description: '制作を進めながら確認・修正を行います',
+		description: '制作を進めながら確認・修正を行います。',
 	},
 	{
-		icon: Rocket,
+		icon: 'delivery' as const,
 		number: 4,
 		title: '納品・公開',
-		description: '完成後、納品・公開対応をします',
+		description: '完成後、納品・公開対応をします。',
 	},
 ];
 ---
@@ -174,28 +174,25 @@ const flows = [
   </section>
 
   <!-- Flow -->
-  <section id="flow" aria-label="ご依頼の流れ" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-main">
-    <div class="max-w-container mx-auto px-4">
+  <section id="flow" aria-label="ご依頼の流れ" class="bg-bg-main px-16px py-64px md:px-40px md:py-112px">
+    <div class="mx-auto flex flex-col items-center gap-32px md:gap-64px">
       <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
-      <ol class="grid gap-6 md:grid-cols-4 list-none p-0 m-0">
+      <ol class="grid w-full max-w-content grid-cols-1 gap-24px md:grid-cols-2 md:grid-rows-[repeat(8,auto)] md:gap-20px xl:grid-cols-4 xl:grid-rows-[repeat(4,auto)]">
         {
           flows.map((flow) => (
-            <li class="flex flex-col bg-white rounded-2xl px-6 py-8 shadow-sm">
-              <div class="relative w-fit mb-5">
-                <div class="flex items-center justify-center w-14 h-14 bg-primary text-white rounded-xl">
-                  <flow.icon size={24} strokeWidth={1.5} />
-                </div>
-                <span class="absolute -top-2 -right-2 flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-accent rounded-full">{flow.number}</span>
-              </div>
-              <Heading level={3} variant="card" class="mb-2">{flow.title}</Heading>
-              <p class="text-sm leading-relaxed text-text-muted m-0" set:html={flow.description} />
+            <li class="list-none md:row-span-4 md:grid md:grid-rows-subgrid md:gap-0">
+              <FlowCard
+                stepNumber={flow.number}
+                icon={flow.icon}
+                title={flow.title}
+                description={flow.description}
+                linkText={flow.linkText}
+                linkHref={flow.linkHref}
+              />
             </li>
           ))
         }
       </ol>
-      <div class="mt-12 text-center">
-        <Button href="/contact" class="rounded-full">お問い合わせはこちら</Button>
-      </div>
     </div>
   </section>
 
