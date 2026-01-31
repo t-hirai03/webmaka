@@ -119,7 +119,10 @@ body {
   --width-373px: 373px; /* WorkCard PC幅 */
 
   /* プログレスバー幅 */
-  --width-progress: 600px;
+  --width-progress: 576px;
+
+  /* フォーム幅 */
+  --max-width-form: 756px;
 
   /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
   --spacing-sidebar: 200px;
@@ -618,9 +621,6 @@ body {
 .progressbar {
   display: flex;
   flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 /* プログレスバー各ステップ */
@@ -631,7 +631,7 @@ body {
   padding: 13px 0;
   line-height: 1.5;
   background: var(--color-grey-91);
-  color: var(--color-text-muted);
+  color: var(--color-text);
   border-radius: 8px 0 0 8px;
 }
 
@@ -643,23 +643,23 @@ body {
   border-radius: 0 8px 8px 0;
 }
 
-/* 矢印形状（border使用） */
+/* 矢印形状（clip-path使用） */
 .progressbar .item:not(:last-child)::before,
 .progressbar .item:not(:last-child)::after {
   position: absolute;
   z-index: 2;
   top: 0;
-  bottom: 0;
   left: 100%;
   content: '';
-  border: 37px solid transparent;
-  border-left: 20px solid var(--color-grey-91);
-  margin: auto;
+  width: 12px;
+  height: 100%;
+  background: var(--color-grey-91);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .progressbar .item:not(:last-child)::before {
   margin-left: 1px;
-  border-left-color: #FFF;
+  background: var(--color-bg-section);
 }
 
 /* アクティブ状態 */
@@ -670,11 +670,11 @@ body {
 }
 
 .progressbar .item.active:not(:last-child)::after {
-  border-left-color: var(--color-primary);
+  background: var(--color-primary);
 }
 
 .progressbar .item.active:not(:last-child)::before {
-  border-left: none;
+  display: none;
 }
 
 /* レスポンシブ */
@@ -692,8 +692,7 @@ body {
 
   .progressbar .item:not(:last-child)::before,
   .progressbar .item:not(:last-child)::after {
-    border-width: 25px;
-    border-left-width: 12px;
+    width: 10px;
   }
 }
 

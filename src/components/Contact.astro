@@ -1,5 +1,6 @@
 ---
 import Button from './ui/Button.astro';
+import ContactProgress from './ui/ContactProgress.astro';
 import FormField from './ui/FormField.astro';
 import Input from './ui/Input.astro';
 import SectionTitle from './ui/SectionTitle.astro';
@@ -8,9 +9,11 @@ import Textarea from './ui/Textarea.astro';
 ---
 
 <section id="contact" aria-label="お問い合わせ" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
-  <div class="max-w-container mx-auto px-4">
+  <div class="max-w-container mx-auto px-4 flex flex-col items-center gap-10">
     <SectionTitle title="Contact" subtitle="お問い合わせ" />
-    <form id="contact-form" class="max-w-xl mx-auto flex flex-col gap-6">
+    <form id="contact-form" class="max-w-form w-full flex flex-col items-center gap-8">
+      <ContactProgress currentStep={1} />
+      <div class="w-full flex flex-col gap-6">
       <FormField label="氏名" name="name" required>
         <Input type="text" name="name" id="name" required class="border-none" aria-describedby="name-error" />
         <span id="name-error" class="text-sm text-red-600 hidden" role="alert"></span>
@@ -38,9 +41,10 @@ import Textarea from './ui/Textarea.astro';
       </FormField>
       <div id="contact-message" class="contact-message hidden px-4 py-3 rounded-lg text-center" aria-live="polite"></div>
       <div class="text-center">
-        <Button type="submit" variant="secondary" size="lg">
+        <Button type="submit" variant="secondary" size="md">
           確認する
         </Button>
+      </div>
       </div>
     </form>
   </div>
