@@ -618,6 +618,15 @@ body {
   font-size: var(--font-size-section-subtitle);
 }
 
+/* MVテキスト用フォントサイズ */
+@utility text-54px {
+  font-size: var(--font-size-54px);
+}
+
+@utility text-42px {
+  font-size: var(--font-size-42px);
+}
+
 /* ===== プログレスバー ===== */
 
 /* プログレスバーコンテナ */
