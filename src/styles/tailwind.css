@@ -108,7 +108,7 @@ body {
 
   /* コンテナ幅 */
   --max-width-container: 1440px;
-  --max-width-content: 800px;
+  --max-width-content: 1240px;
 
   /* プログレスバー幅 */
   --width-progress: 600px;
