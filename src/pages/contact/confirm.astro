@@ -25,6 +25,34 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 <script is:inline define:vars={{ INQUIRY_TYPE_LABELS }}>
   const STORAGE_KEY = 'contactFormData';
 
+  // ストレージユーティリティ（sessionStorage優先、フォールバックでlocalStorage）
+  function getFromStorage(key) {
+    try {
+      const sessionData = sessionStorage.getItem(key);
+      if (sessionData) return sessionData;
+    } catch {
+      // sessionStorageが使えない場合は無視
+    }
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function removeFromStorage(key) {
+    try {
+      sessionStorage.removeItem(key);
+    } catch {
+      // 無視
+    }
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // 無視
+    }
+  }
+
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -33,7 +61,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 
   function init() {
     const contentEl = document.getElementById('confirm-content');
-    const storedData = sessionStorage.getItem(STORAGE_KEY);
+    const storedData = getFromStorage(STORAGE_KEY);
 
     if (!storedData) {
       window.location.href = '/contact';
@@ -118,7 +146,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
         const result = await response.json();
 
         if (result.success) {
-          sessionStorage.removeItem(STORAGE_KEY);
+          removeFromStorage(STORAGE_KEY);
           window.location.href = '/contact/thanks';
         } else {
           messageEl.textContent = result.error || '送信に失敗しました。もう一度お試しください。';
