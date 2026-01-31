@@ -129,6 +129,7 @@ body {
 
   /* ヘッダー高さ */
   --height-header: 80px;
+  --height-header-mobile: 64px; /* モバイルヘッダーバーの高さ */
 
   /* 最小高さ */
   --min-height-page: calc(100dvh - var(--height-header));
