@@ -20,15 +20,15 @@ const {
 } = Astro.props;
 
 const baseClasses =
-	'inline-flex items-center justify-center font-semibold rounded-lg leading-none transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
+	'inline-flex items-center justify-center font-semibold rounded-lg leading-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
 
 const variantClasses = {
 	primary:
 		'bg-primary text-white hover:bg-primary-dark focus:ring-primary disabled:hover:bg-primary',
 	secondary: 'bg-accent text-white hover:bg-accent-dark focus:ring-accent disabled:hover:bg-accent',
 	ghost: 'bg-gray-200 text-text hover:bg-gray-300 focus:ring-gray-400 disabled:hover:bg-gray-200',
-	cta: 'bg-cta text-white hover:bg-cta-dark focus:ring-cta shadow-button',
-	gold: 'bg-gold text-white hover:bg-gold-dark focus:ring-gold shadow-button border-2 border-gold-border',
+	cta: 'bg-cta text-white hover:bg-cta-dark focus:ring-cta shadow-button hover:shadow-button-hover hover:translate-y-button-hover active:shadow-button-active active:translate-y-button-press',
+	gold: 'bg-gold text-white hover:bg-gold-dark focus:ring-gold shadow-button hover:shadow-button-hover hover:translate-y-button-hover active:shadow-button-active active:translate-y-button-press border-2 border-gold-border',
 };
 
 const sizeClasses = {
