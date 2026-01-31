@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import {
 	Code,
 	Database,
@@ -11,6 +11,10 @@ import {
 	Rocket,
 } from 'lucide-astro';
 import mvImage from '@/assets/top/mv.png';
+import mvSpImage from '@/assets/top/mv-sp.png';
+
+const mvPc = await getImage({ src: mvImage, format: 'webp' });
+const mvSp = await getImage({ src: mvSpImage, format: 'webp' });
 import Contact from '@/components/Contact.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
@@ -95,8 +99,8 @@ const flows = [
 
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
   <!-- MV -->
-  <section id="hero" aria-label="メインビジュアル" class="pt-16 pb-8 sm:py-10 bg-bg-main">
-    <div class="max-w-content mx-auto px-4 sm:px-10">
+  <section id="hero" aria-label="メインビジュアル" class="pt-16 pb-8 sm:py-10 bg-bg-main overflow-x-clip">
+    <div class="max-w-content mx-auto ps-[clamp(1rem,0.33rem+2.85vw,3.75rem)] pe-0 sm:pe-[clamp(1rem,0.33rem+2.85vw,3.75rem)]">
       <div class="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-6">
         <div class="flex flex-col items-start sm:w-1/2">
           <!-- SP用テキスト（〜639px） -->
@@ -122,7 +126,7 @@ const flows = [
               Webサイト・LP制作、既存サイトの
             </p>
             <h1 class="text-[clamp(2rem,1.5rem+1.25vw,3rem)] font-bold text-text leading-tight mt-1">
-              <span class="relative inline-block">
+              <span class="relative inline-block whitespace-nowrap">
                 <span class="relative z-10">CMS化対応いたします。</span>
                 <span class="absolute bottom-0 left-0 w-full h-[clamp(1rem,0.75rem+0.5vw,1.25rem)] bg-marker-gold rounded-[3px]" aria-hidden="true"></span>
               </span>
@@ -135,13 +139,18 @@ const flows = [
             </Button>
           </div>
         </div>
-        <div class="w-full sm:w-1/2 flex justify-center sm:justify-end">
-          <Image
-            src={mvImage}
-            alt="PC・スマートフォンでのWebサイト表示イメージ"
-            class="w-full max-w-[359px] sm:max-w-[clamp(280px,45vw,576px)] rounded-3xl"
-            loading="eager"
-          />
+        <div class="w-full sm:w-1/2 flex justify-end">
+          <picture>
+            <source srcset={mvPc.src} media="(min-width: 640px)" />
+            <img
+              src={mvSp.src}
+              alt="PC・スマートフォンでのWebサイト表示イメージ"
+              width={mvSp.attributes.width}
+              height={mvSp.attributes.height}
+              class="w-full max-w-[359px] sm:max-w-[clamp(280px,45vw,576px)] rounded-s-3xl rounded-e-none sm:rounded-3xl"
+              loading="eager"
+            />
+          </picture>
         </div>
         <!-- ボタン（〜639px） -->
         <div class="sm:hidden w-full">
