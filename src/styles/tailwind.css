@@ -139,7 +139,7 @@ body {
   --font-size-5xl: 3rem; /* 48px */
 
   /* レスポンシブフォントサイズ */
-  --font-size-section-title: clamp(2.25rem, 2rem + 1.5vw, 3rem); /* セクションタイトル: 36px → 48px */
+  --font-size-section-title: clamp(2rem, 1.5rem + 2vw, 3rem); /* セクションタイトル: 32px → 48px */
   --font-size-section-subtitle: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* セクションサブタイトル: 16px → 18px */
 
   /* 行間（Figmaトークン） */
