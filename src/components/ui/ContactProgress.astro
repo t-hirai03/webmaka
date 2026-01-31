@@ -12,13 +12,20 @@ const steps = [
 ].map((step) => ({
 	...step,
 	isActive: step.number <= currentStep,
+	isCurrent: step.number === currentStep,
 }));
+
+const totalSteps = steps.length;
 ---
 
 <nav aria-label="お問い合わせ進捗" class="w-full max-w-progress">
 	<ol class="progressbar">
 		{steps.map((step) => (
-			<li class:list={['item', { active: step.isActive }]}>
+			<li
+				class:list={['item', { active: step.isActive }]}
+				aria-current={step.isCurrent ? 'step' : undefined}
+				aria-label={`ステップ${step.number}/${totalSteps}: ${step.label}${step.isCurrent ? '（現在のステップ）' : ''}`}
+			>
 				<span class="font-medium">{step.label}</span>
 			</li>
 		))}

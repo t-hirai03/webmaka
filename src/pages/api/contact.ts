@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { RateLimiter } from '../../lib/rate-limit';
 import {
 	escapeHtml,
 	getInquiryTypeLabel,
@@ -7,51 +8,16 @@ import {
 	validateContactForm,
 } from '../../lib/validation';
 
-// レート制限の設定
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1分
-const RATE_LIMIT_MAX_REQUESTS = 3; // 1分あたりの最大リクエスト数
-
-// IPアドレスごとのリクエスト記録
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-
-function isRateLimited(ip: string): boolean {
-	const now = Date.now();
-	const record = rateLimitMap.get(ip);
-
-	if (!record || now > record.resetTime) {
-		rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
-		return false;
-	}
-
-	if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-		return true;
-	}
-
-	record.count++;
-	return false;
-}
-
-// 定期的に古いレコードをクリーンアップ
-function cleanupRateLimitMap() {
-	const now = Date.now();
-	for (const [ip, record] of rateLimitMap.entries()) {
-		if (now > record.resetTime) {
-			rateLimitMap.delete(ip);
-		}
-	}
-}
-
+const rateLimiter = new RateLimiter();
 const FROM_EMAIL = 'うぇぶまか <admin@webmaka.com>';
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
-	// 古いレコードのクリーンアップ
-	cleanupRateLimitMap();
+	rateLimiter.cleanup();
 
-	// レート制限チェック
 	const ip = clientAddress || request.headers.get('cf-connecting-ip') || 'unknown';
-	if (isRateLimited(ip)) {
+	if (rateLimiter.isLimited(ip)) {
 		return new Response(
 			JSON.stringify({
 				success: false,
@@ -113,7 +79,6 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 	const resend = new Resend(resendApiKey);
 
 	try {
-		// 管理者への通知メール
 		await resend.emails.send({
 			from: FROM_EMAIL,
 			to: contactEmail,
@@ -146,7 +111,6 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 			`,
 		});
 
-		// ユーザーへの自動返信メール
 		await resend.emails.send({
 			from: FROM_EMAIL,
 			to: email,
