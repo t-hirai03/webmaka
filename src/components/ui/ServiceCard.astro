@@ -1,0 +1,38 @@
+---
+interface Props {
+	label: string;
+	pageCount: string;
+	priceNumber: string;
+	priceUnit: string;
+	tagline: string;
+	description: string;
+	tags: string[];
+}
+
+const { label, pageCount, priceNumber, priceUnit, tagline, description, tags } = Astro.props;
+---
+
+<article class="w-full overflow-hidden rounded-xl bg-white shadow-md">
+	<div class="bg-primary px-6 py-3 text-center">
+		<span class="text-lg font-bold text-white">{label}</span>
+	</div>
+	<div class="p-6">
+		<div class="mb-4 text-center">
+			<p class="text-sm text-text-muted">{pageCount}</p>
+			<p>
+				<span class="text-5xl font-bold text-primary">{priceNumber}</span>
+				<span class="text-xl text-text">{priceUnit}</span>
+			</p>
+			<p class="mt-2 font-bold text-text">{tagline}</p>
+		</div>
+		<hr class="mb-4 border-gray-200" />
+		<p class="mb-6 text-sm-plus leading-relaxed-plus text-text-muted">{description}</p>
+		<div class="flex flex-wrap gap-2">
+			{tags.map((tag) => (
+				<span class="rounded border border-grey-91 bg-tag-service px-3 py-1 text-sm text-text-muted">
+					{tag}
+				</span>
+			))}
+		</div>
+	</div>
+</article>

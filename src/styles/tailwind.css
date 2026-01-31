@@ -108,7 +108,10 @@ body {
 
   /* コンテナ幅 */
   --max-width-container: 1440px;
-  --max-width-content: 800px;
+  --max-width-content: 1240px;
+
+  /* プログレスバー幅 */
+  --width-progress: 600px;
 
   /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
   --spacing-sidebar: 200px;
@@ -136,7 +139,7 @@ body {
   --font-size-5xl: 3rem; /* 48px */
 
   /* レスポンシブフォントサイズ */
-  --font-size-section-title: clamp(2.25rem, 2rem + 1.5vw, 3rem); /* セクションタイトル: 36px → 48px */
+  --font-size-section-title: clamp(2rem, 1.5rem + 2vw, 3rem); /* セクションタイトル: 32px → 48px */
   --font-size-section-subtitle: clamp(1rem, 0.9rem + 0.5vw, 1.125rem); /* セクションサブタイトル: 16px → 18px */
 
   /* 行間（Figmaトークン） */
@@ -212,6 +215,15 @@ body {
 /* モバイルスライダーのカード幅 */
 @utility basis-card {
   flex-basis: 85%;
+}
+
+/* セクションタイトル用フォントサイズ（レスポンシブ） */
+@utility text-section-title {
+  font-size: var(--font-size-section-title);
+}
+
+@utility text-section-subtitle {
+  font-size: var(--font-size-section-subtitle);
 }
 
 /* ===== プログレスバー ===== */
