@@ -59,6 +59,8 @@ UIコンポーネントのカタログ・ドキュメント
 | トップ | `/` | サービス説明、制作フロー、実績、お問い合わせ |
 | About | `/about` | 運営者プロフィール、スキル |
 | お問い合わせ | `/contact` | フォーム入力 → 確認 → 送信完了 |
+| サンプル集 | `/samples` | UIコンポーネントのサンプル一覧 |
+| 404 | `/404` | カスタム404ページ |
 
 ## ディレクトリ構成
 
@@ -71,8 +73,29 @@ src/
 ├── pages/           # ページ（ファイルベースルーティング）
 │   ├── api/         # APIエンドポイント（お問い合わせ送信）
 │   └── contact/     # お問い合わせフロー
+├── stories/         # Storybookストーリー
 └── styles/          # Tailwind CSS設定
 ```
+
+## UIコンポーネント
+
+`src/components/ui/` に再利用可能なコンポーネントを配置
+
+| コンポーネント | 用途 |
+| --- | --- |
+| Button | ボタン（variant: primary/secondary/outline） |
+| Badge | バッジ・タグ表示 |
+| SectionTitle | セクションタイトル |
+| Heading | 見出し（h1〜h6） |
+| ServiceCard | サービス紹介カード |
+| FlowCard | 制作フローカード |
+| WorkCard | 実績カード |
+| SkillItem | スキル項目 |
+| ContactProgress | お問い合わせステップ表示 |
+| FormField | フォームフィールドラッパー |
+| Input | テキスト入力 |
+| Textarea | テキストエリア |
+| Select | セレクトボックス |
 
 ## デザイン
 
