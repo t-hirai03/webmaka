@@ -41,6 +41,7 @@ interface ContactFormData {
 	inquiryType: string;
 	phone: string;
 	message: string;
+	sourceUrl?: string;
 }
 
 const INQUIRY_TYPE_LABELS: Record<string, string> = {
@@ -124,7 +125,7 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 		});
 	}
 
-	const { name, email, inquiryType, phone, message } = formData;
+	const { name, email, inquiryType, phone, message, sourceUrl } = formData;
 	const inquiryLabel = INQUIRY_TYPE_LABELS[inquiryType] ?? '未選択';
 
 	const resend = new Resend(resendApiKey);
@@ -137,6 +138,7 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
 			subject: `【お問い合わせ】${name}様より`,
 			html: `
 				<h2>お問い合わせがありました</h2>
+				<p style="margin-bottom: 16px; color: #666;">送信元: ${escapeHtml(sourceUrl || '不明')}</p>
 				<table style="border-collapse: collapse; width: 100%; max-width: 600px;">
 					<tr>
 						<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd; width: 30%;">氏名</th>

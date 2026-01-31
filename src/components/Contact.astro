@@ -151,6 +151,7 @@ const { compact = false } = Astro.props;
       inquiryType: formData.get('inquiry-type') as string,
       phone: formData.get('phone') as string,
       message: formData.get('message') as string,
+      sourceUrl: window.location.href,
     };
 
     // バリデーション
