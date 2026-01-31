@@ -1,6 +1,6 @@
 ---
 interface Props {
-	variant?: 'primary' | 'secondary' | 'ghost' | 'cta' | 'confirm';
+	variant?: 'primary' | 'secondary' | 'ghost' | 'cta' | 'gold';
 	size?: 'sm' | 'md' | 'lg';
 	href?: string;
 	type?: 'button' | 'submit';
@@ -28,8 +28,7 @@ const variantClasses = {
 	secondary: 'bg-accent text-white hover:bg-accent-dark focus:ring-accent disabled:hover:bg-accent',
 	ghost: 'bg-gray-200 text-text hover:bg-gray-300 focus:ring-gray-400 disabled:hover:bg-gray-200',
 	cta: 'bg-cta text-white hover:bg-cta-dark focus:ring-cta shadow-button',
-	confirm:
-		'bg-confirm text-white hover:bg-confirm-dark focus:ring-confirm shadow-button border-2 border-confirm-border',
+	gold: 'bg-gold text-white hover:bg-gold-dark focus:ring-gold shadow-button border-2 border-gold-border',
 };
 
 const sizeClasses = {

@@ -70,10 +70,10 @@ body {
   --color-cta: #D97757;
   --color-cta-dark: #C86747;
 
-  /* 確認ボタン */
-  --color-confirm: #C9902E;
-  --color-confirm-dark: #AA700B;
-  --color-confirm-border: #AA700B;
+  /* ゴールドボタン（フォーム送信等） */
+  --color-gold: #C9902E;
+  --color-gold-dark: #AA700B;
+  --color-gold-border: #AA700B;
 
   /* グレー系 */
   --color-grey-91: #E5E7EB; /* grey.91 - ボーダー等 */

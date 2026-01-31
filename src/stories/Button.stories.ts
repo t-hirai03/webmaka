@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 
 interface ButtonArgs {
-	variant: 'primary' | 'secondary' | 'ghost' | 'cta' | 'confirm';
+	variant: 'primary' | 'secondary' | 'ghost' | 'cta' | 'gold';
 	size: 'sm' | 'md' | 'lg';
 	label: string;
 	disabled: boolean;
@@ -14,8 +14,7 @@ const variantClasses: Record<ButtonArgs['variant'], string> = {
 	secondary: 'bg-accent text-white hover:bg-accent-dark focus:ring-accent disabled:hover:bg-accent',
 	ghost: 'bg-gray-200 text-text hover:bg-gray-300 focus:ring-gray-400 disabled:hover:bg-gray-200',
 	cta: 'bg-cta text-white hover:bg-cta-dark focus:ring-cta shadow-button',
-	confirm:
-		'bg-confirm text-white hover:bg-confirm-dark focus:ring-confirm shadow-button border-2 border-confirm-border',
+	gold: 'bg-gold text-white hover:bg-gold-dark focus:ring-gold shadow-button border-2 border-gold-border',
 };
 
 const sizeClasses: Record<ButtonArgs['size'], string> = {
@@ -64,7 +63,7 @@ const meta: Meta<ButtonArgs> = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: ['primary', 'secondary', 'ghost', 'cta', 'confirm'],
+			options: ['primary', 'secondary', 'ghost', 'cta', 'gold'],
 			description: 'ボタンのスタイルバリエーション',
 		},
 		size: {
@@ -121,9 +120,9 @@ export const CTA: Story = {
 	},
 };
 
-export const Confirm: Story = {
+export const Gold: Story = {
 	args: {
-		variant: 'confirm',
+		variant: 'gold',
 		size: 'md',
 		label: '確認する',
 		disabled: false,

@@ -12,11 +12,10 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 ---
 
 <Layout title="入力内容の確認 | うぇぶまか" noindex>
-  <section class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section min-h-page">
-    <div class="max-w-container mx-auto px-4">
-      <SectionTitle title="Confirm" subtitle="入力内容の確認" />
-
-      <div id="confirm-content" class="max-w-xl mx-auto">
+  <section class="pt-12 pb-16 md:pt-16 md:pb-20 bg-bg-section min-h-page">
+    <div class="max-w-container mx-auto px-4 flex flex-col items-center gap-8">
+      <SectionTitle title="Contact" subtitle="お問い合わせ" />
+      <div id="confirm-content" class="max-w-form w-full flex flex-col items-center gap-8">
         <p class="text-center text-text-muted">読み込み中...</p>
       </div>
     </div>
@@ -45,32 +44,39 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
     const inquiryLabel = INQUIRY_TYPE_LABELS[data.inquiryType] || '未選択';
 
     contentEl.innerHTML = `
-      <dl class="flex flex-col bg-white p-0 rounded-xl overflow-hidden shadow-sm">
-        <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
-          <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">氏名</dt>
-          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.name)}</dd>
+      <nav aria-label="お問い合わせ進捗" class="w-full max-w-progress">
+        <ol class="progressbar">
+          <li class="item active"><span class="font-medium">ご入力</span></li>
+          <li class="item active"><span class="font-medium">ご確認</span></li>
+          <li class="item"><span class="font-medium">完了</span></li>
+        </ol>
+      </nav>
+      <div class="w-full flex flex-col gap-6">
+        <div class="form-field space-y-1">
+          <p class="block text-sm font-medium text-text">氏名<span class="text-red-500 ml-1">*</span></p>
+          <p class="text-text text-base">${escapeHtml(data.name)}</p>
         </div>
-        <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
-          <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">メールアドレス</dt>
-          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.email)}</dd>
+        <div class="form-field space-y-1">
+          <p class="block text-sm font-medium text-text">メールアドレス<span class="text-red-500 ml-1">*</span></p>
+          <p class="text-text text-base">${escapeHtml(data.email)}</p>
         </div>
-        <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
-          <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お問い合わせ種別</dt>
-          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(inquiryLabel)}</dd>
+        <div class="form-field space-y-1">
+          <p class="block text-sm font-medium text-text">お問い合わせ種別</p>
+          <p class="text-text text-base">${escapeHtml(inquiryLabel)}</p>
         </div>
-        <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6 border-b border-gray-200">
-          <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お電話番号</dt>
-          <dd class="text-text text-lg leading-normal-plus">${escapeHtml(data.phone || '未入力')}</dd>
+        <div class="form-field space-y-1">
+          <p class="block text-sm font-medium text-text">お電話番号</p>
+          <p class="text-text text-base">${escapeHtml(data.phone || '未入力')}</p>
         </div>
-        <div class="flex flex-col gap-3 px-5 py-5 sm:px-8 sm:py-6">
-          <dt class="font-bold text-sm text-text-muted uppercase tracking-wide">お問い合わせ内容</dt>
-          <dd class="text-text text-base leading-normal-plus whitespace-pre-wrap">${escapeHtml(data.message)}</dd>
+        <div class="form-field space-y-1">
+          <p class="block text-sm font-medium text-text">お問い合わせ内容<span class="text-red-500 ml-1">*</span></p>
+          <p class="text-text text-base whitespace-pre-wrap">${escapeHtml(data.message)}</p>
         </div>
-      </dl>
-      <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center mt-6" aria-live="polite"></div>
-      <div class="flex flex-col sm:flex-row gap-4 mt-8 items-center sm:justify-center">
-        <button type="button" id="back-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gray-200 text-text border-none hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">戻って修正する</button>
-        <button type="button" id="submit-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-accent text-white border-none hover:bg-accent-dark disabled:opacity-50 disabled:cursor-not-allowed">送信する</button>
+        <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center" aria-live="polite"></div>
+        <div class="text-center flex flex-col sm:flex-row gap-4 justify-center">
+          <button type="button" id="back-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gray-200 text-text border-none hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">戻って修正する</button>
+          <button type="button" id="submit-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gold text-white border-none hover:bg-gold-dark disabled:opacity-50 disabled:cursor-not-allowed">送信する</button>
+        </div>
       </div>
     `;
 
