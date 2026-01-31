@@ -35,3 +35,6 @@ storybook-static/
 # playwright
 test-results/
 playwright-report/
+
+# vitest coverage
+coverage/

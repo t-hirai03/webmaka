@@ -203,9 +203,9 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
     contentEl.innerHTML = `
       <nav aria-label="お問い合わせ進捗" class="w-full max-w-progress">
         <ol class="progressbar">
-          <li class="item active"><span class="font-medium">ご入力</span></li>
-          <li class="item active"><span class="font-medium">ご確認</span></li>
-          <li class="item"><span class="font-medium">完了</span></li>
+          <li class="item active" aria-label="ステップ1/3: ご入力"><span class="font-medium">ご入力</span></li>
+          <li class="item active" aria-current="step" aria-label="ステップ2/3: ご確認（現在のステップ）"><span class="font-medium">ご確認</span></li>
+          <li class="item" aria-label="ステップ3/3: 完了"><span class="font-medium">完了</span></li>
         </ol>
       </nav>
       <div class="w-full flex flex-col gap-6">
@@ -229,7 +229,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
           <p class="block text-sm font-medium text-text">お問い合わせ内容<span class="text-red-500 ml-1">*</span></p>
           <p class="text-text text-base whitespace-pre-wrap">${escapeHtml(data.message)}</p>
         </div>
-        <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center" aria-live="polite"></div>
+        <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center" role="status" aria-live="polite"></div>
       </div>
     `;
 

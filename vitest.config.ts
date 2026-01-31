@@ -1,15 +1,14 @@
-import { defineConfig } from 'vitest/config';
+import { getViteConfig } from 'astro/config';
 
-export default defineConfig({
+export default getViteConfig({
 	test: {
 		globals: true,
-		environment: 'node',
 		include: ['src/**/*.test.ts'],
 		coverage: {
 			provider: 'v8',
-			reporter: ['text', 'html'],
+			reporter: ['text', 'html', 'lcov'],
 			include: ['src/**/*.ts'],
-			exclude: ['src/**/*.test.ts', 'src/**/*.d.ts'],
+			exclude: ['src/**/*.test.ts', 'src/**/*.d.ts', 'src/stories/**'],
 		},
 	},
-});
+} as Parameters<typeof getViteConfig>[0]);
