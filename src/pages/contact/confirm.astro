@@ -12,7 +12,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 ---
 
 <Layout title="入力内容の確認 | うぇぶまか" noindex>
-  <section class="pt-12 pb-16 md:pt-16 md:pb-20 bg-bg-section min-h-page">
+  <section class="pt-12 pb-16 md:pt-80px md:pb-20 bg-bg-section min-h-page">
     <div class="max-w-container mx-auto px-4 flex flex-col items-center gap-8">
       <SectionTitle title="Contact" subtitle="お問い合わせ" />
       <div id="confirm-content" class="max-w-form w-full flex flex-col items-center gap-8">
@@ -73,12 +73,24 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
           <p class="text-text text-base whitespace-pre-wrap">${escapeHtml(data.message)}</p>
         </div>
         <div id="confirm-message" class="hidden px-4 py-3 rounded-lg text-center" aria-live="polite"></div>
-        <div class="text-center flex flex-col sm:flex-row gap-4 justify-center">
-          <button type="button" id="back-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gray-200 text-text border-none hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">戻って修正する</button>
-          <button type="button" id="submit-button" class="px-8 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gold text-white border-none hover:bg-gold-dark disabled:opacity-50 disabled:cursor-not-allowed">送信する</button>
-        </div>
       </div>
     `;
+
+    // 固定ボタンエリアを作成
+    const fixedButtonArea = document.createElement('div');
+    fixedButtonArea.id = 'fixed-button-area';
+    fixedButtonArea.className = 'fixed bottom-0 left-0 right-0 bg-bg-section px-4 py-4 z-10';
+    fixedButtonArea.innerHTML = `
+      <div class="max-w-form mx-auto flex flex-row gap-4 justify-center">
+        <button type="button" id="back-button" class="flex-1 max-w-200px px-4 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gray-200 text-text border-none hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">修正する</button>
+        <button type="button" id="submit-button" class="flex-1 max-w-200px px-4 py-4 rounded-lg font-semibold text-base cursor-pointer transition-colors bg-gold text-white border-none hover:bg-gold-dark disabled:opacity-50 disabled:cursor-not-allowed">送信する</button>
+      </div>
+    `;
+    document.body.appendChild(fixedButtonArea);
+
+    // コンテンツ下部に固定ボタン分の余白を追加
+    const section = document.querySelector('section');
+    section.style.paddingBottom = '100px';
 
     document.getElementById('back-button').addEventListener('click', () => {
       window.location.href = '/contact';

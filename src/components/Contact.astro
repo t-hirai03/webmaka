@@ -6,9 +6,15 @@ import Input from './ui/Input.astro';
 import SectionTitle from './ui/SectionTitle.astro';
 import Select from './ui/Select.astro';
 import Textarea from './ui/Textarea.astro';
+
+interface Props {
+	compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
 ---
 
-<section id="contact" aria-label="お問い合わせ" class="pt-12 pb-16 md:pt-28 md:pb-32 bg-bg-section">
+<section id="contact" aria-label="お問い合わせ" class:list={["pt-12 pb-16 bg-bg-section", compact ? "md:pt-80px md:pb-32" : "md:pt-130px md:pb-32"]}
   <div class="max-w-container mx-auto px-4 flex flex-col items-center gap-10">
     <SectionTitle title="Contact" subtitle="お問い合わせ" />
     <form id="contact-form" class="max-w-form w-full flex flex-col items-center gap-8">
