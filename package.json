@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "rm -rf node_modules/.vite .astro && astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
