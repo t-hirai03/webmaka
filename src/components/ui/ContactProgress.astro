@@ -1,0 +1,25 @@
+---
+interface Props {
+	currentStep: 1 | 2 | 3;
+}
+
+const { currentStep } = Astro.props;
+
+const stepLabels = ['ご入力', 'ご確認', '完了'];
+---
+
+<nav aria-label="お問い合わせ進捗" class="w-full max-w-progress">
+	<ol class="progressbar">
+		{stepLabels.map((label, index) => {
+			const stepNumber = index + 1;
+			const isActive = stepNumber <= currentStep;
+			return (
+				<li class:list={['item', { active: isActive }]}>
+					<span class="font-medium">STEP.{stepNumber}</span>
+					<br />
+					{label}
+				</li>
+			);
+		})}
+	</ol>
+</nav>

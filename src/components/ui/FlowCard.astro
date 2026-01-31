@@ -1,0 +1,53 @@
+---
+interface Props {
+	stepNumber: number;
+	icon: 'mail' | 'hearing' | 'check' | 'delivery';
+	title: string;
+	description: string;
+	linkText?: string;
+	linkHref?: string;
+}
+
+const { stepNumber, icon, title, description, linkText, linkHref } = Astro.props;
+
+const iconPaths: Record<Props['icon'], string> = {
+	mail: '/icons/flow-mail.png',
+	hearing: '/icons/flow-hearing.png',
+	check: '/icons/flow-check.png',
+	delivery: '/icons/flow-delivery.png',
+};
+
+const iconSrc = iconPaths[icon];
+---
+
+<article class="flex w-full flex-col items-center gap-6 rounded-2xl bg-white p-4 pb-6 shadow-card md:gap-8">
+	<span class="inline-block rounded-md bg-primary px-4 py-1 text-2xl font-medium text-white">
+		STEP{stepNumber}
+	</span>
+
+	<div class="flex flex-col items-center gap-8">
+		<div class="flex h-24 items-center justify-center md:h-[105px]">
+			<img src={iconSrc} alt="" class="h-full w-auto" />
+		</div>
+
+		<div class="flex flex-col items-center gap-2 text-left">
+			<h3 class="text-xl font-bold leading-snug text-primary">{title}</h3>
+			<p class="text-sm leading-relaxed-plus text-text-muted">
+				{linkText && linkHref ? (
+					<>
+						{description.split('{link}')[0]}
+						<a
+							href={linkHref}
+							class="font-bold text-primary underline underline-offset-2"
+						>
+							{linkText}
+						</a>
+						{description.split('{link}')[1]}
+					</>
+				) : (
+					description
+				)}
+			</p>
+		</div>
+	</div>
+</article>
