@@ -61,9 +61,37 @@ const { compact = false } = Astro.props;
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const messageEl = document.getElementById('contact-message') as HTMLDivElement;
 
+  // ストレージユーティリティ（sessionStorage優先、フォールバックでlocalStorage）
+  function saveToStorage(key: string, value: string) {
+    try {
+      sessionStorage.setItem(key, value);
+    } catch {
+      // sessionStorageが使えない場合は無視
+    }
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      // localStorageが使えない場合も無視
+    }
+  }
+
+  function getFromStorage(key: string): string | null {
+    try {
+      const sessionData = sessionStorage.getItem(key);
+      if (sessionData) return sessionData;
+    } catch {
+      // sessionStorageが使えない場合は無視
+    }
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
   // 確認画面から戻った場合、入力内容を復元
   function restoreFormData() {
-    const storedData = sessionStorage.getItem(STORAGE_KEY);
+    const storedData = getFromStorage(STORAGE_KEY);
     if (!storedData) return;
 
     const data = JSON.parse(storedData);
@@ -139,8 +167,8 @@ const { compact = false } = Astro.props;
       return;
     }
 
-    // sessionStorageに保存して確認画面へ遷移
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    // ストレージに保存して確認画面へ遷移
+    saveToStorage(STORAGE_KEY, JSON.stringify(data));
     window.location.href = '/contact/confirm';
   });
 </script>
