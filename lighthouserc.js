@@ -17,7 +17,7 @@ export default {
 				// 個別アサーションを全てoff
 				'first-contentful-paint': 'off',
 				'largest-contentful-paint': 'off',
-				'interactive': 'off',
+				interactive: 'off',
 				'max-potential-fid': 'off',
 				'cumulative-layout-shift': 'off',
 				'speed-index': 'off',
@@ -35,7 +35,7 @@ export default {
 				'uses-text-compression': 'off',
 				'uses-rel-preconnect': 'off',
 				'server-response-time': 'off',
-				'redirects': 'off',
+				redirects: 'off',
 				'uses-long-cache-ttl': 'off',
 				'total-byte-weight': 'off',
 				'dom-size': 'off',
