@@ -12,14 +12,17 @@ export default defineConfig({
 	site: 'https://webmaka.com',
 	integrations: [
 		sitemap({
-			filter: (page) => !page.includes('/contact/confirm') && !page.includes('/contact/thanks'),
+			filter: (page) =>
+				!page.includes('/contact/confirm') &&
+				!page.includes('/contact/thanks') &&
+				!page.includes('/samples'),
 		}),
 		robotsTxt({
 			policy: [
 				{
 					userAgent: '*',
 					allow: '/',
-					disallow: ['/contact/confirm', '/contact/thanks'],
+					disallow: ['/contact/confirm', '/contact/thanks', '/samples'],
 				},
 			],
 		}),
