@@ -63,6 +63,9 @@ body {
   --color-accent-dark: #D8956A;
   --color-accent-light: #F0BFA0;
 
+  /* マーカーカラー（Gold） */
+  --color-marker-gold: rgba(212, 160, 23, 0.6); /* MVのアンダーライン */
+
   /* CTAボタン */
   --color-cta: #D97757;
   --color-cta-dark: #C86747;
@@ -178,6 +181,7 @@ body {
 
   /* 背景 */
   --background-image-marker: linear-gradient(transparent 60%, rgba(61, 139, 110, 0.3) 60%); /* ヒーローのマーカー効果 */
+  --background-image-marker-gold: linear-gradient(transparent 70%, rgba(212, 160, 23, 0.6) 70%); /* MVのゴールドマーカー */
   --background-size-zero: 0% 100%; /* マーカーアニメーション開始状態 */
 
   /* アニメーション */
