@@ -16,7 +16,7 @@ const createContactProgress = (args: ContactProgressArgs): string => {
 	});
 
 	return `
-		<nav aria-label="お問い合わせ進捗" class="w-[600px]">
+		<nav aria-label="お問い合わせ進捗" class="w-progress">
 			<ol class="progressbar">
 				${steps.join('')}
 			</ol>

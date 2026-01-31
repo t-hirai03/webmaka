@@ -110,6 +110,9 @@ body {
   --max-width-container: 1440px;
   --max-width-content: 800px;
 
+  /* プログレスバー幅 */
+  --width-progress: 600px;
+
   /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
   --spacing-sidebar: 200px;
 
