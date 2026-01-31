@@ -47,26 +47,35 @@ const skills = [
             2024年より東京で事業会社のフロントエンドエンジニアへ転向。
           </p>
           <p class="text-text leading-relaxed-plus">
-            お仕事のお問い合わせは<br>
-            <a href="/contact" class="underline underline-offset-4">CONTACTページ</a>のフォームからお願いいたします。
+            仕事のご依頼は<a href="/contact" class="text-primary underline underline-offset-4">お問い合わせフォーム</a>からお願いいたします。
           </p>
         </div>
 
         <div>
           <Heading level={2} variant="bordered" class="mb-4">スキル・経験</Heading>
 
-          <ul class="flex flex-col list-none p-0 m-0">
-            {skills.map((skill, index) => (
-              <li>
+          <div class="grid gap-x-8 md:grid-cols-2">
+            <div>
+              {skills.slice(0, 5).map((skill, index) => (
                 <SkillItem
                   icon={skill.icon}
                   name={skill.name}
                   years={skill.years}
-                  showDivider={index < skills.length - 1}
+                  showDivider={index < 4}
                 />
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+            <div>
+              {skills.slice(5).map((skill, index) => (
+                <SkillItem
+                  icon={skill.icon}
+                  name={skill.name}
+                  years={skill.years}
+                  showDivider={index < skills.slice(5).length - 1}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
