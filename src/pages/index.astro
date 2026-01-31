@@ -152,10 +152,10 @@ const flows = [
   </section>
 
   <!-- Service -->
-  <section id="service" aria-label="サービス内容" class="bg-bg-section px-40px py-112px">
-    <div class="mx-auto flex flex-col items-center gap-64px">
+  <section id="service" aria-label="サービス内容" class="bg-bg-section px-16px py-64px md:px-40px md:py-112px">
+    <div class="mx-auto flex flex-col items-center gap-32px md:gap-64px">
       <SectionTitle title="Service" subtitle="サービス内容" />
-      <div class="grid grid-cols-1 gap-20px md:grid-cols-2 xl:grid-cols-4">
+      <div class="grid grid-cols-1 gap-24px md:grid-cols-2 md:gap-20px xl:grid-cols-4">
         {
           services.map((service) => (
             <ServiceCard
