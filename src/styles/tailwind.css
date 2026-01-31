@@ -33,7 +33,7 @@ html {
 }
 
 body {
-  font-family: 'Zen Maru Gothic', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -43,6 +43,9 @@ body {
 }
 
 @theme {
+  /* ===== フォントファミリー ===== */
+  --font-display: 'Zen Maru Gothic', sans-serif; /* セクションタイトル用 */
+
   /* ===== カラー ===== */
 
   /* 背景色 */
