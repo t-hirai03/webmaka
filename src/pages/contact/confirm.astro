@@ -57,6 +57,137 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
     return div.innerHTML;
   }
 
+  // リトライ設定
+  const RETRY_CONFIG = {
+    maxRetries: 3,
+    baseDelay: 1000,
+    maxDelay: 10000,
+    timeout: 30000,
+  };
+
+  // 指数バックオフでの待機時間計算
+  function getRetryDelay(attempt) {
+    const delay = Math.min(
+      RETRY_CONFIG.baseDelay * Math.pow(2, attempt),
+      RETRY_CONFIG.maxDelay
+    );
+    // ジッターを追加（±25%）
+    return delay * (0.75 + Math.random() * 0.5);
+  }
+
+  // タイムアウト付きfetch
+  async function fetchWithTimeout(url, options, timeout) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+      return response;
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  // エラータイプの判定
+  function getErrorType(error) {
+    if (error.name === 'AbortError') {
+      return 'timeout';
+    }
+    if (!navigator.onLine) {
+      return 'offline';
+    }
+    return 'network';
+  }
+
+  // エラーメッセージの取得
+  function getErrorMessage(errorType, statusCode, serverMessage) {
+    switch (errorType) {
+      case 'timeout':
+        return '接続がタイムアウトしました。ネットワーク環境を確認して再度お試しください。';
+      case 'offline':
+        return 'インターネットに接続されていません。接続を確認して再度お試しください。';
+      case 'network':
+        return '通信エラーが発生しました。しばらく待ってから再度お試しください。';
+      case 'server':
+        if (statusCode >= 500) {
+          return 'サーバーエラーが発生しました。しばらく待ってから再度お試しください。';
+        }
+        if (statusCode === 429) {
+          return '送信回数の上限に達しました。しばらく待ってから再度お試しください。';
+        }
+        return serverMessage || '送信に失敗しました。入力内容を確認して再度お試しください。';
+      default:
+        return '予期せぬエラーが発生しました。もう一度お試しください。';
+    }
+  }
+
+  // リトライ付きAPI送信
+  async function submitWithRetry(data, onProgress) {
+    let lastStatusCode = null;
+    let lastErrorType = null;
+    let lastServerMessage = null;
+
+    for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
+      if (attempt > 0) {
+        const delay = getRetryDelay(attempt - 1);
+        onProgress(`再試行中... (${attempt}/${RETRY_CONFIG.maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+
+      try {
+        const response = await fetchWithTimeout(
+          '/api/contact',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: data,
+          },
+          RETRY_CONFIG.timeout
+        );
+
+        const result = await response.json();
+
+        if (result.success) {
+          return { success: true };
+        }
+
+        // サーバーからのエラーレスポンス
+        lastErrorType = 'server';
+        lastStatusCode = response.status;
+        lastServerMessage = result.error;
+
+        // クライアントエラー（4xx）はリトライしない（429を除く）
+        if (response.status >= 400 && response.status < 500 && response.status !== 429) {
+          break;
+        }
+
+        // 429もリトライ対象外（レート制限は待っても無駄）
+        if (response.status === 429) {
+          break;
+        }
+      } catch (error) {
+        lastErrorType = getErrorType(error);
+        lastStatusCode = null;
+        lastServerMessage = null;
+
+        // オフラインはリトライしない
+        if (lastErrorType === 'offline') {
+          break;
+        }
+      }
+    }
+
+    return {
+      success: false,
+      errorType: lastErrorType,
+      statusCode: lastStatusCode,
+      message: getErrorMessage(lastErrorType, lastStatusCode, lastServerMessage),
+    };
+  }
+
   function init() {
     const contentEl = document.getElementById('confirm-content');
     const storedData = getFromStorage(STORAGE_KEY);
@@ -132,31 +263,21 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
       backButton.disabled = true;
       messageEl.textContent = '';
       messageEl.classList.add('hidden');
-      messageEl.classList.remove('bg-red-100', 'text-red-800');
+      messageEl.classList.remove('bg-red-100', 'text-red-800', 'bg-yellow-100', 'text-yellow-800');
 
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: storedData,
-        });
+      const result = await submitWithRetry(storedData, (progressMessage) => {
+        submitButton.textContent = progressMessage;
+        messageEl.textContent = 'ネットワークエラーが発生したため、自動的に再試行しています...';
+        messageEl.classList.remove('hidden', 'bg-red-100', 'text-red-800');
+        messageEl.classList.add('bg-yellow-100', 'text-yellow-800');
+      });
 
-        const result = await response.json();
-
-        if (result.success) {
-          removeFromStorage(STORAGE_KEY);
-          window.location.href = '/contact/thanks';
-        } else {
-          messageEl.textContent = result.error || '送信に失敗しました。もう一度お試しください。';
-          messageEl.classList.remove('hidden');
-          messageEl.classList.add('bg-red-100', 'text-red-800');
-          submitButton.disabled = false;
-          submitButton.textContent = '送信する';
-          backButton.disabled = false;
-        }
-      } catch {
-        messageEl.textContent = '通信エラーが発生しました。もう一度お試しください。';
-        messageEl.classList.remove('hidden');
+      if (result.success) {
+        removeFromStorage(STORAGE_KEY);
+        window.location.href = '/contact/thanks';
+      } else {
+        messageEl.textContent = result.message;
+        messageEl.classList.remove('hidden', 'bg-yellow-100', 'text-yellow-800');
         messageEl.classList.add('bg-red-100', 'text-red-800');
         submitButton.disabled = false;
         submitButton.textContent = '送信する';
