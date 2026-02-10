@@ -151,14 +151,6 @@ const structuredData = {
     {structuredData.breadcrumbList && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData.breadcrumbList)} />
     )}
-    <!-- Google Analytics -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-YEDJ65JEPR"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YEDJ65JEPR');
-    </script>
   </head>
   <body class="min-h-dvh bg-bg-main text-text font-sans leading-relaxed">
     <!-- Google Tag Manager (noscript) -->
