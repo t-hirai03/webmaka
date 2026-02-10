@@ -20,14 +20,44 @@ const iconPaths: Record<Props['icon'], string> = {
 const iconSrc = iconPaths[icon];
 ---
 
-<article class="grid w-full grid-rows-[auto_auto_auto_1fr] gap-y-16px rounded-16px bg-white px-24px pb-24px pt-16px shadow-card md:row-span-4 md:grid-rows-subgrid md:gap-y-24px">
+{/* SP版（横並びレイアウト） */}
+<article class="flex gap-12px items-start justify-center rounded-16px bg-white px-20px pb-24px pt-18px shadow-card md:hidden">
+	<div class="flex w-[75px] shrink-0 flex-col items-center gap-8px">
+		<span class="inline-block w-full rounded-6px bg-primary text-center font-sans text-lg font-medium leading-29px text-white">
+			STEP{stepNumber}
+		</span>
+		<img src={iconSrc} alt="" aria-hidden="true" class="h-auto w-[50px]" />
+	</div>
+	<div class="flex flex-col gap-3px">
+		<h3 class="text-lg font-bold leading-snug text-primary">{title}</h3>
+		<p class="text-base leading-relaxed text-text-muted">
+			{linkText && linkHref ? (
+				<>
+					{description.split('{link}')[0]}
+					<a
+						href={linkHref}
+						class="font-bold text-primary underline underline-offset-2 hover:no-underline"
+					>
+						{linkText}
+					</a>
+					{description.split('{link}')[1]}
+				</>
+			) : (
+				description
+			)}
+		</p>
+	</div>
+</article>
+
+{/* PC版（縦積みレイアウト） */}
+<article class="hidden w-full rounded-16px bg-white px-24px pb-24px pt-16px shadow-card md:grid md:row-span-4 md:grid-rows-subgrid md:gap-y-24px">
 	<div class="flex justify-center">
 		<span class="inline-block rounded-6px bg-primary px-16px py-4px text-2xl font-medium text-white">
 			STEP{stepNumber}
 		</span>
 	</div>
 
-	<div class="flex h-24 items-center justify-center md:h-105px">
+	<div class="flex h-105px items-center justify-center">
 		<img src={iconSrc} alt="" aria-hidden="true" class="h-full w-auto" />
 	</div>
 

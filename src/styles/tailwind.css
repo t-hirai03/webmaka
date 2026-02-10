@@ -131,6 +131,7 @@ body {
 
   /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
   --spacing-sidebar: 200px; /* About等のサイドバー */
+  --spacing-sidebar-mobile: 150px; /* モバイルメニュー幅 */
 
   /* ヘッダー高さ */
   --height-header: 80px; /* PC版ヘッダー */
@@ -175,6 +176,7 @@ body {
   --leading-relaxed: 1.625; /* 26px base */
   --leading-relaxed-plus: 1.8; /* 本文の読みやすい行間 */
   --leading-loose: 2;
+  --leading-29px: 29.25px; /* FlowCard STEPバッジの行間 */
   --leading-30px: 30px; /* ServiceCard価格の行間 */
 
   /* 字間（Figmaトークン） */
@@ -193,7 +195,7 @@ body {
   /* 中程度の間隔（12px〜24px） */
   --spacing-12px: 12px; /* WorkCardタグpadding-x、ServiceCardタグpadding-x */
   --spacing-16px: 16px; /* セクションpadding-x（SP）、gap、FlowCard内部gap */
-  --spacing-18px: 18px; /* CTAボタンpadding-y */
+  --spacing-18px: 18px; /* CTAボタンpadding-y、FlowCard上部padding（SP） */
   --spacing-20px: 20px; /* グリッドgap（PC）、ServiceCard内部padding */
   --spacing-21px: 21px; /* ServiceCard上部padding */
   --spacing-22px: 22px; /* ServiceCard横padding */
@@ -203,9 +205,10 @@ body {
   --spacing-30px: 30px; /* ServiceCard価格行間 */
   --spacing-32px: 32px; /* セクション内部gap（SP） */
   --spacing-40px: 40px; /* セクションpadding-x（PC） */
+  --spacing-45px: 45px; /* セクションpadding-y（SP） */
   --spacing-46px: 46px; /* ServiceCardキャッチコピー高さ */
   --spacing-48px: 48px; /* コンタクトページ上部padding */
-  --spacing-64px: 64px; /* セクションpadding-y（SP）、セクション内部gap（PC） */
+  --spacing-64px: 64px; /* セクション内部gap（PC） */
 
   /* 特大間隔（80px以上） */
   --spacing-80px: 80px; /* コンタクトページpadding-y（PC） */
@@ -236,6 +239,7 @@ body {
   --radius-16px: 16px; /* カード全般（WorkCard, FlowCard, ServiceCard） */
 
   /* ===== z-index ===== */
+  --z-menu-button: 10000; /* ハンバーガーボタン（メニューより上） */
   --z-menu: 9999; /* ハンバーガーメニュー・サイドバー */
   --z-menu-overlay: 9998; /* メニューオーバーレイ */
   --z-modal: 60; /* モバイルメニューボタン（後方互換用） */
@@ -312,6 +316,10 @@ body {
 }
 
 /* ===== z-index ===== */
+@utility z-menu-button {
+  z-index: 10000;
+}
+
 @utility z-menu {
   z-index: 9999;
 }
