@@ -131,6 +131,7 @@ body {
 
   /* サイドバー幅（w-sidebar, ps-sidebar等で使用） */
   --spacing-sidebar: 200px; /* About等のサイドバー */
+  --spacing-sidebar-mobile: 150px; /* モバイルメニュー幅 */
 
   /* ヘッダー高さ */
   --height-header: 80px; /* PC版ヘッダー */
@@ -238,6 +239,7 @@ body {
   --radius-16px: 16px; /* カード全般（WorkCard, FlowCard, ServiceCard） */
 
   /* ===== z-index ===== */
+  --z-menu-button: 10000; /* ハンバーガーボタン（メニューより上） */
   --z-menu: 9999; /* ハンバーガーメニュー・サイドバー */
   --z-menu-overlay: 9998; /* メニューオーバーレイ */
   --z-modal: 60; /* モバイルメニューボタン（後方互換用） */
@@ -314,6 +316,10 @@ body {
 }
 
 /* ===== z-index ===== */
+@utility z-menu-button {
+  z-index: 10000;
+}
+
 @utility z-menu {
   z-index: 9999;
 }
