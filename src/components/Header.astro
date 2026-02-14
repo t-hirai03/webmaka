@@ -79,32 +79,39 @@ const navItems = [
 </div>
 
 <script>
-  const mobileNav = document.querySelector('[data-mobile-nav]');
-  const hamburger = document.querySelector('[data-hamburger]') as HTMLButtonElement | null;
-  const overlay = document.querySelector('[data-overlay]');
-  const menuLinks = document.querySelectorAll('[data-menu-link]');
+  function initMobileNav() {
+    const mobileNav = document.querySelector('[data-mobile-nav]');
+    const hamburger = document.querySelector('[data-hamburger]') as HTMLButtonElement | null;
+    const overlay = document.querySelector('[data-overlay]');
+    const menuLinks = document.querySelectorAll('[data-menu-link]');
 
-  function toggleMenu() {
-    const isOpen = mobileNav?.classList.toggle('is-open');
-    hamburger?.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-
-  function closeMenu() {
-    mobileNav?.classList.remove('is-open');
-    hamburger?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  hamburger?.addEventListener('click', toggleMenu);
-  overlay?.addEventListener('click', closeMenu);
-  menuLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-  // Escapeキーでメニューを閉じる
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && mobileNav?.classList.contains('is-open')) {
-      closeMenu();
-      hamburger?.focus();
+    function toggleMenu() {
+      const isOpen = mobileNav?.classList.toggle('is-open');
+      hamburger?.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
-  });
+
+    function closeMenu() {
+      mobileNav?.classList.remove('is-open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger?.addEventListener('click', toggleMenu);
+    overlay?.addEventListener('click', closeMenu);
+    menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    // Escapeキーでメニューを閉じる
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape' && mobileNav?.classList.contains('is-open')) {
+        closeMenu();
+        hamburger?.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape);
+  }
+
+  // View Transitions対応: ページ遷移後もイベントリスナーを再設定
+  document.addEventListener('astro:page-load', initMobileNav);
 </script>
