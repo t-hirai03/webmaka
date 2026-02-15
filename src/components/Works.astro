@@ -97,12 +97,14 @@ const works: WorkItem[] = [
 </section>
 
 <script>
-  const slider = document.getElementById('works-slider');
-  const pagination = document.getElementById('works-pagination');
-  const dots = pagination?.querySelectorAll<HTMLButtonElement>('.works-dot');
-  const cards = slider?.querySelectorAll('.work-card');
+  function initWorksSlider() {
+    const slider = document.getElementById('works-slider');
+    const pagination = document.getElementById('works-pagination');
+    const dots = pagination?.querySelectorAll<HTMLButtonElement>('.works-dot');
+    const cards = slider?.querySelectorAll('.work-card');
 
-  if (slider && dots && cards) {
+    if (!slider || !dots || !cards) return;
+
     let currentIndex = 0;
 
     const updateActiveDot = () => {
@@ -171,5 +173,9 @@ const works: WorkItem[] = [
       });
     });
   }
+
+  // 初回ロード時とView Transitionsでのページ遷移後に初期化
+  initWorksSlider();
+  document.addEventListener('astro:page-load', initWorksSlider);
 </script>
 
