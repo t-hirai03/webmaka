@@ -88,7 +88,7 @@ const flows = [
 
 <Layout title="うぇぶまか：Webサイト・LP制作、既存サイトのCMS化対応いたします。">
   <!-- MV -->
-  <section id="hero" aria-label="メインビジュアル" class="pt-[calc(64px+var(--height-header-mobile))] pb-8 sm:py-10 bg-bg-main overflow-x-clip">
+  <section id="hero" aria-label="メインビジュアル" class="pt-page-top-hero pb-8 sm:py-10 bg-bg-main overflow-x-clip">
     <div class="max-w-content mx-auto ps-[clamp(1rem,0.33rem+2.85vw,3.75rem)] pe-0 sm:pe-[clamp(1rem,0.33rem+2.85vw,3.75rem)]">
       <div class="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-6">
         <div class="flex flex-col items-start sm:w-1/2">
@@ -97,7 +97,7 @@ const flows = [
             <p class="text-lg font-bold text-text leading-relaxed">
               Webサイト・LP制作、既存サイトの
             </p>
-            <h1 class="font-bold text-text leading-tight mt-7">
+            <h1 class="font-bold text-text leading-tight">
               <span class="relative inline-block">
                 <span class="relative z-10 text-54px">CMS</span><span class="relative z-10 text-42px">化</span>
                 <span class="absolute bottom-1 left-0 w-167px h-4 bg-marker-gold rounded-3px" aria-hidden="true"></span>
@@ -154,7 +154,7 @@ const flows = [
 
   <!-- Service -->
   <section id="service" aria-label="サービス内容" class="bg-bg-section px-16px py-45px md:px-40px md:py-112px">
-    <div class="mx-auto flex flex-col items-center gap-32px md:gap-64px">
+    <div class="mx-auto flex max-w-section flex-col items-center gap-32px md:gap-64px">
       <SectionTitle title="Service" subtitle="サービス内容" />
       <div class="grid grid-cols-1 gap-24px md:grid-cols-2 md:gap-20px xl:grid-cols-4">
         {
@@ -176,11 +176,11 @@ const flows = [
 
   <!-- Flow -->
   <section id="flow" aria-label="ご依頼の流れ" class="bg-bg-main px-16px py-45px md:px-40px md:py-112px">
-    <div class="mx-auto flex flex-col items-center gap-32px md:gap-64px">
+    <div class="mx-auto flex max-w-section flex-col items-center gap-32px md:gap-64px">
       <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
-      <ol class="grid w-full max-w-content grid-cols-1 gap-24px md:grid-cols-2 md:grid-rows-[repeat(8,auto)] md:gap-20px xl:grid-cols-4 xl:grid-rows-[repeat(4,auto)]">
+      <ol class="grid w-full grid-cols-1 gap-10px md:grid-cols-2 md:grid-rows-[repeat(8,auto)] md:gap-20px xl:grid-cols-4 xl:grid-rows-[repeat(4,auto)] xl:gap-32px">
         {
-          flows.map((flow) => (
+          flows.map((flow, index) => (
             <li class="list-none md:row-span-4 md:grid md:grid-rows-subgrid md:gap-0">
               <FlowCard
                 stepNumber={flow.number}
@@ -189,6 +189,7 @@ const flows = [
                 description={flow.description}
                 linkText={flow.linkText}
                 linkHref={flow.linkHref}
+                showArrow={index < flows.length - 1}
               />
             </li>
           ))

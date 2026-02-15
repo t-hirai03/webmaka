@@ -6,9 +6,10 @@ interface Props {
 	description: string;
 	linkText?: string;
 	linkHref?: string;
+	showArrow?: boolean;
 }
 
-const { stepNumber, icon, title, description, linkText, linkHref } = Astro.props;
+const { stepNumber, icon, title, description, linkText, linkHref, showArrow = false } = Astro.props;
 
 const iconPaths: Record<Props['icon'], string> = {
 	mail: '/icons/flow-mail.png',
@@ -21,14 +22,14 @@ const iconSrc = iconPaths[icon];
 ---
 
 {/* SP版（横並びレイアウト） */}
-<article class="flex gap-12px items-start justify-center rounded-16px bg-white px-20px pb-24px pt-18px shadow-card md:hidden">
-	<div class="flex w-[75px] shrink-0 flex-col items-center gap-8px">
+<article class="flex gap-12px items-start rounded-16px bg-white px-20px pb-24px pt-18px shadow-card md:hidden">
+	<div class="flex w-flow-number shrink-0 flex-col items-center gap-8px">
 		<span class="inline-block w-full rounded-6px bg-primary text-center font-sans text-lg font-medium leading-29px text-white">
 			STEP{stepNumber}
 		</span>
-		<img src={iconSrc} alt="" aria-hidden="true" class="h-auto w-[50px]" />
+		<img src={iconSrc} alt="" aria-hidden="true" class="h-auto w-flow-icon" />
 	</div>
-	<div class="flex flex-col gap-3px">
+	<div class="mt-0.5 flex flex-col gap-3px">
 		<h3 class="text-lg font-bold leading-snug text-primary">{title}</h3>
 		<p class="text-base leading-relaxed text-text-muted">
 			{linkText && linkHref ? (
@@ -48,9 +49,28 @@ const iconSrc = iconPaths[icon];
 		</p>
 	</div>
 </article>
+{/* SP版の矢印（下向き） */}
+{showArrow && (
+	<div class="mt-10px flex justify-center md:hidden">
+		<img
+			src="/icons/flow-arrow.svg"
+			alt=""
+			aria-hidden="true"
+			class="h-12px w-auto rotate-90"
+		/>
+	</div>
+)}
 
 {/* PC版（縦積みレイアウト） */}
-<article class="hidden w-full rounded-16px bg-white px-24px pb-24px pt-16px shadow-card md:grid md:row-span-4 md:grid-rows-subgrid md:gap-y-24px">
+<article class="relative hidden w-full rounded-16px bg-white px-24px pb-24px pt-16px shadow-card md:grid md:row-span-4 md:grid-rows-subgrid md:gap-y-24px">
+	{showArrow && (
+		<img
+			src="/icons/flow-arrow.svg"
+			alt=""
+			aria-hidden="true"
+			class="absolute top-1/2 -right-inset-flow-arrow hidden w-12px -translate-y-1/2 xl:block"
+		/>
+	)}
 	<div class="flex justify-center">
 		<span class="inline-block rounded-6px bg-primary px-16px py-4px text-2xl font-medium text-white">
 			STEP{stepNumber}
