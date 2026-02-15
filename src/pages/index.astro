@@ -178,20 +178,51 @@ const flows = [
   <section id="flow" aria-label="ご依頼の流れ" class="bg-bg-main px-16px py-45px md:px-40px md:py-112px">
     <div class="mx-auto flex max-w-section flex-col items-center gap-32px md:gap-64px">
       <SectionTitle title="Flow" subtitle="ご依頼の流れ" />
-      <ol class="grid w-full grid-cols-1 gap-10px md:grid-cols-2 md:grid-rows-[repeat(8,auto)] md:gap-20px xl:grid-cols-4 xl:grid-rows-[repeat(4,auto)] xl:gap-32px">
+      {/* SP版（縦並び） */}
+      <ol class="flex w-full flex-col gap-10px md:hidden">
         {
           flows.map((flow, index) => (
-            <li class="list-none md:row-span-4 md:grid md:grid-rows-subgrid md:gap-0">
-              <FlowCard
-                stepNumber={flow.number}
-                icon={flow.icon}
-                title={flow.title}
-                description={flow.description}
-                linkText={flow.linkText}
-                linkHref={flow.linkHref}
-                showArrow={index < flows.length - 1}
-              />
-            </li>
+            <>
+              <li class="list-none">
+                <FlowCard
+                  stepNumber={flow.number}
+                  icon={flow.icon}
+                  title={flow.title}
+                  description={flow.description}
+                  linkText={flow.linkText}
+                  linkHref={flow.linkHref}
+                />
+              </li>
+              {index < flows.length - 1 && (
+                <li class="flex list-none justify-center" aria-hidden="true">
+                  <img src="/icons/flow-arrow.svg" alt="" class="h-12px w-auto rotate-90" />
+                </li>
+              )}
+            </>
+          ))
+        }
+      </ol>
+      {/* PC版（横並び） */}
+      <ol class="hidden w-full items-center gap-10px md:flex">
+        {
+          flows.map((flow, index) => (
+            <>
+              <li class="min-w-0 flex-1 list-none">
+                <FlowCard
+                  stepNumber={flow.number}
+                  icon={flow.icon}
+                  title={flow.title}
+                  description={flow.description}
+                  linkText={flow.linkText}
+                  linkHref={flow.linkHref}
+                />
+              </li>
+              {index < flows.length - 1 && (
+                <li class="shrink-0 list-none" aria-hidden="true">
+                  <img src="/icons/flow-arrow.svg" alt="" class="w-12px" />
+                </li>
+              )}
+            </>
           ))
         }
       </ol>
