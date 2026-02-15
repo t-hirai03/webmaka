@@ -123,6 +123,11 @@ body {
   --width-275px: 275px; /* WorkCard SP幅 */
   --width-373px: 373px; /* WorkCard PC幅 */
 
+  /* FlowCard */
+  --width-flow-number: 75px; /* FlowCard番号部分の幅 */
+  --width-flow-icon: 50px; /* FlowCardアイコンの幅 */
+  --inset-flow-arrow: 22px; /* FlowCard矢印アイコンの右位置 */
+
   /* プログレスバー幅 */
   --width-progress: 576px; /* お問い合わせプログレスバー */
 
@@ -139,6 +144,11 @@ body {
 
   /* 最小高さ */
   --min-height-page: calc(100dvh - var(--height-header)); /* ページ最小高さ */
+
+  /* ページ上余白（モバイル用） */
+  --spacing-page-top-hero: calc(64px + var(--height-header-mobile)); /* Hero上余白 */
+  --spacing-page-top-section: calc(48px + var(--height-header-mobile)); /* セクション上余白 */
+  --spacing-page-top-about: calc(var(--spacing-15) + var(--height-header-mobile)); /* About上余白 */
 
   /* ===== タイポグラフィ ===== */
 

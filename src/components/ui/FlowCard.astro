@@ -23,11 +23,11 @@ const iconSrc = iconPaths[icon];
 
 {/* SP版（横並びレイアウト） */}
 <article class="flex gap-12px items-start rounded-16px bg-white px-20px pb-24px pt-18px shadow-card md:hidden">
-	<div class="flex w-[75px] shrink-0 flex-col items-center gap-8px">
+	<div class="flex w-flow-number shrink-0 flex-col items-center gap-8px">
 		<span class="inline-block w-full rounded-6px bg-primary text-center font-sans text-lg font-medium leading-29px text-white">
 			STEP{stepNumber}
 		</span>
-		<img src={iconSrc} alt="" aria-hidden="true" class="h-auto w-[50px]" />
+		<img src={iconSrc} alt="" aria-hidden="true" class="h-auto w-flow-icon" />
 	</div>
 	<div class="mt-0.5 flex flex-col gap-3px">
 		<h3 class="text-lg font-bold leading-snug text-primary">{title}</h3>
@@ -68,7 +68,7 @@ const iconSrc = iconPaths[icon];
 			src="/icons/flow-arrow.svg"
 			alt=""
 			aria-hidden="true"
-			class="absolute top-1/2 -right-[22px] hidden w-12px -translate-y-1/2 xl:block"
+			class="absolute top-1/2 -right-inset-flow-arrow hidden w-12px -translate-y-1/2 xl:block"
 		/>
 	)}
 	<div class="flex justify-center">
