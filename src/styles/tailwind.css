@@ -117,7 +117,7 @@ body {
   /* コンテナ幅 */
   --max-width-container: 1440px; /* 最大コンテナ幅 */
   --max-width-content: 1240px; /* コンテンツ幅 */
-  --max-width-1160px: 1160px; /* Worksセクションのコンテンツ幅 */
+  --max-width-section: 1160px; /* セクションコンテンツ幅（PC） */
 
   /* カード幅 */
   --width-275px: 275px; /* WorkCard SP幅 */
