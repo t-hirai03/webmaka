@@ -126,7 +126,7 @@ body {
   /* FlowCard */
   --width-flow-number: 75px; /* FlowCard番号部分の幅 */
   --width-flow-icon: 50px; /* FlowCardアイコンの幅 */
-  --inset-flow-arrow: 22px; /* FlowCard矢印アイコンの右位置 */
+  --width-flow-arrow: 14px; /* Flow矢印アイコンの幅（PC版） */
 
   /* プログレスバー幅 */
   --width-progress: 576px; /* お問い合わせプログレスバー */
